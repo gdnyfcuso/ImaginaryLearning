@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginaryLearning.Core", "ImaginaryLearning.Core\ImaginaryLearning.Core.csproj", "{3DC24EDF-1839-418A-8232-5FF2731D6806}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImaginaryLearning", "ImaginaryLearning\ImaginaryLearning.csproj", "{15F832E8-23B2-4BB7-B04A-83AB7ED4D654}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DC24EDF-1839-418A-8232-5FF2731D6806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC24EDF-1839-418A-8232-5FF2731D6806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC24EDF-1839-418A-8232-5FF2731D6806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC24EDF-1839-418A-8232-5FF2731D6806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F832E8-23B2-4BB7-B04A-83AB7ED4D654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F832E8-23B2-4BB7-B04A-83AB7ED4D654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F832E8-23B2-4BB7-B04A-83AB7ED4D654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F832E8-23B2-4BB7-B04A-83AB7ED4D654}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3322220D-1F9A-46A5-A347-47DF02EA9A65}
+	EndGlobalSection
+EndGlobal

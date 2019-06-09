@@ -1,0 +1,8 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/ImaginaryLearning.Core/ImaginaryLearning/bin/Debug/netcoreapp2.2
+/ImaginaryLearning.Core/ImaginaryLearning/obj
+/ImaginaryLearning.Core/ImaginaryLearning.Core/bin/Debug/netcoreapp2.2
+/ImaginaryLearning.Core/ImaginaryLearning.Core/obj
