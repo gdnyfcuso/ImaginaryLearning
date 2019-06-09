@@ -8,3 +8,8 @@
 /ImaginaryLearning.Core/ImaginaryLearning.Core/obj
 /ImaginaryLearning.Core/.vs/ImaginaryLearning.Core/v15/Server/sqlite3
 /ImaginaryLearning.Core/.vs/ImaginaryLearning.Core/v15
+################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/ImaginaryLearning.Core/ImaginaryLearning/bin/Debug/netcoreapp2.2
