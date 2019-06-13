@@ -17,7 +17,11 @@ using System.Text;
 
 namespace ImaginaryLearning.Core
 {
-    public class YinYang
+    /// <summary>
+    /// 易经里面最基本的表示状态相当于二进制的0
+    /// </summary>
+    public class Yin
     {
+        public string Name { get; } = "阴";
     }
 }
