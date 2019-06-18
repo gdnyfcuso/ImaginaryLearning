@@ -20,8 +20,8 @@ namespace ImaginaryLearning.Core
     /// <summary>
     /// 易经里面最基本的表示状态相当于二进制的0
     /// </summary>
-    public class Yin
+    public class Yin:TaiJi
     {
-        public string Name { get; } = "阴";
+        public new string Name { get; } = "阴";
     }
 }
