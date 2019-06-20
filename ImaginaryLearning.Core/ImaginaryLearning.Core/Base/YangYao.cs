@@ -14,13 +14,11 @@ namespace ImaginaryLearning.Core
         public YangYao()
         {
             Yang = new Yang();
+            YaoName = Yang.Name + YaoName;
         }
         public override string ToString()
         {
-            return Yang.Name + base.YaoName;
+            return YaoName;
         }
-
-        
-
     }
 }

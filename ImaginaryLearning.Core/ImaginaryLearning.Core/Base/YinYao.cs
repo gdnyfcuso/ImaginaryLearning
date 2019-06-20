@@ -26,9 +26,11 @@ namespace ImaginaryLearning.Core
         /// </summary>
         public Rectangle RightRectangle { get; set; }
 
-        public YinYao()
+        public YinYao(Point startPoint, int totalWidth, int midWidth)
         {
             Yin = new Yin();
+            YaoName = Yin.Name + YaoName;
+
         }
 
         /// <summary>
@@ -37,7 +39,7 @@ namespace ImaginaryLearning.Core
         /// <returns></returns>
         public override string ToString()
         {
-            return Yin.Name + base.YaoName;
+            return Yin.Name;
         }
     }
 }
