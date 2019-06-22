@@ -18,5 +18,10 @@ namespace ImaginaryLearning.Core
         /// 上卦
         /// </summary>
         public DanGua ShangGua { get; set; }
+
+        /// <summary>
+        /// 复卦名字
+        /// </summary>
+        public string Name { get; set; }
     }
 }

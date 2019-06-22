@@ -14,5 +14,7 @@ namespace ImaginaryLearning.Core
         public Yao ErYao { get; set; }
 
         public Yao SanYao { get; set; }
+
+        public string Name { get; set; }
     }
 }
