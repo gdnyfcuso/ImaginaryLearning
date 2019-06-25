@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace ImaginaryLearning.Core
@@ -9,6 +10,12 @@ namespace ImaginaryLearning.Core
     /// </summary>
     public class DanGua
     {
+        private List<Rectangle> _rectangleList = null;
+        public DanGua()
+        {
+            _rectangleList = new List<Rectangle>();
+        }
+
         public Yao ChuYao { get; set; }
 
         public Yao ErYao { get; set; }
@@ -16,5 +23,16 @@ namespace ImaginaryLearning.Core
         public Yao SanYao { get; set; }
 
         public string Name { get; set; }
+
+        public List<Rectangle> RectangleList
+        {
+            get
+            {
+                this._rectangleList.AddRange(ChuYao.RectangleList);
+                this._rectangleList.AddRange(ErYao.RectangleList);
+                this._rectangleList.AddRange(SanYao.RectangleList);
+                return _rectangleList;
+            }
+        }
     }
 }

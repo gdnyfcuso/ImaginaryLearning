@@ -14,6 +14,7 @@ namespace ImaginaryLearning.Core.BaGua
             ChuYao = new YangYao();
             ErYao = new YangYao();
             SanYao = new YangYao();
+            Name = "乾";
         }
     }
 }
