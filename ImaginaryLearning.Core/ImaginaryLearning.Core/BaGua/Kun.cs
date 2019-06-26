@@ -17,11 +17,11 @@ namespace ImaginaryLearning.Core.BaGua
 
         public Kun(Point startPoint, int totalWidth, int midWidth, int heigth)
         {
-            ChuYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
+            SanYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
 
-            ErYao = new YinYao(new Point(startPoint.X, startPoint.Y + 2 * heigth), totalWidth, midWidth, heigth);
+            ErYao = new YinYao(CreateSecondPoint(startPoint,heigth), totalWidth, midWidth, heigth);
 
-            SanYao = new YinYao(new Point(startPoint.X, startPoint.Y + 4 * heigth), totalWidth, midWidth, heigth);
+            ChuYao = new YinYao(CreateThirdPoint(startPoint,heigth), totalWidth, midWidth, heigth);
 
             Name = "坤";
         }

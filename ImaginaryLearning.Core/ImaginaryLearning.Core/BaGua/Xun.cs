@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace ImaginaryLearning.Core.BaGua
@@ -9,11 +10,12 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Xun : DanGua
     {
-        public Xun()
+        public Xun(Point startPoint, int totalWidth, int midWidth, int heigth)
         {
-            ChuYao = new YinYao();
-            ErYao = new YangYao();
-            SanYao = new YangYao();
+            SanYao = new YinYao(startPoint,totalWidth,midWidth,heigth);
+            ErYao = new YangYao(CreateSecondPoint(startPoint,heigth),totalWidth,heigth);
+            ChuYao = new YangYao(CreateThirdPoint(startPoint,heigth),totalWidth,heigth);
+            Name = "巽";
            
         }
     }

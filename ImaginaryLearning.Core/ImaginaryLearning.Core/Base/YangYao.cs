@@ -24,7 +24,7 @@ namespace ImaginaryLearning.Core
 
         public YangYao(Point startPoint, int totalWidth, int heigth, int midWidth = 0)
         {
-            this.InitYinYaoInfo(startPoint, totalWidth, midWidth, heigth);
+            this.InitYinYaoInfo(startPoint, totalWidth, heigth, midWidth);
         }
 
         private void InitYinYaoInfo(Point startPoint, int totalWidth, int heigth, int midWidth = 0)
@@ -33,6 +33,8 @@ namespace ImaginaryLearning.Core
             YaoName = Yang.Name + YaoName;
             var size = new Size(totalWidth, heigth);
             Rectangle = new Rectangle(startPoint, size);
+            if (RectangleList == null)
+                RectangleList = new List<Rectangle>();
             RectangleList.Add(Rectangle);
         }
 

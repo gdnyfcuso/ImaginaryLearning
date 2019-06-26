@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace ImaginaryLearning.Core
@@ -9,6 +10,13 @@ namespace ImaginaryLearning.Core
     /// </summary>
     public class FuGua
     {
+        private List<Rectangle> _rectangleList;
+
+        public FuGua()
+        {
+            _rectangleList = new List<Rectangle>();
+        }
+
         /// <summary>
         /// 下卦
         /// </summary>
@@ -23,5 +31,20 @@ namespace ImaginaryLearning.Core
         /// 复卦名字
         /// </summary>
         public string Name { get; set; }
+
+        protected Point CreateXiaGuaPoint(Point point, int heigth)
+        {
+            return new Point(point.X, point.Y + 6 * heigth);
+        }
+
+        public List<Rectangle> RectangleList
+        {
+            get
+            {
+                this._rectangleList.AddRange(XiaGua.RectangleList);
+                this._rectangleList.AddRange(ShangGua.RectangleList);
+                return _rectangleList;
+            }
+        }
     }
 }

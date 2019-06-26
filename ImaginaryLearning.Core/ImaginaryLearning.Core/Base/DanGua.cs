@@ -34,5 +34,15 @@ namespace ImaginaryLearning.Core
                 return _rectangleList;
             }
         }
+
+        protected Point CreateSecondPoint(Point point,int heigth)
+        {
+            return new Point(point.X, point.Y + 2 * heigth);
+        }
+
+        protected Point CreateThirdPoint(Point point, int heigth)
+        {
+            return new Point(point.X, point.Y + 4 * heigth);
+        }
     }
 }
