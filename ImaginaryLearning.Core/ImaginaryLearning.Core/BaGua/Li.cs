@@ -15,7 +15,20 @@ namespace ImaginaryLearning.Core.BaGua
             SanYao = new YangYao(startPoint, totalWidth, heigth);
             ErYao = new YinYao(CreateSecondPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             ChuYao = new YangYao(CreateThirdPoint(startPoint, heigth), totalWidth, heigth);
+
+            GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
+
             Name = "离";
+        }
+
+        public Li(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        {
+
+        }
+
+        public Li() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        {
+
         }
     }
 }

@@ -10,7 +10,12 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Kun : DanGua
     {
-        public Kun() : this(new System.Drawing.Point() { X = 0, Y = 0 }, 25, 5, 5)
+        public Kun(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        {
+
+        }
+
+        public Kun() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }
@@ -22,6 +27,8 @@ namespace ImaginaryLearning.Core.BaGua
             ErYao = new YinYao(CreateSecondPoint(startPoint,heigth), totalWidth, midWidth, heigth);
 
             ChuYao = new YinYao(CreateThirdPoint(startPoint,heigth), totalWidth, midWidth, heigth);
+
+            GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
 
             Name = "坤";
         }

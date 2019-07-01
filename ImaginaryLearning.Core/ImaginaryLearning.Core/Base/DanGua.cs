@@ -11,6 +11,9 @@ namespace ImaginaryLearning.Core
     public class DanGua
     {
         private List<Rectangle> _rectangleList = null;
+
+        public Rectangle GuaRectangle { get; set; }
+
         public DanGua()
         {
             _rectangleList = new List<Rectangle>();
@@ -35,7 +38,7 @@ namespace ImaginaryLearning.Core
             }
         }
 
-        protected Point CreateSecondPoint(Point point,int heigth)
+        protected Point CreateSecondPoint(Point point, int heigth)
         {
             return new Point(point.X, point.Y + 2 * heigth);
         }
@@ -43,6 +46,35 @@ namespace ImaginaryLearning.Core
         protected Point CreateThirdPoint(Point point, int heigth)
         {
             return new Point(point.X, point.Y + 4 * heigth);
+        }
+
+        /// <summary>
+        /// 算出来卦的整体的宽高
+        /// </summary>
+        /// <param name="totalWidth"></param>
+        /// <param name="heigth"></param>
+        /// <param name="midWidth"></param>
+        /// <returns></returns>
+        protected Rectangle GetGuaRectangle(int totalWidth, int heigth, int midWidth)
+        {
+            return new Rectangle() { Width = totalWidth, Height = 3 * heigth + 2 * midWidth };
+
+        }
+
+        public string SaveGuaImage()
+        {
+            Image image = new Bitmap(400, 400);
+
+            Graphics graph = Graphics.FromImage(image);
+
+            graph.Clear(Color.Azure);
+            Pen pen = new Pen(Brushes.Red);
+            graph.DrawRectangles(pen, this.RectangleList.ToArray());
+            graph.FillRectangles(Brushes.Red, this.RectangleList.ToArray());
+            graph.DrawString(this.Name, new Font("宋体", 12), Brushes.Red, new PointF(this.GuaRectangle.Width + 20, this.GuaRectangle.Height / 2));
+            var guaImagePath = "graph_" + this.Name + ".bmp";
+            image.Save(guaImagePath, System.Drawing.Imaging.ImageFormat.Bmp);
+            return guaImagePath;
         }
     }
 }
