@@ -150,6 +150,13 @@ namespace Tests
 
         }
 
+        [Test]
+        public void TaiJi()
+        {
+            var taiji = new TaiJi();
+            taiji.CreateTaiJiImage();
+        }
+
 
         [Test]
         public void FuGua_PI_Test()
