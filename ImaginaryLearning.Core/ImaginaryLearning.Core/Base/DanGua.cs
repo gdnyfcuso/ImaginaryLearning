@@ -27,6 +27,16 @@ namespace ImaginaryLearning.Core
 
         public string Name { get; set; }
 
+        /// <summary>
+        /// 别名
+        /// </summary>
+        public string Alias { get; set; }
+
+        /// <summary>
+        /// 卦性
+        /// </summary>
+        public string Nature { get; set; }
+
         public List<Rectangle> RectangleList
         {
             get

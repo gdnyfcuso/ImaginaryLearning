@@ -17,6 +17,7 @@ namespace ImaginaryLearning.Core.BaGua
             SanYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
             Name = "震";
+            Nature = "雷";
         }
 
         public Zhen(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

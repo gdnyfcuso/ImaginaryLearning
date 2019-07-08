@@ -12,6 +12,11 @@ namespace ImaginaryLearning.Core
     {
         private List<Rectangle> _rectangleList;
 
+        /// <summary>
+        /// 爻词
+        /// </summary>
+        public string[] YaoCi { get; set; }
+
         public FuGua()
         {
             _rectangleList = new List<Rectangle>();
@@ -32,6 +37,12 @@ namespace ImaginaryLearning.Core
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// 是否是十二辟卦
+        /// </summary>
+        public bool IsTwelvePIGua { get; set; } = false;
+
+
         protected Point CreateXiaGuaPoint(Point point, int heigth)
         {
             return new Point(point.X, point.Y + 6 * heigth);
@@ -44,6 +55,23 @@ namespace ImaginaryLearning.Core
                 this._rectangleList.AddRange(XiaGua.RectangleList);
                 this._rectangleList.AddRange(ShangGua.RectangleList);
                 return _rectangleList;
+            }
+        }
+
+        /// <summary>
+        /// 爻辞所在的索引
+        /// </summary>
+        /// <param name="yaoCiIndex"></param>
+        /// <returns></returns>
+        public string GetYaoCi(int yaoCiIndex)
+        {
+            if (YaoCi != null && YaoCi.Length > yaoCiIndex)
+            {
+                return YaoCi[yaoCiIndex];
+            }
+            else
+            {
+                return string.Empty;
             }
         }
     }

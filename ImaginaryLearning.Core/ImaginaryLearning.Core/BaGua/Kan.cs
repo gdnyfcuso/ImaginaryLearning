@@ -17,6 +17,7 @@ namespace ImaginaryLearning.Core.BaGua
             ChuYao = new YinYao(CreateThirdPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
             Name = "坎";
+            Nature = "水";
         }
 
         public Kan(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

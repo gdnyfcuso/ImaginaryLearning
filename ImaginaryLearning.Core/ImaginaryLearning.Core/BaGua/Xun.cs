@@ -17,6 +17,7 @@ namespace ImaginaryLearning.Core.BaGua
             ChuYao = new YinYao(CreateThirdPoint(startPoint,heigth), totalWidth, midWidth, heigth);
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
             Name = "巽";
+            Nature = "风";
 
         }
 

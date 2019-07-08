@@ -19,6 +19,8 @@ namespace ImaginaryLearning.Core.BaGua
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
 
             Name = "离";
+
+            Nature = "火";
         }
 
         public Li(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

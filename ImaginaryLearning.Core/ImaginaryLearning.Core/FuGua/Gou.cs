@@ -6,13 +6,13 @@ using System.Text;
 
 namespace ImaginaryLearning.Core
 {
-    public class PI : FuGua
+   public class Gou:FuGua
     {
-        public PI(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Gou(Point startPoint, int totalWidth, int midWidth, int heigth)
         {
-            XiaGua = new Kun(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
+            XiaGua = new Xun(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             ShangGua = new Qian(startPoint, totalWidth, heigth);
-            Name = "否";
+            Name = "姤";
             IsTwelvePIGua = true;
         }
     }

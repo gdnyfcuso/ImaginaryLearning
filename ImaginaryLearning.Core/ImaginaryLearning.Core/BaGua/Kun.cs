@@ -31,6 +31,7 @@ namespace ImaginaryLearning.Core.BaGua
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
 
             Name = "坤";
+            Nature = "母";
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ImaginaryLearning.Core.BaGua
             ChuYao = new YangYao(new Point(startPoint.X, startPoint.Y + 4 * heigth), width, heigth);
             GuaRectangle = GetGuaRectangle(width, heigth, 0);
             Name = "乾";
+            Nature = "父";
         }
 
         public Qian(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.Heigth)

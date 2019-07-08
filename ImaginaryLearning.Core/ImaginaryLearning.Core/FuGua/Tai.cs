@@ -13,6 +13,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint,heigth),totalWidth,heigth);
             ShangGua = new Kun(startPoint,totalWidth,midWidth,heigth);
             Name = "泰";
+            IsTwelvePIGua = true;
         }
     }
 }

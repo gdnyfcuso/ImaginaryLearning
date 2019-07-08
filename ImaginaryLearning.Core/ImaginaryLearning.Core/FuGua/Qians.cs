@@ -16,7 +16,17 @@ namespace ImaginaryLearning.Core
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             ShangGua = new Qian(startPoint, totalWidth, heigth);
             Name = "乾";
+            IsTwelvePIGua = true;
+            YaoCi = new string[]
+            {
+                "潜龙勿用。",
+                "见（xiàn）龙在田，利见大人。",
+                "君子终日乾乾，夕惕若厉，无咎。",
+                "或跃在渊，无咎。",
+                "飞龙在天，利见大人。",
+                "亢龙有悔。",
+                "见群龙无首，吉。"
+            };
         }
-
     }
 }

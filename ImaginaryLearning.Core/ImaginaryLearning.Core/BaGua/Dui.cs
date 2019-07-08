@@ -16,7 +16,8 @@ namespace ImaginaryLearning.Core.BaGua
             ErYao = new YangYao(CreateSecondPoint(startPoint, heigth), totalWidth, heigth);
             SanYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
-            Name = "泽";
+            Name = "兑";
+            Nature = "泽";
         }
 
         public Dui(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
