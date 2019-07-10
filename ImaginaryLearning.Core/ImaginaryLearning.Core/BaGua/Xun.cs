@@ -19,6 +19,11 @@ namespace ImaginaryLearning.Core.BaGua
             Name = "巽";
             Nature = "风";
 
+            InnateNumber = 5;
+            NumbersAcquired = 4;
+            InnateOrientation = "西南";
+            AcquiredAzimuth = "东南";
+
         }
 
         public Xun(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

@@ -32,6 +32,10 @@ namespace ImaginaryLearning.Core.BaGua
 
             Name = "坤";
             Nature = "母";
+            InnateNumber = 8;
+            NumbersAcquired = 2;
+            InnateOrientation = "北";
+            AcquiredAzimuth = "西南";
         }
     }
 }

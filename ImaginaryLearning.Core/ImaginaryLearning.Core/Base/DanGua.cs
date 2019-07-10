@@ -37,6 +37,28 @@ namespace ImaginaryLearning.Core
         /// </summary>
         public string Nature { get; set; }
 
+        /// <summary>
+        /// 先天方位
+        /// </summary>
+        public string InnateOrientation { get; set; }
+
+        /// <summary>
+        /// 后天方位
+        /// </summary>
+        public string AcquiredAzimuth { get; set; }
+
+        /// <summary>
+        /// 后天数字
+        /// </summary>
+        public int NumbersAcquired { get; set; }
+
+        /// <summary>
+        /// 先天数字
+        /// </summary>
+        public int InnateNumber { get; set; }
+
+
+
         public List<Rectangle> RectangleList
         {
             get

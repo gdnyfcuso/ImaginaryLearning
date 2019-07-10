@@ -18,6 +18,10 @@ namespace ImaginaryLearning.Core.BaGua
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
             Name = "兑";
             Nature = "泽";
+            InnateNumber = 2;
+            NumbersAcquired = 7;
+            InnateOrientation = "东南";
+            AcquiredAzimuth = "正西";
         }
 
         public Dui(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

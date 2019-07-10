@@ -21,6 +21,11 @@ namespace ImaginaryLearning.Core.BaGua
             Name = "离";
 
             Nature = "火";
+
+            InnateNumber = 3;
+            NumbersAcquired = 9;
+            InnateOrientation = "正东";
+            AcquiredAzimuth = "正南";
         }
 
         public Li(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
