@@ -24,9 +24,9 @@ namespace ImaginaryLearning.Core.BaGua
         {
             SanYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
 
-            ErYao = new YinYao(CreateSecondPoint(startPoint,heigth), totalWidth, midWidth, heigth);
+            ErYao = new YinYao(CreateSecondPoint(startPoint, heigth), totalWidth, midWidth, heigth);
 
-            ChuYao = new YinYao(CreateThirdPoint(startPoint,heigth), totalWidth, midWidth, heigth);
+            ChuYao = new YinYao(CreateThirdPoint(startPoint, heigth), totalWidth, midWidth, heigth);
 
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
 
@@ -34,8 +34,8 @@ namespace ImaginaryLearning.Core.BaGua
             Nature = "母";
             InnateNumber = 8;
             NumbersAcquired = 2;
-            InnateOrientation = "北";
-            AcquiredAzimuth = "西南";
+            InnateOrientation = BaGuaDirection.ZB;// "北";
+            AcquiredAzimuth = BaGuaDirection.XN;// "西南";
         }
     }
 }

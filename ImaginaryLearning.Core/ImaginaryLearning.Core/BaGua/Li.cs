@@ -24,8 +24,8 @@ namespace ImaginaryLearning.Core.BaGua
 
             InnateNumber = 3;
             NumbersAcquired = 9;
-            InnateOrientation = "正东";
-            AcquiredAzimuth = "正南";
+            InnateOrientation = BaGuaDirection.ZD;// "正东";
+            AcquiredAzimuth = BaGuaDirection.ZN;// "正南";
         }
 
         public Li(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

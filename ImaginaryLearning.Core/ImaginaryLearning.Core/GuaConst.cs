@@ -10,7 +10,7 @@ namespace ImaginaryLearning.Core
         /// 每一卦的初始X坐标
         /// </summary>
         public const int Start_Point_X = 0;
-        
+
         /// <summary>
         /// 每一卦的初始Y坐标
         /// </summary>
@@ -30,6 +30,18 @@ namespace ImaginaryLearning.Core
         /// 每一爻的高度
         /// </summary>
         public const int Heigth = 10;
+
+        /// <summary>
+        /// 默认圆心坐标X
+        /// </summary>
+        public const int CircleCenterX = 300;
+
+        /// <summary>
+        /// 默认的圆心坐标Y
+        /// </summary>
+        public const int CircleCenterY = 300;
+
+        public const int CircleCenterR = 100;
 
     }
 }

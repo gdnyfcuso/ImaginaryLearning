@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImaginaryLearning.Core.Base;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -40,12 +41,12 @@ namespace ImaginaryLearning.Core
         /// <summary>
         /// 先天方位
         /// </summary>
-        public string InnateOrientation { get; set; }
+        public BaGuaDirection InnateOrientation { get; set; }
 
         /// <summary>
         /// 后天方位
         /// </summary>
-        public string AcquiredAzimuth { get; set; }
+        public BaGuaDirection AcquiredAzimuth { get; set; }
 
         /// <summary>
         /// 后天数字
@@ -87,7 +88,7 @@ namespace ImaginaryLearning.Core
         /// <param name="heigth"></param>
         /// <param name="midWidth"></param>
         /// <returns></returns>
-        protected Rectangle GetGuaRectangle(int totalWidth, int heigth, int midWidth)
+        public static Rectangle GetGuaRectangle(int totalWidth, int heigth, int midWidth)
         {
             return new Rectangle() { Width = totalWidth, Height = 3 * heigth + 2 * midWidth };
 

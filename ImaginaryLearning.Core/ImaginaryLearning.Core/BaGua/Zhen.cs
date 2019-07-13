@@ -20,9 +20,9 @@ namespace ImaginaryLearning.Core.BaGua
             Nature = "雷";
 
             InnateNumber = 4;
-            NumbersAcquired = 6;
-            InnateOrientation = "南";
-            AcquiredAzimuth = "西北";
+            NumbersAcquired = 3;
+            InnateOrientation = BaGuaDirection.DB;// "南";
+            AcquiredAzimuth = BaGuaDirection.ZD;
         }
 
         public Zhen(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

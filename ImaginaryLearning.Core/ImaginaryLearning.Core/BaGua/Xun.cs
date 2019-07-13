@@ -21,8 +21,8 @@ namespace ImaginaryLearning.Core.BaGua
 
             InnateNumber = 5;
             NumbersAcquired = 4;
-            InnateOrientation = "西南";
-            AcquiredAzimuth = "东南";
+            InnateOrientation = BaGuaDirection.XN;// "西南";
+            AcquiredAzimuth = BaGuaDirection.DN;// "东南";
 
         }
 

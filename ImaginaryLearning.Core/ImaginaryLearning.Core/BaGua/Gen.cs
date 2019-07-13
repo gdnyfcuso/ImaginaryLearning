@@ -20,8 +20,8 @@ namespace ImaginaryLearning.Core.BaGua
             Nature = "山";
             InnateNumber = 7;
             NumbersAcquired = 8;
-            InnateOrientation = "西北";
-            AcquiredAzimuth = "东北";
+            InnateOrientation = BaGuaDirection.XB;// "西北";
+            AcquiredAzimuth = BaGuaDirection.DB;// "东北";
         }
 
         public Gen(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)

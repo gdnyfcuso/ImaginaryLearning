@@ -20,8 +20,8 @@ namespace ImaginaryLearning.Core.BaGua
             Nature = "水";
             InnateNumber = 6;
             NumbersAcquired = 1;
-            InnateOrientation = "正西";
-            AcquiredAzimuth = "正北";
+            InnateOrientation = BaGuaDirection.ZX;// "正西";
+            AcquiredAzimuth = BaGuaDirection.ZB;// "正北";
         }
 
         public Kan(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
