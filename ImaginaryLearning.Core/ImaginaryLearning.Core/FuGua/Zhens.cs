@@ -11,7 +11,7 @@ namespace ImaginaryLearning.Core
     /// </summary>
     public class Zhens : FuGua
     {
-        public Zhens(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Zhens(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             XiaGua = new Zhen(CreateXiaGuaPoint(startPoint,heigth),totalWidth,midWidth,heigth);
             ShangGua = new Zhen(startPoint,totalWidth,midWidth,heigth);

@@ -18,13 +18,13 @@ namespace ImaginaryLearning.Core
         /// <summary>
         /// 阴爻分段，计算机画图要显示的左边区域
         /// </summary>
-        public Rectangle LeftRectangle { get; set; }
+        public RectangleF LeftRectangle { get; set; }
 
 
         /// <summary>
         /// 阴爻分段，计算机画图要显示的右边区域
         /// </summary>
-        public Rectangle RightRectangle { get; set; }
+        public RectangleF RightRectangle { get; set; }
 
         /// <summary>
         /// 
@@ -33,7 +33,7 @@ namespace ImaginaryLearning.Core
         /// <param name="totalWidth">整个爻的宽度</param>
         /// <param name="midWidth">阴爻中间的空白宽度</param>
         /// <param name="heigth">爻的高度</param>
-        public YinYao(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public YinYao(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             this.InitYinYaoInfo(startPoint, totalWidth, midWidth, heigth);
         }
@@ -56,17 +56,17 @@ namespace ImaginaryLearning.Core
         }
 
 
-        private void InitYinYaoInfo(Point startPoint, int totalWidth, int midWidth, int heigth)
+        private void InitYinYaoInfo(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             Yin = new Yin();
             YaoName = Yin.Name + YaoName;
             var width = (totalWidth - midWidth) / 2;
             var size = new Size(width, heigth);
-            RectangleList = new List<Rectangle>();
-            LeftRectangle = new Rectangle(startPoint, size);
+            RectangleList = new List<RectangleF>();
+            LeftRectangle = new RectangleF(startPoint, size);
             RectangleList.Add(LeftRectangle);
-            var secondPoint = new Point(startPoint.X + width + midWidth, startPoint.Y);
-            RightRectangle = new Rectangle(secondPoint, size);
+            var secondPoint = new PointF(startPoint.X + width + midWidth, startPoint.Y);
+            RightRectangle = new RectangleF(secondPoint, size);
             RectangleList.Add(RightRectangle);
         }
 

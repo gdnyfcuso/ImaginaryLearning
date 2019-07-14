@@ -10,7 +10,7 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Li : DanGua
     {
-        public Li(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Li(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             SanYao = new YangYao(startPoint, totalWidth, heigth);
             ErYao = new YinYao(CreateSecondPoint(startPoint, heigth), totalWidth, midWidth, heigth);

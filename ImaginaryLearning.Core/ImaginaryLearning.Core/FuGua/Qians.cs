@@ -11,7 +11,7 @@ namespace ImaginaryLearning.Core
     /// </summary>
     public class Qians : FuGua
     {
-        public Qians(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Qians(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             ShangGua = new Qian(startPoint, totalWidth, heigth);

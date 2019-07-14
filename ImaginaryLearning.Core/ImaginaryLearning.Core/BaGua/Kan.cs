@@ -10,7 +10,7 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Kan : DanGua
     {
-        public Kan(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Kan(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             SanYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
             ErYao = new YangYao(CreateSecondPoint(startPoint, heigth), totalWidth, heigth);
@@ -24,12 +24,12 @@ namespace ImaginaryLearning.Core.BaGua
             AcquiredAzimuth = BaGuaDirection.ZB;// "正北";
         }
 
-        public Kan(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Kan(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Kan():this(new Point() { X=GuaConst.Start_Point_X,Y=GuaConst.Start_Point_Y})
+        public Kan():this(new PointF() { X=GuaConst.Start_Point_X,Y=GuaConst.Start_Point_Y})
         {
 
         }

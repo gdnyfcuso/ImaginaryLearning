@@ -9,32 +9,32 @@ namespace ImaginaryLearning.Core
     {
         public Yang Yang { get; set; }
 
-        public Rectangle Rectangle { get; set; }
+        public RectangleF Rectangle { get; set; }
 
-        public YangYao() : this(new Point(0, 0))
+        public YangYao() : this(new PointF(0, 0))
         {
 
         }
 
-        public YangYao(Point point)
+        public YangYao(PointF point)
         {
             this.InitYinYaoInfo(point, 30, 5, 0);
 
         }
 
-        public YangYao(Point startPoint, int totalWidth, int heigth, int midWidth = 0)
+        public YangYao(PointF startPoint, int totalWidth, int heigth, int midWidth = 0)
         {
             this.InitYinYaoInfo(startPoint, totalWidth, heigth, midWidth);
         }
 
-        private void InitYinYaoInfo(Point startPoint, int totalWidth, int heigth, int midWidth = 0)
+        private void InitYinYaoInfo(PointF startPoint, int totalWidth, int heigth, int midWidth = 0)
         {
             Yang = new Yang();
             YaoName = Yang.Name + YaoName;
             var size = new Size(totalWidth, heigth);
-            Rectangle = new Rectangle(startPoint, size);
+            Rectangle = new RectangleF(startPoint, size);
             if (RectangleList == null)
-                RectangleList = new List<Rectangle>();
+                RectangleList = new List<RectangleF>();
             RectangleList.Add(Rectangle);
         }
 

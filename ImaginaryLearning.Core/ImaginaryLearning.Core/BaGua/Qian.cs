@@ -10,11 +10,11 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Qian : DanGua
     {
-        public Qian(Point startPoint, int width, int heigth)
+        public Qian(PointF startPoint, int width, int heigth)
         {
             SanYao = new YangYao(startPoint, width, heigth);
-            ErYao = new YangYao(new Point(startPoint.X, startPoint.Y + 2 * heigth), width, heigth);
-            ChuYao = new YangYao(new Point(startPoint.X, startPoint.Y + 4 * heigth), width, heigth);
+            ErYao = new YangYao(new PointF(startPoint.X, startPoint.Y + 2 * heigth), width, heigth);
+            ChuYao = new YangYao(new PointF(startPoint.X, startPoint.Y + 4 * heigth), width, heigth);
             GuaRectangle = GetGuaRectangle(width, heigth, 0);
             Name = "乾";
             Nature = "父";

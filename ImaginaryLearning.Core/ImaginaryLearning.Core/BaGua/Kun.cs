@@ -10,17 +10,17 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Kun : DanGua
     {
-        public Kun(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Kun(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Kun() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Kun() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }
 
-        public Kun(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Kun(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             SanYao = new YinYao(startPoint, totalWidth, midWidth, heigth);
 

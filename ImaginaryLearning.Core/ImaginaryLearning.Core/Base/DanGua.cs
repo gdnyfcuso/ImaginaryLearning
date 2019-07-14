@@ -11,13 +11,13 @@ namespace ImaginaryLearning.Core
     /// </summary>
     public class DanGua
     {
-        private List<Rectangle> _rectangleList = null;
+        private List<RectangleF> _rectangleList = null;
 
-        public Rectangle GuaRectangle { get; set; }
+        public RectangleF GuaRectangle { get; set; }
 
         public DanGua()
         {
-            _rectangleList = new List<Rectangle>();
+            _rectangleList = new List<RectangleF>();
         }
 
         public Yao ChuYao { get; set; }
@@ -60,7 +60,7 @@ namespace ImaginaryLearning.Core
 
 
 
-        public List<Rectangle> RectangleList
+        public List<RectangleF> RectangleList
         {
             get
             {
@@ -71,14 +71,14 @@ namespace ImaginaryLearning.Core
             }
         }
 
-        protected Point CreateSecondPoint(Point point, int heigth)
+        protected PointF CreateSecondPoint(PointF point, int heigth)
         {
-            return new Point(point.X, point.Y + 2 * heigth);
+            return new PointF(point.X, point.Y + 2 * heigth);
         }
 
-        protected Point CreateThirdPoint(Point point, int heigth)
+        protected PointF CreateThirdPoint(PointF point, int heigth)
         {
-            return new Point(point.X, point.Y + 4 * heigth);
+            return new PointF(point.X, point.Y + 4 * heigth);
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace ImaginaryLearning.Core
         /// <param name="heigth"></param>
         /// <param name="midWidth"></param>
         /// <returns></returns>
-        public static Rectangle GetGuaRectangle(int totalWidth, int heigth, int midWidth)
+        public static RectangleF GetGuaRectangle(int totalWidth, int heigth, int midWidth)
         {
-            return new Rectangle() { Width = totalWidth, Height = 3 * heigth + 2 * midWidth };
+            return new RectangleF() { Width = totalWidth, Height = 3 * heigth + 2 * midWidth };
 
         }
 

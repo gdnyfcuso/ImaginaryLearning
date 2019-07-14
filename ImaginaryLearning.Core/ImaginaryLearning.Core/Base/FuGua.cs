@@ -10,7 +10,7 @@ namespace ImaginaryLearning.Core
     /// </summary>
     public class FuGua
     {
-        private List<Rectangle> _rectangleList;
+        private List<RectangleF> _rectangleList;
 
         /// <summary>
         /// 爻词
@@ -19,7 +19,7 @@ namespace ImaginaryLearning.Core
 
         public FuGua()
         {
-            _rectangleList = new List<Rectangle>();
+            _rectangleList = new List<RectangleF>();
         }
 
         /// <summary>
@@ -43,12 +43,12 @@ namespace ImaginaryLearning.Core
         public bool IsTwelvePIGua { get; set; } = false;
 
 
-        protected Point CreateXiaGuaPoint(Point point, int heigth)
+        protected PointF CreateXiaGuaPoint(PointF point, int heigth)
         {
-            return new Point(point.X, point.Y + 6 * heigth);
+            return new PointF(point.X, point.Y + 6 * heigth);
         }
 
-        public List<Rectangle> RectangleList
+        public List<RectangleF> RectangleList
         {
             get
             {

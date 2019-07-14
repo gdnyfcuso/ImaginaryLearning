@@ -1,8 +1,10 @@
 using ImaginaryLearning.Core;
 using ImaginaryLearning.Core.BaGua;
+using ImaginaryLearning.Core.Base;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace Tests
 {
@@ -12,6 +14,36 @@ namespace Tests
         public void Setup()
         {
 
+        }
+
+        [Test]
+        public void BaGuaTest()
+        {
+            var ba = new BaguaCoordinateSystem(new Point() { X = 500, Y = 500 }, 200);
+
+            TaiJi taiJi = new TaiJi();
+
+            Bitmap image = new Bitmap(1000, 1000);
+
+
+            Graphics graph = Graphics.FromImage(image);
+
+            //taiJi.CreateTaiJiImage(new Point(), graph);
+
+            graph.Clear(Color.Azure);
+
+            List<RectangleF> rList = new List<RectangleF>();
+            foreach (var item in ba.HouTianBaGua)
+            {
+                rList.AddRange(item.RectangleList);
+            }
+            Pen pen = new Pen(Brushes.Red);
+            graph.DrawEllipse(pen, 500, 500, 200, 200);//画椭圆的方法，x坐标、y坐标、宽、高，如果是100，则半径为50
+            graph.DrawRectangles(pen, rList.ToArray());
+            graph.FillRectangles(Brushes.Red, rList.ToArray());
+            //graph.DrawString(danGua.Name, new Font("宋体", 12), Brushes.Red, new PointF(danGua.GuaRectangle.Width + 20, danGua.GuaRectangle.Height / 2));
+            image.Save("graph_" + "BaGua" + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            graph.Dispose();
         }
 
         [Test]
@@ -62,7 +94,7 @@ namespace Tests
 
             Graphics graph = Graphics.FromImage(image);
 
-            List<Rectangle> list = new List<Rectangle>();
+            List<RectangleF> list = new List<RectangleF>();
             list.AddRange(yinYao1.RectangleList);
             list.AddRange(yinYao2.RectangleList);
             list.AddRange(yinYao3.RectangleList);

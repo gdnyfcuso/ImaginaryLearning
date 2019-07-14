@@ -20,16 +20,16 @@ namespace ImaginaryLearning.Core
         private EncoderParameter myEncoderParameter;
         private EncoderParameters myEncoderParameters;
 
-        public Bitmap CreateTaiJiImage(Point midPoint)
+        public void CreateTaiJiImage(Point midPoint, Graphics graphics, int imgWidth = 400)
         {
-            int imgWidth = 400;                 //图象尺寸  
+            //int imgWidth = 400;                 //图象尺寸  
             int eyeRadius = imgWidth / 20;      //鱼眼半径  
             int headDiameter = imgWidth / 2;    //鱼头直径  
 
-            Bitmap image = new Bitmap(imgWidth, imgWidth);
-            image.SetResolution(300, 300);
+            //Bitmap image = new Bitmap(imgWidth, imgWidth);
+            //image.SetResolution(300, 300);
 
-            Graphics graphics = Graphics.FromImage(image);
+            //Graphics graphics = Graphics.FromImage(image);
 
             //设置图像质量  
             graphics.CompositingQuality = CompositingQuality.HighQuality;
@@ -60,7 +60,7 @@ namespace ImaginaryLearning.Core
             //填充蓝色眼睛  
             graphics.FillPie(blue, new Rectangle(headDiameter + headDiameter / 2 - eyeRadius, headDiameter - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
 
-            graphics.Dispose();
+           
 
             //写入到Response输出流中去，普通质量  
             //image.Save(Response.OutputStream, ImageFormat.Jpeg);  
@@ -73,13 +73,23 @@ namespace ImaginaryLearning.Core
             //图片质量等级  
             myEncoderParameter = new EncoderParameter(myEncoder, 100L);
             myEncoderParameters.Param[0] = myEncoderParameter;
-            return image;
+            //graphics
+            //return  image;
         }
 
         public void CreateTaiJiImage()
         {
-            var ima = CreateTaiJiImage(new Point());
-            ima.Save("TaiJi.bmp");
+            int imagWidth = 400;
+            Bitmap image = new Bitmap(imagWidth, imagWidth);
+
+            //Bitmap image = new Bitmap(imgWidth, imgWidth);
+            image.SetResolution(300, 300);
+
+            Graphics graphics = Graphics.FromImage(image);
+
+            CreateTaiJiImage(new Point(), graphics);
+            image.Save("TaiJi.bmp");
+            graphics.Dispose();
         }
 
         private static ImageCodecInfo GetEncoder(ImageFormat format)

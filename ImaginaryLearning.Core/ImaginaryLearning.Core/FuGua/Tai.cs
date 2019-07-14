@@ -8,7 +8,7 @@ namespace ImaginaryLearning.Core
 {
     public class Tai : FuGua
     {
-        public Tai(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Tai(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint,heigth),totalWidth,heigth);
             ShangGua = new Kun(startPoint,totalWidth,midWidth,heigth);

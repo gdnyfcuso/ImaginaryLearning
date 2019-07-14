@@ -10,7 +10,7 @@ namespace ImaginaryLearning.Core.BaGua
     /// </summary>
     public class Gen : DanGua
     {
-        public Gen(Point startPoint, int totalWidth, int midWidth, int heigth)
+        public Gen(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             ChuYao = new YinYao(CreateThirdPoint(startPoint,heigth),totalWidth,midWidth,heigth);
             ErYao = new YinYao(CreateSecondPoint(startPoint,heigth),totalWidth,midWidth,heigth);
@@ -24,12 +24,12 @@ namespace ImaginaryLearning.Core.BaGua
             AcquiredAzimuth = BaGuaDirection.DB;// "东北";
         }
 
-        public Gen(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Gen(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Gen() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Gen() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }
