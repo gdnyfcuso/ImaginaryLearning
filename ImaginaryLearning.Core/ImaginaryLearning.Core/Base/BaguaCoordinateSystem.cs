@@ -70,7 +70,7 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="R"></param>
         private void GetBaGuaDirectionPoint()
         {
-            var XY = Math.Cos(45) * R;
+            var XY = Math.Cos(45 * 3.14 / 180) * R;
 
             var XNX = XY + CircleCenter.X;
             var XNY = CircleCenter.Y - XY - GuaRectangle.Height;
@@ -103,7 +103,7 @@ namespace ImaginaryLearning.Core.Base
             directionPoint.Add(BaGuaDirection.ZB, ZB);
 
             var ZNX = CircleCenter.X - GuaRectangle.Width / 2;
-            var ZNY = CircleCenter.Y - R-GuaRectangle.Height;
+            var ZNY = CircleCenter.Y - R - GuaRectangle.Height;
             ZN = new PointF((float)ZNX, (float)ZNY);
 
             directionPoint.Add(BaGuaDirection.ZN, ZN);

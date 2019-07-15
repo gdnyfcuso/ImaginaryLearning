@@ -19,30 +19,34 @@ namespace Tests
         [Test]
         public void BaGuaTest()
         {
-            var ba = new BaguaCoordinateSystem(new Point() { X = 500, Y = 500 }, 200);
+            var o = new Point() { X = 500, Y =500  };
+            var ba = new BaguaCoordinateSystem(o, 300);
 
             TaiJi taiJi = new TaiJi();
 
             Bitmap image = new Bitmap(1000, 1000);
 
-
             Graphics graph = Graphics.FromImage(image);
+            //底色填充为白色  
+            Brush white = new SolidBrush(Color.White);
+            graph.FillRectangle(white, new Rectangle(0,0,image.Width,image.Height));
 
-            //taiJi.CreateTaiJiImage(new Point(), graph);
+            taiJi.CreateTaiJiImage(o, graph, 250);
 
-            graph.Clear(Color.Azure);
 
             List<RectangleF> rList = new List<RectangleF>();
-            foreach (var item in ba.HouTianBaGua)
+            foreach (var item in ba.XianTianBaGua)
             {
                 rList.AddRange(item.RectangleList);
             }
             Pen pen = new Pen(Brushes.Red);
-            graph.DrawEllipse(pen, 500, 500, 200, 200);//画椭圆的方法，x坐标、y坐标、宽、高，如果是100，则半径为50
+            //graph.DrawEllipse(pen, 500, 500, 200, 200);//画椭圆的方法，x坐标、y坐标、宽、高，如果是100，则半径为50
             graph.DrawRectangles(pen, rList.ToArray());
             graph.FillRectangles(Brushes.Red, rList.ToArray());
             //graph.DrawString(danGua.Name, new Font("宋体", 12), Brushes.Red, new PointF(danGua.GuaRectangle.Width + 20, danGua.GuaRectangle.Height / 2));
             image.Save("graph_" + "BaGua" + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            graph.Clear(Color.Azure);
+
             graph.Dispose();
         }
 
