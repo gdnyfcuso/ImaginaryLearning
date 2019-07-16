@@ -47,7 +47,7 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="midWidth">如果是阴爻的话，中间的宽度</param>
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
-        public BaguaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, int r = 300)
+        public BaguaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, float r = 300)
         {
             XianTianBaGua = new List<DanGua>();
             HouTianBaGua = new List<DanGua>();
@@ -236,7 +236,7 @@ namespace ImaginaryLearning.Core.Base
         /// <summary>
         /// 圆形八卦的半径
         /// </summary>
-        public int R { get; set; }
+        public float R { get; set; }
 
         /// <summary>
         /// 卦的起始位置 正东

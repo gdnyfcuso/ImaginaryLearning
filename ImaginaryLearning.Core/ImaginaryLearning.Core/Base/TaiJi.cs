@@ -20,7 +20,7 @@ namespace ImaginaryLearning.Core
         private EncoderParameter myEncoderParameter;
         private EncoderParameters myEncoderParameters;
 
-        public void CreateTaiJiImage(Point midPoint, Graphics graphics, int r = 200)
+        public void CreateTaiJiImage(Point midPoint, Graphics graphics, Color leftColor,Color rightColor, int r = 200)
         {
             //int imgWidth = 400;                 //图象尺寸  
             int eyeRadius = r / 10;      //鱼眼半径  
@@ -40,11 +40,11 @@ namespace ImaginaryLearning.Core
             //Brush white = new SolidBrush(Color.White);
             //graphics.FillRectangle(white, new Rectangle(midPoint.X - r, midPoint.Y - r, 2 * r, 2 * r));
 
-            Brush blue = new SolidBrush(Color.Blue);//定义蓝色笔刷  
-            Brush red = new SolidBrush(Color.Red);//定义红色笔刷  
+            Brush leftBrush = new SolidBrush(leftColor);//定义蓝色笔刷  
+            Brush rightBrush = new SolidBrush(rightColor);//定义红色笔刷  
 
             //整个圆形填充蓝色  
-            graphics.FillPie(blue, midPoint.X - r, midPoint.Y - r, 2 * r, 2 * r, 0, 360);
+            graphics.FillPie(leftBrush, midPoint.X - r, midPoint.Y - r, 2 * r, 2 * r, 0, 360);
 
             //定义右边的路径（红色部分）  
             GraphicsPath redPath = new GraphicsPath();//初始化路径  
@@ -53,14 +53,12 @@ namespace ImaginaryLearning.Core
             redPath.AddArc(midPoint.X - r + headDiameter, midPoint.Y - r + headDiameter / 2, headDiameter, headDiameter, 0, 180);
 
             //填充右边部分  
-            graphics.FillPath(red, redPath);
+            graphics.FillPath(rightBrush, redPath);
 
             //填充红色眼睛  
-            graphics.FillPie(red, new Rectangle(midPoint.X - headDiameter / 2 - eyeRadius, midPoint.Y - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
+            graphics.FillPie(rightBrush, new Rectangle(midPoint.X - headDiameter / 2 - eyeRadius, midPoint.Y - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
             //填充蓝色眼睛  
-            graphics.FillPie(blue, new Rectangle(midPoint.X + headDiameter / 2 - eyeRadius, midPoint.Y - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
-
-
+            graphics.FillPie(leftBrush, new Rectangle(midPoint.X + headDiameter / 2 - eyeRadius, midPoint.Y - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
 
             //写入到Response输出流中去，普通质量  
             //image.Save(Response.OutputStream, ImageFormat.Jpeg);  
@@ -87,7 +85,7 @@ namespace ImaginaryLearning.Core
 
             Graphics graphics = Graphics.FromImage(image);
 
-            CreateTaiJiImage(new Point(), graphics);
+            CreateTaiJiImage(new Point(), graphics,Color.Blue,Color.Red);
             image.Save("TaiJi.bmp");
             graphics.Dispose();
         }

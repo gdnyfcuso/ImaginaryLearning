@@ -19,7 +19,7 @@ namespace Tests
         [Test]
         public void BaGuaTest()
         {
-            var o = new Point() { X = 500, Y =500  };
+            var o = new Point() { X = 500, Y = 500 };
             var ba = new BaguaCoordinateSystem(o, 300);
 
             TaiJi taiJi = new TaiJi();
@@ -28,10 +28,10 @@ namespace Tests
 
             Graphics graph = Graphics.FromImage(image);
             //底色填充为白色  
-            Brush white = new SolidBrush(Color.White);
-            graph.FillRectangle(white, new Rectangle(0,0,image.Width,image.Height));
+            Brush white = new SolidBrush(Color.Green);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
 
-            taiJi.CreateTaiJiImage(o, graph, 250);
+            taiJi.CreateTaiJiImage(o, graph, Color.White, Color.Black, 250);
 
 
             List<RectangleF> rList = new List<RectangleF>();
@@ -45,6 +45,63 @@ namespace Tests
             graph.FillRectangles(Brushes.Red, rList.ToArray());
             //graph.DrawString(danGua.Name, new Font("宋体", 12), Brushes.Red, new PointF(danGua.GuaRectangle.Width + 20, danGua.GuaRectangle.Height / 2));
             image.Save("graph_" + "BaGua" + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            graph.Clear(Color.Azure);
+
+            graph.Dispose();
+        }
+
+        [Test]
+        public void BaGuaFuTest()
+        {
+            var listColor = new List<Color>() { Color.White, Color.Black, Color.Red, Color.Yellow, Color.Blue, Color.Gold };
+
+            for (int i = 0; i < listColor.Count; i++)
+            {
+                for (int j = 0; j < listColor.Count; j++)
+                {
+                    for (int k = 0; k < listColor.Count; k++)
+                    {
+                        if (listColor[i] != listColor[j] && listColor[i] != listColor[k] && listColor[j] != listColor[k])
+                        {
+                            CreateTaijiBaGuaByColor(800, listColor[i], listColor[j], listColor[k], i + j + k.ToString());
+                        }
+                    }
+                }
+            }
+
+
+            CreateTaijiBaGuaByColor(800, Color.Red, Color.White, Color.Black);
+        }
+
+        private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string fileName = "graph_" + "BaGua")
+        {
+            var o = new Point() { X = imageWidth / 2, Y = imageWidth / 2 };
+            var ba = new BaguaCoordinateSystem(o, imageWidth / 3);
+
+            TaiJi taiJi = new TaiJi();
+
+            Bitmap image = new Bitmap(imageWidth, imageWidth);
+
+            Graphics graph = Graphics.FromImage(image);
+            //底色填充为白色  
+            Brush white = new SolidBrush(color);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            taiJi.CreateTaiJiImage(o, graph, leftColor, rightColor, imageWidth / 4);
+
+
+            List<RectangleF> rList = new List<RectangleF>();
+            foreach (var item in ba.XianTianBaGua)
+            {
+                rList.AddRange(item.RectangleList);
+            }
+
+            Pen pen = new Pen(new SolidBrush(leftColor));
+            //graph.DrawEllipse(pen, 500, 500, 200, 200);//画椭圆的方法，x坐标、y坐标、宽、高，如果是100，则半径为50
+            graph.DrawRectangles(pen, rList.ToArray());
+            graph.FillRectangles(new SolidBrush(rightColor), rList.ToArray());
+            //graph.DrawString(danGua.Name, new Font("宋体", 12), Brushes.Red, new PointF(danGua.GuaRectangle.Width + 20, danGua.GuaRectangle.Height / 2));
+            image.Save(fileName + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
             graph.Clear(Color.Azure);
 
             graph.Dispose();
