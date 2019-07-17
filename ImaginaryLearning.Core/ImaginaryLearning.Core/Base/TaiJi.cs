@@ -56,9 +56,9 @@ namespace ImaginaryLearning.Core
             graphics.FillPath(rightBrush, redPath);
 
             //填充红色眼睛  
-            graphics.FillPie(rightBrush, new Rectangle(midPoint.X - headDiameter / 2 - eyeRadius, midPoint.Y - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
+            graphics.FillPie(rightBrush, (float)(midPoint.X - headDiameter / 2 - eyeRadius), (float)(midPoint.Y - eyeRadius), (float)(eyeRadius * 2), (float)(eyeRadius * 2), 0, 360);
             //填充蓝色眼睛  
-            graphics.FillPie(leftBrush, new Rectangle(midPoint.X + headDiameter / 2 - eyeRadius, midPoint.Y - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
+            graphics.FillPie(leftBrush, (float)(midPoint.X + headDiameter / 2 - eyeRadius), (float)(midPoint.Y - eyeRadius), eyeRadius * 2, eyeRadius * 2, 0, 360);
 
             //写入到Response输出流中去，普通质量  
             //image.Save(Response.OutputStream, ImageFormat.Jpeg);  

@@ -47,7 +47,8 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="midWidth">如果是阴爻的话，中间的宽度</param>
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
-        public BaguaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, float r = 300)
+        /// <param name="ISS">默认为南向坐标系</param>
+        public BaguaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, float r = 300, bool ISS = true)
         {
             XianTianBaGua = new List<DanGua>();
             HouTianBaGua = new List<DanGua>();
@@ -58,7 +59,7 @@ namespace ImaginaryLearning.Core.Base
             CircleCenter = point;
             R = r;
             this.GetBaGuaDirectionPoint();
-            this.GetBaGuaList();
+            this.GetBaGuaList(ISS);
 
         }
 
@@ -121,65 +122,134 @@ namespace ImaginaryLearning.Core.Base
             directionPoint.Add(BaGuaDirection.ZX, ZX);
         }
 
-        public static Tuple<List<DanGua>, List<DanGua>> GetBaGuaList(Dictionary<BaGuaDirection, PointF> directionPoint, int totalWidth, int midWidth, int heigth)
+        /// <summary>
+        /// 获取八卦与南向坐坐系,八卦原始坐标上为南
+        /// </summary>
+        /// <param name="directionPoint"></param>
+        /// <param name="totalWidth"></param>
+        /// <param name="midWidth"></param>
+        /// <param name="heigth"></param>
+        /// <param name="ISS">是否是南向坐标系，默认为南true,false的话会转为现在坐标系</param>
+        /// <returns></returns>
+        public static Tuple<List<DanGua>, List<DanGua>> GetBaGuaList(Dictionary<BaGuaDirection, PointF> directionPoint, int totalWidth, int midWidth, int heigth, bool ISS = false)
         {
             var xtList = new List<DanGua>();
             var htList = new List<DanGua>();
 
             foreach (var guaDirection in directionPoint.Keys)
             {
-                switch (guaDirection)
+                if (ISS)
                 {
-                    case BaGuaDirection.ZX:
-                        var xkan = new Kan(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xkan);
-                        var hdui = new Dui(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hdui);
-                        break;
-                    case BaGuaDirection.ZN:
-                        var xQian = new Qian(directionPoint[guaDirection], totalWidth, heigth);
-                        xtList.Add(xQian);
-                        var hLi = new Li(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hLi);
-                        break;
-                    case BaGuaDirection.ZB:
-                        var xkun = new Kun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xkun);
-                        var hKan = new Kan(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hKan);
-                        break;
-                    case BaGuaDirection.ZD:
-                        var xLi = new Li(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xLi);
-                        var hZhen = new Zhen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hZhen);
-                        break;
-                    case BaGuaDirection.DB:
-                        var xZhen = new Zhen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xZhen);
-                        var hGen = new Gen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hGen);
-                        break;
-                    case BaGuaDirection.DN:
-                        var xDui = new Dui(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xDui);
-                        var hXun = new Xun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hXun);
-                        break;
-                    case BaGuaDirection.XB:
-                        var xGen = new Gen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xGen);
-                        var hQian = new Qian(directionPoint[guaDirection], totalWidth, heigth);
-                        htList.Add(hQian);
-                        break;
-                    case BaGuaDirection.XN:
-                        var xXun = new Xun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        xtList.Add(xXun);
-                        var hKun = new Kun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
-                        htList.Add(hKun);
-                        break;
-                    default:
-                        break;
+                    switch (guaDirection)
+                    {
+                        case BaGuaDirection.ZX:
+                            var xkan = new Kan(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xkan);
+                            var hdui = new Dui(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hdui);
+                            break;
+                        case BaGuaDirection.ZN:
+                            var xQian = new Qian(directionPoint[guaDirection], totalWidth, heigth);
+                            xtList.Add(xQian);
+                            var hLi = new Li(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hLi);
+                            break;
+                        case BaGuaDirection.ZB:
+                            var xkun = new Kun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xkun);
+                            var hKan = new Kan(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hKan);
+                            break;
+                        case BaGuaDirection.ZD:
+                            var xLi = new Li(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xLi);
+                            var hZhen = new Zhen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hZhen);
+                            break;
+                        case BaGuaDirection.DB:
+                            var xZhen = new Zhen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xZhen);
+                            var hGen = new Gen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hGen);
+                            break;
+                        case BaGuaDirection.DN:
+                            var xDui = new Dui(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xDui);
+                            var hXun = new Xun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hXun);
+                            break;
+                        case BaGuaDirection.XB:
+                            var xGen = new Gen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xGen);
+                            var hQian = new Qian(directionPoint[guaDirection], totalWidth, heigth);
+                            htList.Add(hQian);
+                            break;
+                        case BaGuaDirection.XN:
+                            var xXun = new Xun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xXun);
+                            var hKun = new Kun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hKun);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (guaDirection)
+                    {
+                        case BaGuaDirection.ZX:
+                            var xLi = new Li(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xLi);
+                            var hZhen = new Zhen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hZhen);
+                            break;
+                        case BaGuaDirection.ZN:
+                            var xkun = new Kun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xkun);
+                            var hKan = new Kan(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hKan);
+                            break;
+                        case BaGuaDirection.ZB:
+                            var xQian = new Qian(directionPoint[guaDirection], totalWidth, heigth);
+                            xtList.Add(xQian);
+                            var hLi = new Li(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hLi);
+                            break;
+                        case BaGuaDirection.ZD:
+                            var xkan = new Kan(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xkan);
+                            var hdui = new Dui(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hdui);
+
+                            break;
+                        case BaGuaDirection.DB:
+                            var xXun = new Xun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xXun);
+                            var hKun = new Kun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hKun);
+                            break;
+                        case BaGuaDirection.DN:
+                            var xGen = new Gen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xGen);
+                            var hQian = new Qian(directionPoint[guaDirection], totalWidth, heigth);
+                            htList.Add(hQian);
+                            break;
+                        case BaGuaDirection.XB:
+                            var xDui = new Dui(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xDui);
+                            var hXun = new Xun(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hXun);
+                            break;
+                        case BaGuaDirection.XN:
+                            var xZhen = new Zhen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            xtList.Add(xZhen);
+                            var hGen = new Gen(directionPoint[guaDirection], totalWidth, midWidth, heigth);
+                            htList.Add(hGen);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
@@ -187,12 +257,15 @@ namespace ImaginaryLearning.Core.Base
             return xhTup;
         }
 
+
+
         /// <summary>
         /// 调用此方法获取先天八卦后后天八卦的实体对象
         /// </summary>
-        public void GetBaGuaList()
+        /// <param name="ISS">默认为南向坐标系</param>
+        public void GetBaGuaList(bool ISS = true)
         {
-            var xhBaGuaList = GetBaGuaList(directionPoint, TotalWidth, MidWidth, Heigth);
+            var xhBaGuaList = GetBaGuaList(directionPoint, TotalWidth, MidWidth, Heigth, ISS);
             XianTianBaGua = xhBaGuaList.Item1;
             HouTianBaGua = xhBaGuaList.Item2;
         }
@@ -205,7 +278,7 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="midWidth">如果是阴爻的话，中间的宽度</param>
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
-        public BaguaCoordinateSystem(PointF circleCenterPoint, int r) : this(circleCenterPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth, r)
+        public BaguaCoordinateSystem(PointF circleCenterPoint, int r, bool ISS=true) : this(circleCenterPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth, r,ISS)
         {
 
         }
@@ -218,7 +291,8 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="midWidth">如果是阴爻的话，中间的宽度</param>
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
-        public BaguaCoordinateSystem(PointF circleCenterPoint) : this(circleCenterPoint, GuaConst.CircleCenterR)
+        /// <param name="ISS">默认为南向坐标系</param>
+        public BaguaCoordinateSystem(PointF circleCenterPoint, bool ISS = true) : this(circleCenterPoint, GuaConst.CircleCenterR,ISS)
         {
 
         }

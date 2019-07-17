@@ -1,3 +1,4 @@
+using ImaginaryLearning.Common;
 using ImaginaryLearning.Core;
 using ImaginaryLearning.Core.BaGua;
 using ImaginaryLearning.Core.Base;
@@ -76,7 +77,7 @@ namespace Tests
         private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string fileName = "graph_" + "BaGua")
         {
             var o = new Point() { X = imageWidth / 2, Y = imageWidth / 2 };
-            var ba = new BaguaCoordinateSystem(o, imageWidth / 3);
+            var ba = new BaguaCoordinateSystem(o, imageWidth / 3, false);
 
             TaiJi taiJi = new TaiJi();
 
@@ -85,13 +86,16 @@ namespace Tests
             Graphics graph = Graphics.FromImage(image);
             //底色填充为白色  
             Brush white = new SolidBrush(color);
-            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+            //graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+            Bitmap bitmap = new Bitmap("FW.png");
+            graph.DrawImage(bitmap, new RectangleF(0, 0, image.Width, image.Height));
 
-            taiJi.CreateTaiJiImage(o, graph, leftColor, rightColor, imageWidth / 4);
+
+            taiJi.CreateTaiJiImage(o, graph, leftColor, rightColor, imageWidth / 12);
 
 
             List<RectangleF> rList = new List<RectangleF>();
-            foreach (var item in ba.XianTianBaGua)
+            foreach (var item in ba.HouTianBaGua)
             {
                 rList.AddRange(item.RectangleList);
             }
@@ -101,10 +105,25 @@ namespace Tests
             graph.DrawRectangles(pen, rList.ToArray());
             graph.FillRectangles(new SolidBrush(rightColor), rList.ToArray());
             //graph.DrawString(danGua.Name, new Font("宋体", 12), Brushes.Red, new PointF(danGua.GuaRectangle.Width + 20, danGua.GuaRectangle.Height / 2));
-            image.Save(fileName + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            //Bitmap bitmap = new Bitmap("FW.png");
+            //image.alphaImage(bitmap, 100);
+            //image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            image.Save(fileName + ".png", System.Drawing.Imaging.ImageFormat.Png);
             graph.Clear(Color.Azure);
 
             graph.Dispose();
+        }
+
+        public static Bitmap img_alpha(Bitmap src, int alpha)
+        {
+            Bitmap bmp = new Bitmap(src.Width, src.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            for (int h = 0; h < src.Height; h++)
+                for (int w = 0; w < src.Width; w++)
+                {
+                    Color c = src.GetPixel(w, h);
+                    bmp.SetPixel(w, h, Color.FromArgb(alpha, c.R, c.G, c.B));//色彩度最大为255，最小为0
+                }
+            return bmp;
         }
 
         [Test]
