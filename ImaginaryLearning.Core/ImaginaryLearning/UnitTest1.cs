@@ -64,7 +64,7 @@ namespace Tests
                     {
                         if (listColor[i] != listColor[j] && listColor[i] != listColor[k] && listColor[j] != listColor[k])
                         {
-                            CreateTaijiBaGuaByColor(800, listColor[i], listColor[j], listColor[k], i + j + k.ToString());
+                            CreateTaijiBaGuaByColor(800, listColor[i], listColor[j],  listColor[k], string.Format("FW{0}.jpg", i+1), i.ToString() + j.ToString() + k.ToString());
                         }
                     }
                 }
@@ -74,7 +74,7 @@ namespace Tests
             CreateTaijiBaGuaByColor(800, Color.Red, Color.White, Color.Black);
         }
 
-        private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string fileName = "graph_" + "BaGua")
+        private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string sFileName = "FW.png", string fileName = "graph_" + "BaGua")
         {
             var o = new Point() { X = imageWidth / 2, Y = imageWidth / 2 };
             var ba = new BaguaCoordinateSystem(o, imageWidth / 3, false);
@@ -87,7 +87,7 @@ namespace Tests
             //µ×É«Ìî³äÎª°×É«  
             Brush white = new SolidBrush(color);
             //graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
-            Bitmap bitmap = new Bitmap("FW.png");
+            Bitmap bitmap = new Bitmap(sFileName);
             graph.DrawImage(bitmap, new RectangleF(0, 0, image.Width, image.Height));
 
 
