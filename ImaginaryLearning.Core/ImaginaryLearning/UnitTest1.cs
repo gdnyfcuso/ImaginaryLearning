@@ -18,9 +18,31 @@ namespace Tests
         }
 
         [Test]
+        public void CircleTest()
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            var o = new PointF() { X = 500, Y = 500 };
+            var ba = new BaguaCoordinateSystem(o, 300);
+            var angle = 45;
+            Graphics graph = Graphics.FromImage(image);
+            //底色填充为白色  
+            Brush white = new SolidBrush(Color.Green);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            for (int i = 0; i < ba.XianTianBaGua.Count; i++)
+            {
+                var dg = ba.XianTianBaGua[i];
+                graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 250));
+            }
+
+            image.Save("graph_CircleTest.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+        }
+
+
+        [Test]
         public void BaGuaTest()
         {
-            var o = new Point() { X = 500, Y = 500 };
+            var o = new PointF() { X = 500, Y = 500 };
             var ba = new BaguaCoordinateSystem(o, 300);
 
             TaiJi taiJi = new TaiJi();
@@ -33,13 +55,29 @@ namespace Tests
             graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
 
             taiJi.CreateTaiJiImage(o, graph, Color.White, Color.Black, 250);
+            var angle = 45;
+
+            //for (int i = 0; i < ba.XianTianBaGua.Count; i++)
+            //{
+            //    var dg = ba.XianTianBaGua[i];
+            //    graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 200));
+            //}
 
 
             List<RectangleF> rList = new List<RectangleF>();
-            foreach (var item in ba.XianTianBaGua)
+
+            for (int i = 0; i < ba.XianTianBaGua.Count; i++)
             {
-                rList.AddRange(item.RectangleList);
+                var dg = ba.XianTianBaGua[i];
+                rList.AddRange(dg.RectangleList);
+                graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 250));
             }
+
+
+            //foreach (var item in ba.XianTianBaGua)
+            //{
+            //    rList.AddRange(item.RectangleList);
+            //}
             Pen pen = new Pen(Brushes.Red);
             //graph.DrawEllipse(pen, 500, 500, 200, 200);//画椭圆的方法，x坐标、y坐标、宽、高，如果是100，则半径为50
             graph.DrawRectangles(pen, rList.ToArray());
@@ -64,20 +102,27 @@ namespace Tests
                     {
                         if (listColor[i] != listColor[j] && listColor[i] != listColor[k] && listColor[j] != listColor[k])
                         {
-                            CreateTaijiBaGuaByColor(800, listColor[i], listColor[j],  listColor[k], string.Format("FW{0}.jpg", i+1), i.ToString() + j.ToString() + k.ToString());
+                            CreateTaijiBaGuaByColor(800, listColor[i], listColor[j], listColor[k], string.Format("FW{0}.jpg", i + 1), i.ToString() + j.ToString() + k.ToString());
                         }
                     }
                 }
             }
-
-
-            CreateTaijiBaGuaByColor(800, Color.Red, Color.White, Color.Black);
         }
 
-        private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string sFileName = "FW.png", string fileName = "graph_" + "BaGua")
+        [Test]
+        public void BaGuaDNameTest()
         {
-            var o = new Point() { X = imageWidth / 2, Y = imageWidth / 2 };
-            var ba = new BaguaCoordinateSystem(o, imageWidth / 3, false);
+            CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "N_XianTian");
+            CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "N_HouTian", false);
+            CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "S_XianTian", ISS: false);
+            CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "S_HouTian", false, ISS: false);
+        }
+
+
+        private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string sFileName = "FW.png", string fileName = "graph_BaGua", bool IXH = true, bool ISS = true)
+        {
+            var o = new PointF() { X = imageWidth / 2, Y = imageWidth / 2 };
+            var ba = new BaguaCoordinateSystem(o, imageWidth / 3, ISS);
 
             TaiJi taiJi = new TaiJi();
 
@@ -87,17 +132,36 @@ namespace Tests
             //底色填充为白色  
             Brush white = new SolidBrush(color);
             //graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
-            Bitmap bitmap = new Bitmap(sFileName);
-            graph.DrawImage(bitmap, new RectangleF(0, 0, image.Width, image.Height));
+            if (!string.IsNullOrWhiteSpace(sFileName))
+            {
+                Bitmap bitmap = new Bitmap(sFileName);
+                graph.DrawImage(bitmap, new RectangleF(0, 0, image.Width, image.Height));
+            }
 
 
             taiJi.CreateTaiJiImage(o, graph, leftColor, rightColor, imageWidth / 12);
 
-
+            var angle = 45;
             List<RectangleF> rList = new List<RectangleF>();
-            foreach (var item in ba.HouTianBaGua)
+
+            var dgList = IXH ? ba.XianTianBaGua : ba.HouTianBaGua;
+
+            for (int i = 0; i < dgList.Count; i++)
             {
-                rList.AddRange(item.RectangleList);
+                var dg = dgList[i];
+                rList.AddRange(dg.RectangleList);
+                graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth/4));
+                if (IXH)
+                {
+                    graph.DrawString(dg.InnateNumber.ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth / 5));
+                   // graph.DrawString(dg.InnateOrientation.GetDescription().ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, (float)(imageWidth / 4)));
+                }
+                else
+                {
+                    graph.DrawString(dg.NumbersAcquired.ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth /5));
+                    //graph.DrawString(dg.AcquiredAzimuth.GetDescription().ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, (float)(imageWidth / 4)));
+                }
+
             }
 
             Pen pen = new Pen(new SolidBrush(leftColor));

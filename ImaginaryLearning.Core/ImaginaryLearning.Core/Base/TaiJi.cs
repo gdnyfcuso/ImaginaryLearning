@@ -20,7 +20,7 @@ namespace ImaginaryLearning.Core
         private EncoderParameter myEncoderParameter;
         private EncoderParameters myEncoderParameters;
 
-        public void CreateTaiJiImage(Point midPoint, Graphics graphics, Color leftColor,Color rightColor, int r = 200)
+        public void CreateTaiJiImage(PointF midPoint, Graphics graphics, Color leftColor,Color rightColor, int r = 200)
         {
             //int imgWidth = 400;                 //图象尺寸  
             int eyeRadius = r / 10;      //鱼眼半径  
@@ -85,7 +85,7 @@ namespace ImaginaryLearning.Core
 
             Graphics graphics = Graphics.FromImage(image);
 
-            CreateTaiJiImage(new Point(), graphics,Color.Blue,Color.Red);
+            CreateTaiJiImage(new PointF(), graphics,Color.Blue,Color.Red);
             image.Save("TaiJi.bmp");
             graphics.Dispose();
         }

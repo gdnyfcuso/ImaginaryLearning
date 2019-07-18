@@ -73,35 +73,17 @@ namespace ImaginaryLearning.Core.Base
         {
             var XY = Math.Cos(45 * 3.14 / 180) * R;
 
+            var ZXX = CircleCenter.X + R;
+            var ZXY = CircleCenter.Y - GuaRectangle.Height / 2;
+            ZX = new PointF((float)ZXX, (float)ZXY);
+
+            directionPoint.Add(BaGuaDirection.ZX, ZX);
+
             var XNX = XY + CircleCenter.X;
             var XNY = CircleCenter.Y - XY - GuaRectangle.Height;
             XN = new PointF((float)XNX, (float)XNY);
 
             directionPoint.Add(BaGuaDirection.XN, XN);
-
-            var XBX = XY + CircleCenter.X;
-            var XBY = XY + CircleCenter.Y;
-            XB = new PointF((float)XBX, (float)XBY);
-
-            directionPoint.Add(BaGuaDirection.XB, XB);
-
-            var DNX = CircleCenter.X - XY - GuaRectangle.Width;
-            var DNY = CircleCenter.Y - XY - GuaRectangle.Height;
-            DN = new PointF((float)DNX, (float)DNY);
-
-            directionPoint.Add(BaGuaDirection.DN, DN);
-
-            var DBX = CircleCenter.X - XY - GuaRectangle.Width;
-            var DBY = CircleCenter.Y + XY;
-            DB = new PointF((float)DBX, (float)DBY);
-
-            directionPoint.Add(BaGuaDirection.DB, DB);
-
-            var ZBX = CircleCenter.X - GuaRectangle.Width / 2;
-            var ZBY = R + CircleCenter.Y;
-            ZB = new PointF((float)ZBX, (float)ZBY);
-
-            directionPoint.Add(BaGuaDirection.ZB, ZB);
 
             var ZNX = CircleCenter.X - GuaRectangle.Width / 2;
             var ZNY = CircleCenter.Y - R - GuaRectangle.Height;
@@ -109,17 +91,38 @@ namespace ImaginaryLearning.Core.Base
 
             directionPoint.Add(BaGuaDirection.ZN, ZN);
 
+            var DNX = CircleCenter.X - XY - GuaRectangle.Width;
+            var DNY = CircleCenter.Y - XY - GuaRectangle.Height;
+            DN = new PointF((float)DNX, (float)DNY);
+
+            directionPoint.Add(BaGuaDirection.DN, DN);
+
             var ZDX = CircleCenter.X - R - GuaRectangle.Width;
             var ZDY = CircleCenter.Y - GuaRectangle.Height / 2;
             ZD = new PointF((float)ZDX, (float)ZDY);
 
             directionPoint.Add(BaGuaDirection.ZD, ZD);
 
-            var ZXX = CircleCenter.X + R;
-            var ZXY = CircleCenter.Y - GuaRectangle.Height / 2;
-            ZX = new PointF((float)ZXX, (float)ZXY);
 
-            directionPoint.Add(BaGuaDirection.ZX, ZX);
+            var DBX = CircleCenter.X - XY - GuaRectangle.Width;
+            var DBY = CircleCenter.Y + XY;
+            DB = new PointF((float)DBX, (float)DBY);
+
+            directionPoint.Add(BaGuaDirection.DB, DB);
+
+
+            var ZBX = CircleCenter.X - GuaRectangle.Width / 2;
+            var ZBY = R + CircleCenter.Y;
+            ZB = new PointF((float)ZBX, (float)ZBY);
+
+            directionPoint.Add(BaGuaDirection.ZB, ZB);
+
+
+            var XBX = XY + CircleCenter.X;
+            var XBY = XY + CircleCenter.Y;
+            XB = new PointF((float)XBX, (float)XBY);
+
+            directionPoint.Add(BaGuaDirection.XB, XB);
         }
 
         /// <summary>
