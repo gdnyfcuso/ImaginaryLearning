@@ -116,8 +116,18 @@ namespace Tests
             CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "N_HouTian", false);
             CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "S_XianTian", ISS: false);
             CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, "S_HouTian", false, ISS: false);
+
         }
 
+        [Test]
+        public void BaGua_img_alpha()
+        {
+            CreateTaijiBaGuaByColor(1000, Color.Red, Color.Green, Color.Black, string.Empty, fileName: "N_XianTian1");
+            var bmp = new Bitmap("FW.png");
+            var ir = new Bitmap("N_XianTian1.png");
+            ir.alphaImage(bmp, 50);
+            ir.Save("S_HouTian1.png");
+        }
 
         private static void CreateTaijiBaGuaByColor(int imageWidth, Color color, Color leftColor, Color rightColor, string sFileName = "FW.png", string fileName = "graph_BaGua", bool IXH = true, bool ISS = true)
         {
@@ -150,15 +160,15 @@ namespace Tests
             {
                 var dg = dgList[i];
                 rList.AddRange(dg.RectangleList);
-                graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth/4));
+                graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth / 4));
                 if (IXH)
                 {
                     graph.DrawString(dg.InnateNumber.ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth / 5));
-                   // graph.DrawString(dg.InnateOrientation.GetDescription().ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, (float)(imageWidth / 4)));
+                    // graph.DrawString(dg.InnateOrientation.GetDescription().ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, (float)(imageWidth / 4)));
                 }
                 else
                 {
-                    graph.DrawString(dg.NumbersAcquired.ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth /5));
+                    graph.DrawString(dg.NumbersAcquired.ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, imageWidth / 5));
                     //graph.DrawString(dg.AcquiredAzimuth.GetDescription().ToString(), new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, (float)(imageWidth / 4)));
                 }
 
@@ -173,6 +183,7 @@ namespace Tests
             //image.alphaImage(bitmap, 100);
             //image.RotateFlip(RotateFlipType.Rotate180FlipNone);
             image.Save(fileName + ".png", System.Drawing.Imaging.ImageFormat.Png);
+
             graph.Clear(Color.Azure);
 
             graph.Dispose();
