@@ -34,32 +34,42 @@ namespace Tests
 
             //graph.DrawRectangle(new Pen(Brushes.Red), new Rectangle(800, 500, 100, 50));
 
-            var leftSPoint = new PointF(800, 500);
-            var leftXPoint = new PointF(800, 650);
-            var rightSpoint = new PointF(900, 500);
-            var rightXpoint = new PointF(900, 650);
+            var leftSPoint = new PointF(800, 450);
+            var leftXPoint = new PointF(800, 550);
+            var rightSpoint = new PointF(950, 450);
+            var rightXpoint = new PointF(950, 550);
 
-            graph.DrawLine(new Pen(Brushes.Red), leftSPoint, rightSpoint);
-            graph.DrawLine(new Pen(Brushes.Black), leftSPoint, leftXPoint);
-            graph.DrawLine(new Pen(Brushes.Blue), rightXpoint, rightSpoint);
-            graph.DrawLine(new Pen(Brushes.Green), leftXPoint, rightXpoint);
+            //graph.DrawLine(new Pen(Brushes.Red), leftSPoint, rightSpoint);
+            //graph.DrawLine(new Pen(Brushes.Black), leftSPoint, leftXPoint);
+            //graph.DrawLine(new Pen(Brushes.Blue), rightXpoint, rightSpoint);
+            //graph.DrawLine(new Pen(Brushes.Green), leftXPoint, rightXpoint);
+
+            var leftSangs = AngleA(o, leftSPoint, new PointF(800, 500));
+            var leftSangx = AngleA(o, leftXPoint, new PointF(800, 500));
+            var rightSangs = AngleA(o, rightSpoint, new PointF(800, 500));
+            var rightSangx = AngleA(o, rightXpoint, new PointF(800, 500));
+            TaiJi taiJi = new TaiJi();
+            taiJi.CreateTaiJiImage(o, graph, Color.Green, Color.Black, 450);
+            taiJi.CreateTaiJiImage(o, graph, Color.WhiteSmoke, Color.Yellow, 300);
+
             for (int i = 0; i < ba.XianTianBaGua.Count; i++)
             {
+                //if (i == 0) continue;
 
                 var ang = (8 - i) * angle;
 
                 double leftSPointvalue = Math.Sqrt(Math.Abs(o.X - leftSPoint.X) * Math.Abs(o.X - leftSPoint.X) + Math.Abs(o.Y - leftSPoint.Y) * Math.Abs(o.Y - leftSPoint.Y));
                 var leftSang = AngleA(o, leftSPoint, rightSpoint);
-                var leftSPoint1 = o.CirclePointF(ang + leftSang, (float)leftSPointvalue);
+                var leftSPoint1 = o.CirclePointF(ang - leftSangs, (float)leftSPointvalue);
                 double leftXPointvalue = Math.Sqrt(Math.Abs(o.X - leftXPoint.X) * Math.Abs(o.X - leftXPoint.X) + Math.Abs(o.Y - leftXPoint.Y) * Math.Abs(o.Y - leftXPoint.Y));
                 var lefXtang = AngleA(o, leftSPoint, leftXPoint);
-                var leftXPoint1 = o.CirclePointF(ang + lefXtang, (float)leftXPointvalue);
+                var leftXPoint1 = o.CirclePointF(ang + leftSangx, (float)leftXPointvalue);
                 double rightSpointvalue = Math.Sqrt(Math.Abs(o.X - rightSpoint.X) * Math.Abs(o.X - rightSpoint.X) + Math.Abs(o.Y - rightSpoint.Y) * Math.Abs(o.Y - rightSpoint.Y));
                 var rightstang = AngleA(o, leftSPoint, rightSpoint);
-                var rightSpoint1 = o.CirclePointF(ang + rightstang, (float)rightSpointvalue);
+                var rightSpoint1 = o.CirclePointF(ang - rightSangs, (float)rightSpointvalue);
                 double rightXpointvalue = Math.Sqrt(Math.Abs(o.X - rightXpoint.X) * Math.Abs(o.X - rightXpoint.X) + Math.Abs(o.Y - rightXpoint.Y) * Math.Abs(o.Y - rightXpoint.Y));
                 var rightxtang = AngleA(o, rightXpoint, rightSpoint);
-                var rightXpoint1 = o.CirclePointF(ang + rightxtang, (float)rightXpointvalue);
+                var rightXpoint1 = o.CirclePointF(ang + rightSangx, (float)rightXpointvalue);
 
                 graph.DrawLine(new Pen(Brushes.Red), leftSPoint1, rightSpoint1);
                 graph.DrawLine(new Pen(Brushes.Black), leftSPoint1, leftXPoint1);
@@ -72,7 +82,7 @@ namespace Tests
                 graph.DrawEllipse(new Pen(Brushes.Green), rightXpoint1.X, rightXpoint1.Y, 20, 20);
                 graph.DrawEllipse(new Pen(Brushes.Blue), leftXPoint1.X, leftXPoint1.Y, 20, 20);
                 var dg = ba.XianTianBaGua[i];
-                graph.DrawString(dg.Name, new Font("ËÎÌו", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 250));
+                graph.DrawString(dg.Name, new Font("ËÎÌו", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 350));
             }
 
             image.Save("graph_ang.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
