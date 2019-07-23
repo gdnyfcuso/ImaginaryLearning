@@ -3,6 +3,7 @@ using ImaginaryLearning.Core;
 using ImaginaryLearning.Core.BaGua;
 using ImaginaryLearning.Core.Base;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -15,6 +16,88 @@ namespace Tests
         public void Setup()
         {
 
+        }
+
+        [Test]
+        public void Angle()
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            Graphics graph = Graphics.FromImage(image);
+            Brush white = new SolidBrush(Color.White);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            var o = new PointF() { X = 500, Y = 500 };
+            var ba = new BaguaCoordinateSystem(o, 300);
+            var angle = 45;
+            //底色填充为白色  
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            //graph.DrawRectangle(new Pen(Brushes.Red), new Rectangle(800, 500, 100, 50));
+
+            var leftSPoint = new PointF(800, 500);
+            var leftXPoint = new PointF(800, 650);
+            var rightSpoint = new PointF(900, 500);
+            var rightXpoint = new PointF(900, 650);
+
+            graph.DrawLine(new Pen(Brushes.Red), leftSPoint, rightSpoint);
+            graph.DrawLine(new Pen(Brushes.Black), leftSPoint, leftXPoint);
+            graph.DrawLine(new Pen(Brushes.Blue), rightXpoint, rightSpoint);
+            graph.DrawLine(new Pen(Brushes.Green), leftXPoint, rightXpoint);
+            for (int i = 0; i < ba.XianTianBaGua.Count; i++)
+            {
+
+                var ang = (8 - i) * angle;
+
+                double leftSPointvalue = Math.Sqrt(Math.Abs(o.X - leftSPoint.X) * Math.Abs(o.X - leftSPoint.X) + Math.Abs(o.Y - leftSPoint.Y) * Math.Abs(o.Y - leftSPoint.Y));
+                var leftSang = AngleA(o, leftSPoint, rightSpoint);
+                var leftSPoint1 = o.CirclePointF(ang + leftSang, (float)leftSPointvalue);
+                double leftXPointvalue = Math.Sqrt(Math.Abs(o.X - leftXPoint.X) * Math.Abs(o.X - leftXPoint.X) + Math.Abs(o.Y - leftXPoint.Y) * Math.Abs(o.Y - leftXPoint.Y));
+                var lefXtang = AngleA(o, leftSPoint, leftXPoint);
+                var leftXPoint1 = o.CirclePointF(ang + lefXtang, (float)leftXPointvalue);
+                double rightSpointvalue = Math.Sqrt(Math.Abs(o.X - rightSpoint.X) * Math.Abs(o.X - rightSpoint.X) + Math.Abs(o.Y - rightSpoint.Y) * Math.Abs(o.Y - rightSpoint.Y));
+                var rightstang = AngleA(o, leftSPoint, rightSpoint);
+                var rightSpoint1 = o.CirclePointF(ang + rightstang, (float)rightSpointvalue);
+                double rightXpointvalue = Math.Sqrt(Math.Abs(o.X - rightXpoint.X) * Math.Abs(o.X - rightXpoint.X) + Math.Abs(o.Y - rightXpoint.Y) * Math.Abs(o.Y - rightXpoint.Y));
+                var rightxtang = AngleA(o, rightXpoint, rightSpoint);
+                var rightXpoint1 = o.CirclePointF(ang + rightxtang, (float)rightXpointvalue);
+
+                graph.DrawLine(new Pen(Brushes.Red), leftSPoint1, rightSpoint1);
+                graph.DrawLine(new Pen(Brushes.Black), leftSPoint1, leftXPoint1);
+                graph.DrawLine(new Pen(Brushes.Blue), rightXpoint1, rightSpoint1);
+                graph.DrawLine(new Pen(Brushes.Blue), leftXPoint1, rightXpoint1);
+
+                graph.DrawEllipse(new Pen(Brushes.Red), leftSPoint1.X, leftSPoint1.Y, 20, 20);
+                Console.WriteLine(leftSPoint1.X + leftSPoint1.Y);
+                graph.DrawEllipse(new Pen(Brushes.Black), rightSpoint1.X, rightSpoint1.Y, 20, 20);
+                graph.DrawEllipse(new Pen(Brushes.Green), rightXpoint1.X, rightXpoint1.Y, 20, 20);
+                graph.DrawEllipse(new Pen(Brushes.Blue), leftXPoint1.X, leftXPoint1.Y, 20, 20);
+                var dg = ba.XianTianBaGua[i];
+                graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 250));
+            }
+
+            image.Save("graph_ang.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
+        }
+
+        public static float AngleA(PointF cen, PointF first, PointF second)
+        {
+            float dx1, dx2, dy1, dy2;
+            float angle;
+
+            dx1 = first.X - cen.X;
+            dy1 = first.Y - cen.Y;
+
+            dx2 = second.X - cen.X;
+
+            dy2 = second.Y - cen.Y;
+
+            float c = (float)Math.Sqrt(dx1 * dx1 + dy1 * dy1) * (float)Math.Sqrt(dx2 * dx2 + dy2 * dy2);
+
+            if (c == 0) return -1;
+
+            angle = (float)Math.Acos((dx1 * dx2 + dy1 * dy2) / c);
+            //angle * 3.14 / 180
+            return (float)(angle * 180 / 3.14);
         }
 
         [Test]
