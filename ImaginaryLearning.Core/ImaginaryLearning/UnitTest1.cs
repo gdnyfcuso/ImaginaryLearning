@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 
 namespace Tests
@@ -27,30 +28,30 @@ namespace Tests
             graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
 
             var o = new PointF() { X = 500, Y = 500 };
-            var ba = new BaguaCoordinateSystem(o, 300);
+            var ba = new BaguaCoordinateSystem(o, 200);
             var angle = 45;
             //底色填充为白色  
             graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
 
             //graph.DrawRectangle(new Pen(Brushes.Red), new Rectangle(800, 500, 100, 50));
 
-            var leftSPoint = new PointF(800, 450);
-            var leftXPoint = new PointF(800, 550);
-            var rightSpoint = new PointF(950, 450);
-            var rightXpoint = new PointF(950, 550);
+            var leftSPoint = new PointF(880, 400);
+            var leftXPoint = new PointF(880, 600);
+            var rightSpoint = new PointF(910, 400);
+            var rightXpoint = new PointF(910, 600);
 
             //graph.DrawLine(new Pen(Brushes.Red), leftSPoint, rightSpoint);
             //graph.DrawLine(new Pen(Brushes.Black), leftSPoint, leftXPoint);
             //graph.DrawLine(new Pen(Brushes.Blue), rightXpoint, rightSpoint);
             //graph.DrawLine(new Pen(Brushes.Green), leftXPoint, rightXpoint);
 
-            var leftSangs = AngleA(o, leftSPoint, new PointF(800, 500));
-            var leftSangx = AngleA(o, leftXPoint, new PointF(800, 500));
-            var rightSangs = AngleA(o, rightSpoint, new PointF(800, 500));
-            var rightSangx = AngleA(o, rightXpoint, new PointF(800, 500));
+            var leftSangs = AngleA(o, leftSPoint, new PointF(600, 500));
+            var leftSangx = AngleA(o, leftXPoint, new PointF(600, 500));
+            var rightSangs = AngleA(o, rightSpoint, new PointF(600, 500));
+            var rightSangx = AngleA(o, rightXpoint, new PointF(600, 500));
             TaiJi taiJi = new TaiJi();
-            taiJi.CreateTaiJiImage(o, graph, Color.Green, Color.Black, 450);
-            taiJi.CreateTaiJiImage(o, graph, Color.WhiteSmoke, Color.Yellow, 300);
+            taiJi.CreateTaiJiImage(o, graph, Color.YellowGreen, Color.YellowGreen, 450);
+            taiJi.CreateTaiJiImage(o, graph, Color.BlanchedAlmond, Color.BlanchedAlmond, 300);
 
             for (int i = 0; i < ba.XianTianBaGua.Count; i++)
             {
@@ -76,12 +77,21 @@ namespace Tests
                 graph.DrawLine(new Pen(Brushes.Blue), rightXpoint1, rightSpoint1);
                 graph.DrawLine(new Pen(Brushes.Blue), leftXPoint1, rightXpoint1);
 
-                graph.DrawEllipse(new Pen(Brushes.Red), leftSPoint1.X, leftSPoint1.Y, 20, 20);
-                Console.WriteLine(leftSPoint1.X + leftSPoint1.Y);
-                graph.DrawEllipse(new Pen(Brushes.Black), rightSpoint1.X, rightSpoint1.Y, 20, 20);
-                graph.DrawEllipse(new Pen(Brushes.Green), rightXpoint1.X, rightXpoint1.Y, 20, 20);
-                graph.DrawEllipse(new Pen(Brushes.Blue), leftXPoint1.X, leftXPoint1.Y, 20, 20);
+                //graph.DrawEllipse(new Pen(Brushes.Red), leftSPoint1.X, leftSPoint1.Y, 20, 20);
+                //Console.WriteLine(leftSPoint1.X + leftSPoint1.Y);
+                //graph.DrawEllipse(new Pen(Brushes.Black), rightSpoint1.X, rightSpoint1.Y, 20, 20);
+                //graph.DrawEllipse(new Pen(Brushes.Green), rightXpoint1.X, rightXpoint1.Y, 20, 20);
+                //graph.DrawEllipse(new Pen(Brushes.Blue), leftXPoint1.X, leftXPoint1.Y, 20, 20);
+                var ps = new PointF[] { leftSPoint1, leftXPoint1, rightXpoint1, rightSpoint1 };
+
+
+                graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                graph.FillPolygon(Brushes.Red, ps, FillMode.Alternate);
+                graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+
                 var dg = ba.XianTianBaGua[i];
+
                 graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 350));
             }
 
