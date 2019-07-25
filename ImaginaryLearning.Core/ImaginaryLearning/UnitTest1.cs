@@ -20,6 +20,35 @@ namespace Tests
         }
 
         [Test]
+        public void XZPointTest()
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            Graphics graph = Graphics.FromImage(image);
+            Brush white = new SolidBrush(Color.White);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            var o = new PointF() { X = 500, Y = 500 };
+
+            var one = new PointF() { X = 700, Y = 700 };
+
+            graph.DrawEllipse(new Pen(Brushes.Red), o.X, o.Y, 20, 20);
+
+            for (int i = 1; i <=8; i++)
+            {
+                var second = o.CirclePointClockwiseRotationF(one, 45*i);
+
+
+                //graph.DrawEllipse(new Pen(Brushes.Red), one.X, one.Y, 20, 20);
+                graph.DrawEllipse(new Pen(Brushes.Red), second.X, second.Y, 20, 20);
+            }
+
+            
+
+            image.Save("graph_XZPointTest.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
+        }
+
+        [Test]
         public void Angle()
         {
             Bitmap image = new Bitmap(1000, 1000);
