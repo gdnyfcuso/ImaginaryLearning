@@ -33,20 +33,128 @@ namespace Tests
 
             graph.DrawEllipse(new Pen(Brushes.Red), o.X, o.Y, 20, 20);
 
-            for (int i = 1; i <=8; i++)
+            for (int i = 1; i <= 8; i++)
             {
-                var second = o.CirclePointClockwiseRotationF(one, 45*i);
+                var second = o.CirclePointClockwiseRotationF(one, 45 * i);
 
 
                 //graph.DrawEllipse(new Pen(Brushes.Red), one.X, one.Y, 20, 20);
                 graph.DrawEllipse(new Pen(Brushes.Red), second.X, second.Y, 20, 20);
             }
 
-            
+
 
             image.Save("graph_XZPointTest.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
         }
+
+
+        [Test]
+        public void AngleRectangle()
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            Graphics graph = Graphics.FromImage(image);
+            Brush white = new SolidBrush(Color.White);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            var o = new PointF() { X = 500, Y = 500 };
+            var ba = new BaguaCoordinateSystem(o, 200);
+            var angle = 45;
+            //底色填充为白色  
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            //graph.DrawRectangle(new Pen(Brushes.Red), new Rectangle(800, 500, 100, 50));
+
+            var leftSPoint = new PointF(880, 400);
+            var leftXPoint = new PointF(880, 600);
+            var rightSpoint = new PointF(910, 400);
+            var rightXpoint = new PointF(910, 600);
+
+            //graph.DrawLine(new Pen(Brushes.Red), leftSPoint, rightSpoint);
+            //graph.DrawLine(new Pen(Brushes.Black), leftSPoint, leftXPoint);
+            //graph.DrawLine(new Pen(Brushes.Blue), rightXpoint, rightSpoint);
+            //graph.DrawLine(new Pen(Brushes.Green), leftXPoint, rightXpoint);
+
+            var leftSangs = AngleA(o, leftSPoint, new PointF(600, 500));
+            var leftSangx = AngleA(o, leftXPoint, new PointF(600, 500));
+            var rightSangs = AngleA(o, rightSpoint, new PointF(600, 500));
+            var rightSangx = AngleA(o, rightXpoint, new PointF(600, 500));
+            //TaiJi taiJi = new TaiJi();
+            //taiJi.CreateTaiJiImage(o, graph, Color.YellowGreen, Color.YellowGreen, 450);
+            //taiJi.CreateTaiJiImage(o, graph, Color.BlanchedAlmond, Color.BlanchedAlmond, 300);
+
+            //graph.FillRectangles(Brushes.Red, ba.XianTianBaGua[0].RectangleList.ToArray());
+
+            //foreach (var item in ba.XianTianBaGua[0].RectangleList)
+            //{
+            //    var ps = o.RectangularRotationForCircleCentPointF(45, item);
+            //    graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            //    graph.FillPolygon(Brushes.Red, ps, FillMode.Alternate);
+            //    graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+
+            //}
+
+
+            var ps = o.RectangularRotationForCircleCentPointF(45, ba.XianTianBaGua[0].RectangleList[0]);
+            graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            graph.FillPolygon(Brushes.Red, ps, FillMode.Alternate);
+            graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+
+
+
+            for (int i = 0; i < ba.XianTianBaGua.Count; i++)
+            {
+                //if (i == 0) continue;
+
+                var ang = (8 - i) * angle;
+
+                //double leftSPointvalue = Math.Sqrt(Math.Abs(o.X - leftSPoint.X) * Math.Abs(o.X - leftSPoint.X) + Math.Abs(o.Y - leftSPoint.Y) * Math.Abs(o.Y - leftSPoint.Y));
+                //var leftSang = AngleA(o, leftSPoint, rightSpoint);
+                //var leftSPoint1 = o.CirclePointF(ang - leftSangs, (float)leftSPointvalue);
+                //double leftXPointvalue = Math.Sqrt(Math.Abs(o.X - leftXPoint.X) * Math.Abs(o.X - leftXPoint.X) + Math.Abs(o.Y - leftXPoint.Y) * Math.Abs(o.Y - leftXPoint.Y));
+                //var lefXtang = AngleA(o, leftSPoint, leftXPoint);
+                //var leftXPoint1 = o.CirclePointF(ang + leftSangx, (float)leftXPointvalue);
+                //double rightSpointvalue = Math.Sqrt(Math.Abs(o.X - rightSpoint.X) * Math.Abs(o.X - rightSpoint.X) + Math.Abs(o.Y - rightSpoint.Y) * Math.Abs(o.Y - rightSpoint.Y));
+                //var rightstang = AngleA(o, leftSPoint, rightSpoint);
+                //var rightSpoint1 = o.CirclePointF(ang - rightSangs, (float)rightSpointvalue);
+                //double rightXpointvalue = Math.Sqrt(Math.Abs(o.X - rightXpoint.X) * Math.Abs(o.X - rightXpoint.X) + Math.Abs(o.Y - rightXpoint.Y) * Math.Abs(o.Y - rightXpoint.Y));
+                //var rightxtang = AngleA(o, rightXpoint, rightSpoint);
+                //var rightXpoint1 = o.CirclePointF(ang + rightSangx, (float)rightXpointvalue);
+
+                //graph.DrawLine(new Pen(Brushes.Red), leftSPoint1, rightSpoint1);
+                //graph.DrawLine(new Pen(Brushes.Black), leftSPoint1, leftXPoint1);
+                //graph.DrawLine(new Pen(Brushes.Blue), rightXpoint1, rightSpoint1);
+                //graph.DrawLine(new Pen(Brushes.Blue), leftXPoint1, rightXpoint1);
+
+                //graph.DrawEllipse(new Pen(Brushes.Red), leftSPoint1.X, leftSPoint1.Y, 20, 20);
+                //Console.WriteLine(leftSPoint1.X + leftSPoint1.Y);
+                //graph.DrawEllipse(new Pen(Brushes.Black), rightSpoint1.X, rightSpoint1.Y, 20, 20);
+                //graph.DrawEllipse(new Pen(Brushes.Green), rightXpoint1.X, rightXpoint1.Y, 20, 20);
+                //graph.DrawEllipse(new Pen(Brushes.Blue), leftXPoint1.X, leftXPoint1.Y, 20, 20);
+                //var ps = new PointF[] { leftSPoint1, leftXPoint1, rightXpoint1, rightSpoint1 };
+
+                
+                //foreach (var item in ba.XianTianBaGua[i].RectangleList)
+                //{
+                //    var ps = o.RectangularRotationForCircleCentPointF(ang, item);
+                //    graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                //    graph.FillPolygon(Brushes.Red, ps, FillMode.Alternate);
+                //    graph.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
+                //}
+
+                //var dg = ba.XianTianBaGua[i];
+
+                //graph.DrawString(dg.Name, new Font("宋体", 25), Brushes.Red, o.CirclePointF((8 - i) * angle, 350));
+            }
+
+            image.Save("graph_ang2.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+
+        }
+
+
 
         [Test]
         public void Angle()

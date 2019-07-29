@@ -76,6 +76,79 @@ namespace ImaginaryLearning.Common
 
         }
 
+
+        /// <summary>
+        /// 矩形绕一个圆心旋转
+        /// </summary>
+        /// <returns></returns>
+        public static PointF[] RectangularRotationForCircleCentPointF(this PointF centPointF, int angleO, RectangleF rectangleF)
+        {
+            var o = centPointF;
+            var angle = angleO;
+
+            var leftSPoint = rectangleF.Location;
+            var leftXPoint = new PointF(rectangleF.X, rectangleF.Y + rectangleF.Height);
+            var rightSpoint = new PointF(rectangleF.X + rectangleF.Width, rectangleF.Y);
+            var rightXpoint = new PointF(rectangleF.X + rectangleF.Width, rectangleF.Y + rectangleF.Height);
+
+            var thirtPoint = new PointF(o.X + 100, o.Y);
+
+            var leftSangs = GetAngleByThirtPointF(o, leftSPoint, thirtPoint);
+            var leftSangx = GetAngleByThirtPointF(o, leftXPoint, thirtPoint);
+            var rightSangs = GetAngleByThirtPointF(o, rightSpoint, thirtPoint);
+            var rightSangx = GetAngleByThirtPointF(o, rightXpoint, thirtPoint);
+
+            var ang = angle;
+
+            double leftSPointvalue = Math.Sqrt(Math.Abs(o.X - leftSPoint.X) * Math.Abs(o.X - leftSPoint.X) + Math.Abs(o.Y - leftSPoint.Y) * Math.Abs(o.Y - leftSPoint.Y));
+            var leftSang = GetAngleByThirtPointF(o, leftSPoint, rightSpoint);
+            var leftSPoint1 = o.CirclePointF(ang - leftSangs, (float)leftSPointvalue);
+            double leftXPointvalue = Math.Sqrt(Math.Abs(o.X - leftXPoint.X) * Math.Abs(o.X - leftXPoint.X) + Math.Abs(o.Y - leftXPoint.Y) * Math.Abs(o.Y - leftXPoint.Y));
+            var lefXtang = GetAngleByThirtPointF(o, leftSPoint, leftXPoint);
+            var leftXPoint1 = o.CirclePointF(ang + leftSangx, (float)leftXPointvalue);
+            double rightSpointvalue = Math.Sqrt(Math.Abs(o.X - rightSpoint.X) * Math.Abs(o.X - rightSpoint.X) + Math.Abs(o.Y - rightSpoint.Y) * Math.Abs(o.Y - rightSpoint.Y));
+            var rightstang = GetAngleByThirtPointF(o, leftSPoint, rightSpoint);
+            var rightSpoint1 = o.CirclePointF(ang - rightSangs, (float)rightSpointvalue);
+            double rightXpointvalue = Math.Sqrt(Math.Abs(o.X - rightXpoint.X) * Math.Abs(o.X - rightXpoint.X) + Math.Abs(o.Y - rightXpoint.Y) * Math.Abs(o.Y - rightXpoint.Y));
+            var rightxtang = GetAngleByThirtPointF(o, rightXpoint, rightSpoint);
+            var rightXpoint1 = o.CirclePointF(ang + rightSangx, (float)rightXpointvalue);
+
+            var ps = new PointF[] { leftSPoint1, leftXPoint1, rightXpoint1, rightSpoint1 };
+
+            return ps;
+        }
+
+        /// <summary>
+        /// 求三个点之间的夹角是多少
+        /// </summary>
+        /// <param name="cen">中间的点</param>
+        /// <param name="first">第一个点</param>
+        /// <param name="second">第三个点</param>
+        /// <returns></returns>
+        public static float GetAngleByThirtPointF(this PointF cen, PointF first, PointF second)
+        {
+            float dx1, dx2, dy1, dy2;
+            float angle;
+
+            dx1 = first.X - cen.X;
+            dy1 = first.Y - cen.Y;
+
+            dx2 = second.X - cen.X;
+
+            dy2 = second.Y - cen.Y;
+
+            float c = (float)Math.Sqrt(dx1 * dx1 + dy1 * dy1) * (float)Math.Sqrt(dx2 * dx2 + dy2 * dy2);
+
+            if (c == 0) return -1;
+
+            angle = (float)Math.Acos((dx1 * dx2 + dy1 * dy2) / c);
+            //angle * 3.14 / 180
+            return (float)(angle * 180 / 3.14);
+        }
+
+
+
+
         /// <summary>
         /// 一个点绕另一个点顺时针旋转
         /// </summary>
