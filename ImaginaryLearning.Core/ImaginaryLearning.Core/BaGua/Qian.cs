@@ -24,12 +24,12 @@ namespace ImaginaryLearning.Core.BaGua
             AcquiredAzimuth = BaGuaDirection.XB;// "西北";
         }
 
-        public Qian(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.Heigth)
+        public Qian(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Qian() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Qian() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }

@@ -99,21 +99,65 @@ namespace ImaginaryLearning.Common
             var rightSangx = GetAngleByThirtPointF(o, rightXpoint, thirtPoint);
 
             var ang = angle;
-
+            var ps = new PointF[4];
             double leftSPointvalue = Math.Sqrt(Math.Abs(o.X - leftSPoint.X) * Math.Abs(o.X - leftSPoint.X) + Math.Abs(o.Y - leftSPoint.Y) * Math.Abs(o.Y - leftSPoint.Y));
-            var leftSang = GetAngleByThirtPointF(o, leftSPoint, rightSpoint);
-            var leftSPoint1 = o.CirclePointF(ang - leftSangs, (float)leftSPointvalue);
-            double leftXPointvalue = Math.Sqrt(Math.Abs(o.X - leftXPoint.X) * Math.Abs(o.X - leftXPoint.X) + Math.Abs(o.Y - leftXPoint.Y) * Math.Abs(o.Y - leftXPoint.Y));
-            var lefXtang = GetAngleByThirtPointF(o, leftSPoint, leftXPoint);
-            var leftXPoint1 = o.CirclePointF(ang + leftSangx, (float)leftXPointvalue);
-            double rightSpointvalue = Math.Sqrt(Math.Abs(o.X - rightSpoint.X) * Math.Abs(o.X - rightSpoint.X) + Math.Abs(o.Y - rightSpoint.Y) * Math.Abs(o.Y - rightSpoint.Y));
-            var rightstang = GetAngleByThirtPointF(o, leftSPoint, rightSpoint);
-            var rightSpoint1 = o.CirclePointF(ang - rightSangs, (float)rightSpointvalue);
-            double rightXpointvalue = Math.Sqrt(Math.Abs(o.X - rightXpoint.X) * Math.Abs(o.X - rightXpoint.X) + Math.Abs(o.Y - rightXpoint.Y) * Math.Abs(o.Y - rightXpoint.Y));
-            var rightxtang = GetAngleByThirtPointF(o, rightXpoint, rightSpoint);
-            var rightXpoint1 = o.CirclePointF(ang + rightSangx, (float)rightXpointvalue);
+            //var leftSang = GetAngleByThirtPointF(o, leftSPoint, rightSpoint);
+            if (leftSPoint.Y > o.Y)
+            {
+                var leftSPoint1 = o.CirclePointF(ang - leftSangs, (float)leftSPointvalue);
+                ps[0] = leftSPoint1;
+            }
+            else
+            {
+                var leftSPoint1 = o.CirclePointF(ang + leftSangs, (float)leftSPointvalue);
+                ps[0] = leftSPoint1;
+            }
 
-            var ps = new PointF[] { leftSPoint1, leftXPoint1, rightXpoint1, rightSpoint1 };
+            double leftXPointvalue = Math.Sqrt(Math.Abs(o.X - leftXPoint.X) * Math.Abs(o.X - leftXPoint.X) + Math.Abs(o.Y - leftXPoint.Y) * Math.Abs(o.Y - leftXPoint.Y));
+
+            if (leftXPoint.Y > o.Y)
+            //var lefXtang = GetAngleByThirtPointF(o, leftSPoint, leftXPoint);
+            {
+                var leftXPoint1 = o.CirclePointF(ang - leftSangx, (float)leftXPointvalue);
+                ps[1] = leftXPoint1;
+            }
+            else
+            {
+                var leftXPoint1 = o.CirclePointF(ang + leftSangx, (float)leftXPointvalue);
+                ps[1] = leftXPoint1;
+            }
+
+
+            double rightSpointvalue = Math.Sqrt(Math.Abs(o.X - rightSpoint.X) * Math.Abs(o.X - rightSpoint.X) + Math.Abs(o.Y - rightSpoint.Y) * Math.Abs(o.Y - rightSpoint.Y));
+            //var rightstang = GetAngleByThirtPointF(o, leftSPoint, rightSpoint);
+            if (rightSpoint.Y > o.Y)
+            {
+                var rightSpoint1 = o.CirclePointF(ang - rightSangs, (float)rightSpointvalue);
+                ps[3]=rightSpoint1;
+            }
+            else {
+                var rightSpoint1 = o.CirclePointF(ang + rightSangs, (float)rightSpointvalue);
+                ps[3] = rightSpoint1;
+            }
+
+            
+
+
+            double rightXpointvalue = Math.Sqrt(Math.Abs(o.X - rightXpoint.X) * Math.Abs(o.X - rightXpoint.X) + Math.Abs(o.Y - rightXpoint.Y) * Math.Abs(o.Y - rightXpoint.Y));
+            //var rightxtang = GetAngleByThirtPointF(o, rightXpoint, rightSpoint);
+
+            if (rightXpoint.Y > o.Y)
+            {
+                var rightXpoint1 = o.CirclePointF(ang - rightSangx, (float)rightXpointvalue);
+                ps[2] = rightXpoint1;
+            }
+            else {
+                var rightXpoint1 = o.CirclePointF(ang + rightSangx, (float)rightXpointvalue);
+                ps[2] = rightXpoint1;
+            }
+            
+
+            //var ps = new PointF[] { leftSPoint1, leftXPoint1, rightXpoint1, rightSpoint1 };
 
             return ps;
         }

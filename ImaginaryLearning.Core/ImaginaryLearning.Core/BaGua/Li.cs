@@ -28,12 +28,12 @@ namespace ImaginaryLearning.Core.BaGua
             AcquiredAzimuth = BaGuaDirection.ZN;// "正南";
         }
 
-        public Li(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Li(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Li() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Li() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }

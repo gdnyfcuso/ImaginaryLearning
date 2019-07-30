@@ -26,12 +26,12 @@ namespace ImaginaryLearning.Core.BaGua
 
         }
 
-        public Xun(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Xun(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Xun() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Xun() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }

@@ -25,12 +25,12 @@ namespace ImaginaryLearning.Core.BaGua
             AcquiredAzimuth = BaGuaDirection.ZD;
         }
 
-        public Zhen(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Zhen(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Zhen() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Zhen() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }

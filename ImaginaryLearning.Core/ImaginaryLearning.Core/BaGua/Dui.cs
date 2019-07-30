@@ -24,12 +24,12 @@ namespace ImaginaryLearning.Core.BaGua
             AcquiredAzimuth = BaGuaDirection.ZX;
         }
 
-        public Dui(Point startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
+        public Dui(PointF startPoint) : this(startPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth)
         {
 
         }
 
-        public Dui() : this(new Point() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
+        public Dui() : this(new PointF() { X = GuaConst.Start_Point_X, Y = GuaConst.Start_Point_Y })
         {
 
         }
