@@ -42,8 +42,6 @@ namespace Tests
                 graph.DrawEllipse(new Pen(Brushes.Red), second.X, second.Y, 20, 20);
             }
 
-
-
             image.Save("graph_XZPointTest.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
         }
@@ -123,8 +121,6 @@ namespace Tests
             image.Save("graph_ang2.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
         }
-
-
 
         [Test]
         public void Angle()
@@ -252,6 +248,42 @@ namespace Tests
 
             image.Save("graph_CircleTest.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
         }
+
+        [Test]
+        public void BaGuaCircle()
+        {
+            Bitmap image = new Bitmap(1500, 1500);
+            var o = new PointF() { X = 750, Y = 750 };
+            var ba = new BaguaCoordinateSystem(o, 300);
+            var bah = new BaguaCoordinateSystem(o, 400);
+            var angle = 45;
+            Graphics graph = Graphics.FromImage(image);
+            //µ×É«Ìî³äÎª°×É«  
+            Brush white = new SolidBrush(Color.Green);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+            TaiJi taiJi = new TaiJi();
+
+            taiJi.CreateTaiJiImage(o, graph, Color.Black, Color.White, 250);
+
+            var listColor = new List<Color>() { Color.White, Color.Black, Color.Red, Color.Yellow, Color.Blue, Color.Gold };
+
+            for (int i = 0; i < ba.HoutTianBaGuaYaoRectangleF.Count; i++)
+            {
+                
+                graph.FillPolygon(new SolidBrush(listColor[i%6]), ba.HoutTianBaGuaYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
+            }
+
+            for (int i = 0; i < bah.XianTianBaGuYaoRectangleF.Count; i++)
+            {
+
+                graph.FillPolygon(new SolidBrush(listColor[i % 6]), bah.XianTianBaGuYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
+            }
+
+            
+
+            image.Save("graph_CircleTest123.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+        }
+
 
 
         [Test]

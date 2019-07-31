@@ -1,4 +1,6 @@
-﻿using ImaginaryLearning.Core.BaGua;
+﻿using ImaginaryLearning.Common;
+using ImaginaryLearning.Core.BaGua;
+using ImaginaryLearning.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,12 +18,22 @@ namespace ImaginaryLearning.Core.Base
         /// <summary>
         /// 先天八卦
         /// </summary>
-        public List<DanGua> XianTianBaGua { get; set; }
+        public List<DanGua> XianTianBaGua { get; private set; }
+
+        /// <summary>
+        /// 先天八卦旋转之后的坐标点主要为了画图
+        /// </summary>
+        public List<YaoRectangleF> XianTianBaGuYaoRectangleF { get; private set; }
 
         /// <summary>
         /// 后天八卦
         /// </summary>
-        public List<DanGua> HouTianBaGua { get; set; }
+        public List<DanGua> HouTianBaGua { get; private set; }
+
+        /// <summary>
+        /// 后天八旋转之后的坐标点主要为了画图
+        /// </summary>
+        public List<YaoRectangleF> HoutTianBaGuaYaoRectangleF { get; private set; }
 
         /// <summary>
         /// 每一卦的总宽度
@@ -52,6 +64,8 @@ namespace ImaginaryLearning.Core.Base
         {
             XianTianBaGua = new List<DanGua>();
             HouTianBaGua = new List<DanGua>();
+            XianTianBaGuYaoRectangleF = new List<YaoRectangleF>();
+            HoutTianBaGuaYaoRectangleF = new List<YaoRectangleF>();
             TotalWidth = totalWidth;
             Heigth = heigth;
             MidWidth = midWidth;
@@ -60,7 +74,98 @@ namespace ImaginaryLearning.Core.Base
             R = r;
             this.GetBaGuaDirectionPoint();
             this.GetBaGuaList(ISS);
+            //求出图上的一起始点
+            this.GetGuaStartPointF();
+            this.GetGuaYaoRectangleF(ISS);
+        }
 
+        public void GetGuaYaoRectangleF(bool ISS = true)
+        {
+            var xianTianGuaList = new List<DanGua>() {
+            new Qian(GuaStartPointF,TotalWidth,Heigth),
+            new Xun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+            new Kan(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+            new Gen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+            new Kun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+            new Zhen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+            new Li(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+            new Dui(GuaStartPointF,TotalWidth,MidWidth,Heigth), };
+            var houTianGuaList = new List<DanGua>() {
+                new Li(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Kun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Dui(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Qian(GuaStartPointF,TotalWidth,Heigth),
+                new Kan(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Gen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Zhen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Xun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+             };
+
+            if (!ISS)
+            {
+                xianTianGuaList = new List<DanGua>() {
+                new Kun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Zhen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Li(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Dui(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Qian(GuaStartPointF,TotalWidth,Heigth),
+                new Xun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Kan(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Gen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                };
+                houTianGuaList = new List<DanGua>() {
+                new Kan(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Gen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Zhen(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Xun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Li(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Kun(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Dui(GuaStartPointF,TotalWidth,MidWidth,Heigth),
+                new Qian(GuaStartPointF,TotalWidth,Heigth),
+             };
+            }
+
+            for (int i = 1; i <= 8; i++)
+            {
+                var ang = i * 45 + 135;
+                var xtdg = xianTianGuaList[i - 1];
+                var htdg = houTianGuaList[i - 1];
+
+                var xtyaors = GetYaoRectangleFs(xtdg.RectangleList, ang);
+                var htyaors = GetYaoRectangleFs(htdg.RectangleList, ang);
+                XianTianBaGuYaoRectangleF.AddRange(xtyaors);
+                HoutTianBaGuaYaoRectangleF.AddRange(htyaors);
+            }
+        }
+
+        /// <summary>
+        /// 获取旋转之后的包装对象和原始区域
+        /// </summary>
+        /// <param name="danGuaRectangleFs"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        private List<YaoRectangleF> GetYaoRectangleFs(List<RectangleF> danGuaRectangleFs, int angle)
+        {
+            List<YaoRectangleF> yaoRectangleFs = new List<YaoRectangleF>();
+            foreach (var item in danGuaRectangleFs)
+            {
+                var yaorec = new YaoRectangleF(item, angle, CircleCenter);
+                yaoRectangleFs.Add(yaorec);
+            }
+            return yaoRectangleFs;
+        }
+
+        public PointF GuaStartPointF { get; private set; }
+
+        /// <summary>
+        /// 此点主要是为了旋转得到八卦圆形图,通过计算起始点并计算一定的旋转角度来画出
+        /// </summary>
+        /// <returns></returns>
+        public void GetGuaStartPointF()
+        {
+            var x = CircleCenter.X - TotalWidth / 2;
+            var y = CircleCenter.Y - R - GuaRectangle.Height;
+            GuaStartPointF = new PointF(x, y);
         }
 
         /// <summary>
@@ -281,7 +386,7 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="midWidth">如果是阴爻的话，中间的宽度</param>
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
-        public BaguaCoordinateSystem(PointF circleCenterPoint, int r, bool ISS=true) : this(circleCenterPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth, r,ISS)
+        public BaguaCoordinateSystem(PointF circleCenterPoint, int r, bool ISS = true) : this(circleCenterPoint, GuaConst.TotalWidth, GuaConst.MidWidth, GuaConst.Heigth, r, ISS)
         {
 
         }
@@ -295,7 +400,7 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
         /// <param name="ISS">默认为南向坐标系</param>
-        public BaguaCoordinateSystem(PointF circleCenterPoint, bool ISS = true) : this(circleCenterPoint, GuaConst.CircleCenterR,ISS)
+        public BaguaCoordinateSystem(PointF circleCenterPoint, bool ISS = true) : this(circleCenterPoint, GuaConst.CircleCenterR, ISS)
         {
 
         }

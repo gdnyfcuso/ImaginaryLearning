@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImaginaryLearning.Common;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -18,7 +19,12 @@ namespace ImaginaryLearning.Core.Model
         /// <param name="circleCentPointF">围绕旋转的圆心</param>
         public YaoRectangleF(RectangleF rectangleF, int angle, PointF circleCentPointF)
         {
-
+            var ps = circleCentPointF.RectangularRotationForCircleCentPointF(angle, rectangleF);
+            LeftUpPoint = ps[0];
+            LeftDownPoint = ps[1];
+            RightDownPoint = ps[2];
+            RightUpPoint = ps[3];
+            SourceRectangleF = rectangleF;
         }
 
 
