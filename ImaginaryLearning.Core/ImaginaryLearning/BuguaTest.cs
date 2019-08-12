@@ -20,6 +20,42 @@ namespace ImaginaryLearning
         }
 
         [Test]
+        public void MatrixTest()
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            var o = new PointF() { X = 500, Y = 500 };
+            var ba = new BaguaCoordinateSystem(o, 300);
+            Graphics graph = Graphics.FromImage(image);
+
+            Matrix matrix = graph.Transform;
+
+
+            Font font = new Font("宋体", 100, GraphicsUnit.Pixel);
+            var pointF = new PointF(500, 500).CirclePointF(90, 200);
+            SizeF sf = graph.MeasureString("中", font); // 计算出来文字所占矩形区域
+            //matrix.RotateAt(45, pointF);
+            graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0,0), new SizeF() { Width = 10, Height = 10 }));
+            graph.FillEllipse(Brushes.Blue, new RectangleF(o, new SizeF(10, 10)));
+            matrix.RotateAt(0, new PointF() { X = 500 - sf.Width / 2, Y = 500 - sf.Height / 2 });
+            //matrix.RotateAt(90, new PointF() { X=500-sf.Width/2,Y=500-sf.Height/2});
+            graph.Transform = matrix;
+            var rf = new RectangleF(500, 100, sf.Width, sf.Height);
+            graph.FillRectangle(Brushes.Gray, rf);
+            graph.DrawString("中", font, Brushes.Red, new RectangleF(800, 100, sf.Width, sf.Height));
+            //graph.TranslateTransform(500, 500);
+
+
+
+            image.Save("mat.bmp");
+
+
+        }
+
+
+
+
+
+        [Test]
         public void WordBuguaTest()
         {
             Bitmap image = new Bitmap(1000, 1000);
@@ -78,7 +114,7 @@ namespace ImaginaryLearning
             graph.Transform = matrix;
 
             graph.FillRectangle(Brushes.Blue, rf);
-            graph.DrawString(ba.XianTianBaGua[8 - 2].Name, new Font("宋体", 25), Brushes.Red, rf);
+            graph.DrawString(ba.XianTianBaGua[0].Name, new Font("宋体", 25), Brushes.Red, rf);
 
 
             //pointF = o.CirclePointF(, 350);
@@ -137,6 +173,69 @@ namespace ImaginaryLearning
             //}
 
             image.Save("graph_CircleTest123456.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+        }
+
+        [Test]
+        public void WordMatrix()
+        {
+            WordMatrix(0, "0");
+            WordMatrix((RotateFlipType)1, "1");
+            WordMatrix((RotateFlipType)2, "2");
+            WordMatrix((RotateFlipType)3, "3");
+            WordMatrix((RotateFlipType)4, "4");
+            WordMatrix((RotateFlipType)5, "5");
+            WordMatrix((RotateFlipType)6, "6");
+            WordMatrix((RotateFlipType)7, "7");
+            var img0 = Image.FromFile("2.bmp");
+            var img1 = Image.FromFile("4.bmp");
+            var img2 = Image.FromFile("3.bmp");
+            var img3 = Image.FromFile("0.bmp");
+
+            Bitmap image = new Bitmap(2000, 2000);
+            var o = new PointF() { X = 500, Y = 500 };
+            var ba = new BaguaCoordinateSystem(o, 300);
+            Graphics graph = Graphics.FromImage(image);
+            Brush white = new SolidBrush(Color.Green);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+            graph.DrawImage(img0, new Point(0, 0));
+            graph.DrawImage(img1, new Point(0, 1000));
+            graph.DrawImage(img2, new Point(1000, 0));
+            graph.DrawImage(img3, new Point(1000, 1000));
+
+            image.Save("ok.bmp");
+
+
+
+        }
+
+        public void WordMatrix(RotateFlipType rotateFlipType, string fileName)
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            var o = new PointF() { X = 500, Y = 500 };
+            var ba = new BaguaCoordinateSystem(o, 300);
+            Graphics graph = Graphics.FromImage(image);
+            //底色填充为白色  
+            Brush white = new SolidBrush(Color.White);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+
+            for (int i = 0; i <= 90; i += 10)
+            {
+                Font font = new Font("宋体", 50, GraphicsUnit.Pixel);
+                var pointF = new PointF(0, 0).CirclePointF(i, 200);
+                Matrix matrix = graph.Transform;
+                SizeF sf = graph.MeasureString("中", font); // 计算出来文字所占矩形区域
+                matrix.RotateAt(i, new PointF(pointF.X + sf.Width / 2, pointF.Y + sf.Height / 2));
+
+                //matrix.Rotate(i);
+                graph.DrawLine(Pens.Black, 0, 0, 800, 0);
+                graph.DrawString("中", font, Brushes.Red, new RectangleF(800, 0, sf.Width, sf.Height));
+                //graph.TranslateTransform(500, 500);
+
+                graph.Transform = matrix;
+
+            }
+            image.RotateFlip(rotateFlipType);
+            image.Save(fileName + ".bmp", System.Drawing.Imaging.ImageFormat.Bmp);
         }
 
 
