@@ -20,34 +20,94 @@ namespace ImaginaryLearning
         }
 
         [Test]
+        public void baGuaWord()
+        {
+            Bitmap image = new Bitmap(1000, 1000);
+            var o = new PointF() { X = 500, Y = 500 };
+            Graphics graph = Graphics.FromImage(image);
+            Brush white = new SolidBrush(Color.Green);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+            CircleBuaGuaByPointF(graph, o, 300, 200, true);
+            DrawGuaString(o, graph, 380,fontSize:50);
+            image.Save("Bagua.bmp");
+
+        }
+
+        [Test]
         public void MatrixTest()
         {
             Bitmap image = new Bitmap(1000, 1000);
             var o = new PointF() { X = 500, Y = 500 };
             var ba = new BaguaCoordinateSystem(o, 300);
             Graphics graph = Graphics.FromImage(image);
+            var leftSPoint = o;
 
-            Matrix matrix = graph.Transform;
+            var guaList = new List<DanGua>() {
+            new Xun(leftSPoint),
+            new Kan(leftSPoint),
+            new Gen(leftSPoint),
+            new Kun(leftSPoint),
+            new Zhen(leftSPoint),
+            new Li(leftSPoint),
+            new Dui(leftSPoint),
+            new Qian(leftSPoint),
+            };
 
 
-            Font font = new Font("宋体", 100, GraphicsUnit.Pixel);
-            var pointF = new PointF(500, 500).CirclePointF(90, 200);
-            SizeF sf = graph.MeasureString("中", font); // 计算出来文字所占矩形区域
-            //matrix.RotateAt(45, pointF);
-            graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0,0), new SizeF() { Width = 10, Height = 10 }));
-            graph.FillEllipse(Brushes.Blue, new RectangleF(o, new SizeF(10, 10)));
-            matrix.RotateAt(0, new PointF() { X = 500 - sf.Width / 2, Y = 500 - sf.Height / 2 });
-            //matrix.RotateAt(90, new PointF() { X=500-sf.Width/2,Y=500-sf.Height/2});
-            graph.Transform = matrix;
-            var rf = new RectangleF(500, 100, sf.Width, sf.Height);
-            graph.FillRectangle(Brushes.Gray, rf);
-            graph.DrawString("中", font, Brushes.Red, new RectangleF(800, 100, sf.Width, sf.Height));
+
+            for (int i = 0; i < 8; i++)
+            {
+                Matrix matrix = graph.Transform;
+
+
+                Font font = new Font("宋体", 100, GraphicsUnit.Pixel);
+                var pointF = new PointF(500, 500).CirclePointF(90, 200);
+                SizeF sf = graph.MeasureString(guaList[i].Name, font); // 计算出来文字所占矩形区域
+                                                                       //matrix.RotateAt(45, pointF);
+                graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0, 0), new SizeF() { Width = 10, Height = 10 }));
+                graph.FillEllipse(Brushes.Blue, new RectangleF(o, new SizeF(10, 10)));
+                matrix.RotateAt(45, new PointF() { X = 500, Y = 500 });
+                graph.Transform = matrix;
+                var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
+                graph.FillRectangle(Brushes.Gray, rf);
+                graph.DrawLine(Pens.Red, 500, 500, 500, 100);
+                graph.DrawString(guaList[i].Name, font, Brushes.Red, new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height));
+            }
+
+
+
             //graph.TranslateTransform(500, 500);
 
 
 
             image.Save("mat.bmp");
 
+
+        }
+
+        public void DrawGuaString(PointF o, Graphics graph, int r, string fontName="宋体", int fontSize=25,int angle=45)
+        {
+            var guaList = new List<DanGua>() {
+            new Xun(o),
+            new Kan(o),
+            new Gen(o),
+            new Kun(o),
+            new Zhen(o),
+            new Li(o),
+            new Dui(o),
+            new Qian(o),
+            };
+
+            for (int i = 0; i < 8; i++)
+            {
+                Matrix matrix = graph.Transform;
+                Font font = new Font(fontName, fontSize, GraphicsUnit.Pixel);
+                SizeF sf = graph.MeasureString(guaList[i].Name, font); // 计算出来文字所占矩形区域
+                matrix.RotateAt(angle, o);
+                graph.Transform = matrix;
+                var rf = new RectangleF(o.X - sf.Width / 2, o.Y-r - sf.Height / 2, sf.Width, sf.Height);
+                graph.DrawString(guaList[i].Name, font, Brushes.Black, rf);
+            }
 
         }
 
@@ -376,7 +436,7 @@ namespace ImaginaryLearning
         {
             var ba = new BaguaCoordinateSystem(o, r);
             var listColor = new List<Color>() { Color.White, Color.Black, Color.Red, Color.Yellow, Color.Blue, Color.Gold };
-
+            
             if (istaiji)
             {
                 TaiJi taiJi = new TaiJi();
@@ -407,6 +467,7 @@ namespace ImaginaryLearning
                 }
             }
 
+            
 
         }
     }
