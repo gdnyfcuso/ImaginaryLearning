@@ -1,5 +1,6 @@
 ﻿using ImaginaryLearning.Common;
 using ImaginaryLearning.Core;
+using ImaginaryLearning.Core.BaGua;
 using ImaginaryLearning.Core.Base;
 using NUnit.Framework;
 using System;
@@ -42,10 +43,10 @@ namespace ImaginaryLearning
             //graph.DrawString("中国", font, new SolidBrush(Color.Black), aa);
 
 
-            //var pointF = o.CirclePointF(0, 350);
-            //SizeF sf = graph.MeasureString(ba.XianTianBaGua[0].Name, new Font("宋体", 25)); // 计算出来文字所占矩形区域
-            //var rf = new RectangleF(o.CirclePointF(0, 350), sf);
-            //Matrix matrix = graph.Transform;
+            var pointF = o.CirclePointF(0, 350);
+            SizeF sf = graph.MeasureString(ba.XianTianBaGua[0].Name, new Font("宋体", 25)); // 计算出来文字所占矩形区域
+            var rf = new RectangleF(o.CirclePointF(0, 350), sf);
+            Matrix matrix = graph.Transform;
 
             //matrix.RotateAt(0, new PointF(pointF.X + sf.Width / 2, pointF.Y + sf.Height / 2));
             //////matrix.RotateAt(i * 45, );
@@ -70,14 +71,14 @@ namespace ImaginaryLearning
             //pointF = o.CirclePointF(135, 350);
             //sf = graph.MeasureString(ba.XianTianBaGua[8 - 2].Name, new Font("宋体", 25)); // 计算出来文字所占矩形区域
             //rf = new RectangleF(o.CirclePointF(60, 350), sf);
-            //matrix = graph.Transform;
+            matrix = graph.Transform;
 
-            //matrix.RotateAt(90 + 45 * 2, new PointF(pointF.X + sf.Width / 2, pointF.Y + sf.Height / 2));
-            //////matrix.RotateAt(i * 45, );
-            //graph.Transform = matrix;
+            matrix.RotateAt(45 * 2, new PointF(pointF.X + sf.Width / 2, pointF.Y + sf.Height / 2));
+            ////matrix.RotateAt(i * 45, );
+            graph.Transform = matrix;
 
-            //graph.FillRectangle(Brushes.Blue, rf);
-            //graph.DrawString(ba.XianTianBaGua[8 - 2].Name, new Font("宋体", 25), Brushes.Red, rf);
+            graph.FillRectangle(Brushes.Blue, rf);
+            graph.DrawString(ba.XianTianBaGua[8 - 2].Name, new Font("宋体", 25), Brushes.Red, rf);
 
 
             //pointF = o.CirclePointF(, 350);
@@ -92,17 +93,27 @@ namespace ImaginaryLearning
 
 
 
-            
 
-            for (int i = 0; i < 8; i++)
-            {
-                Matrix matrix = graph.Transform;
+            //var pointF = o.CirclePointF((8 - 2) * 45, 300);
+            var leftSPoint = pointF;
+            var guaList = new List<DanGua>() {
+            new Qian(leftSPoint),
+            new Xun(leftSPoint),
+            new Kan(leftSPoint),
+            new Gen(leftSPoint),
+            new Kun(leftSPoint),
+            new Zhen(leftSPoint),
+            new Li(leftSPoint),
+            new Dui(leftSPoint),
+            };
 
-                var pointF = o.CirclePointF((8 - i) * 45, 100);
-                AddText(graph, pointF, 25, ba.XianTianBaGua[i].Name, matrix, 20);
-                graph.Transform = matrix;
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    Matrix matrix = graph.Transform;
+            //    AddText(graph, pointF, 25, guaList[i].Name, matrix, i * 45);
+            //    graph.Transform = matrix;
 
-            }
+            //}
 
             //for (int i = 1; i <= 8; i++)
             //{
@@ -153,7 +164,6 @@ namespace ImaginaryLearning
 
             Font font = new Font(fontName, fontSize, GraphicsUnit.Pixel);
             SizeF sf = graphics.MeasureString(text, font); // 计算出来文字所占矩形区域
-
             // 左上角定位
             //string[] location = locationLeftTop.Split(',');
             float x1 = locationLeftTop.X;
@@ -185,6 +195,16 @@ namespace ImaginaryLearning
 
                 #region 法二：矩阵旋转
 
+                var rf = new RectangleF(locationLeftTop, sf);
+
+                var a1 = rf.Location;
+                var a2 = new PointF(a1.X, a1.Y + rf.Height);
+                var b1 = new PointF(a1.X + rf.Width, a1.Y);
+                var b2 = new PointF(a1.X + rf.Width, a1.Y + rf.Height);
+
+                var pos = new PointF[] { a1, a2, b2, b1 };
+
+                //matrix = new Matrix(rf, pos);
 
                 matrix.RotateAt(angle, new PointF(x1 + sf.Width / 2, y1 + sf.Height / 2));
 
