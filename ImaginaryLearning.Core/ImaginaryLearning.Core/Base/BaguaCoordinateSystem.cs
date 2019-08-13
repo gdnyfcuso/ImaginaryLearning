@@ -4,6 +4,8 @@ using ImaginaryLearning.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Text;
 
 namespace ImaginaryLearning.Core.Base
@@ -60,7 +62,7 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="heigth">每一个爻 的宽度</param>
         /// <param name="r"></param>
         /// <param name="ISS">默认为南向坐标系</param>
-        public BaguaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, float r = 300, bool ISS = true)
+        public BaguaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, int r = 300, bool ISS = true)
         {
             XianTianBaGua = new List<DanGua>();
             HouTianBaGua = new List<DanGua>();
@@ -418,7 +420,7 @@ namespace ImaginaryLearning.Core.Base
         /// <summary>
         /// 圆形八卦的半径
         /// </summary>
-        public float R { get; set; }
+        public int R { get; set; }
 
         /// <summary>
         /// 卦的起始位置 正东
@@ -461,6 +463,100 @@ namespace ImaginaryLearning.Core.Base
         /// 西北
         /// </summary>
         public PointF XB { get; set; }
+
+
+        /// <summary>
+        /// 保存太极八卦图
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public Bitmap CreateBaGuaImage(string fileName = "")
+        {
+
+            Bitmap image = new Bitmap(2 * Convert.ToInt32(CircleCenter.X), 2 * Convert.ToInt32(CircleCenter.Y));
+            var o = CircleCenter;//  new PointF() { X = 500, Y = 500 };
+            Graphics graph = Graphics.FromImage(image);
+            Brush white = new SolidBrush(Color.Green);
+            graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
+            CreateBaGuaImage(graph, o, R, R * 4 / 5, true);
+            DrawGuaString(o, graph, R + GuaRectangle.Height+30, fontSize: 50);
+
+            if (!string.IsNullOrWhiteSpace(fileName))
+            {
+                image.Save(fileName, ImageFormat.Png);
+            }
+            return image;
+        }
+
+        public void DrawGuaString(PointF o, Graphics graph, float r, string fontName = "宋体", int fontSize = 25, int angle = 45)
+        {
+            var guaList = new List<DanGua>() {
+            new Xun(o),
+            new Kan(o),
+            new Gen(o),
+            new Kun(o),
+            new Zhen(o),
+            new Li(o),
+            new Dui(o),
+            new Qian(o),
+            };
+
+            for (int i = 0; i < 8; i++)
+            {
+                Matrix matrix = graph.Transform;
+                Font font = new Font(fontName, fontSize, GraphicsUnit.Pixel);
+                SizeF sf = graph.MeasureString(guaList[i].Name, font); // 计算出来文字所占矩形区域
+                matrix.RotateAt(angle, o);
+                graph.Transform = matrix;
+                var rf = new RectangleF(o.X - sf.Width / 2, o.Y - r - sf.Height / 2, sf.Width, sf.Height);
+                graph.DrawString(guaList[i].Name, font, Brushes.Black, rf);
+            }
+
+        }
+
+        /// <summary>
+        /// 画八卦图没有卦名
+        /// </summary>
+        /// <param name="graph">画家</param>
+        /// <param name="o">中心点</param>
+        /// <param name="r">半径</param>
+        /// <param name="taiji">画太极图半径</param>
+        /// <param name="istaiji">是否画太极</param>
+        /// <param name="isXian">是先天八卦还是后天八卦</param>
+        public void CreateBaGuaImage(Graphics graph, PointF o, float r, float taiji = 250, bool istaiji = true, bool isXian = true)
+        {
+            //var ba = new BaguaCoordinateSystem(o, r);
+            var listColor = new List<Color>() { Color.White, Color.Black, Color.Red, Color.Yellow, Color.Blue, Color.Gold };
+
+            if (istaiji)
+            {
+                TaiJi taiJi = new TaiJi();
+
+
+                var r1 = new Random();
+                var c1 = r1.Next(0, 100);
+
+                taiJi.CreateTaiJiImage(o, graph, listColor[c1 % 5], listColor[c1 % 5 + 1], taiji);
+            }
+
+            if (isXian)
+            {
+
+                for (int i = 0; i < this.XianTianBaGuYaoRectangleF.Count; i++)
+                {
+
+                    graph.FillPolygon(new SolidBrush(listColor[i % 6]), this.XianTianBaGuYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
+                }
+            }
+            else
+            {
+
+                for (int i = 0; i < this.HoutTianBaGuaYaoRectangleF.Count; i++)
+                {
+                    graph.FillPolygon(new SolidBrush(listColor[i % 6]), this.HoutTianBaGuaYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
+                }
+            }
+        }
 
     }
 }

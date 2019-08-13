@@ -20,6 +20,14 @@ namespace ImaginaryLearning
         }
 
         [Test]
+        public void BaGua()
+        {
+            var pointf = new PointF(500, 500);
+            var ba = new BaguaCoordinateSystem(pointf, 300);
+            ba.CreateBaGuaImage("CreateBaGuaImage.png");
+        }
+
+        [Test]
         public void baGuaWord()
         {
             Bitmap image = new Bitmap(1000, 1000);
@@ -466,9 +474,6 @@ namespace ImaginaryLearning
                     graph.FillPolygon(new SolidBrush(listColor[i % 6]), ba.HoutTianBaGuaYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
                 }
             }
-
-            
-
         }
     }
 }
