@@ -58,6 +58,12 @@ namespace ImaginaryLearning.Core
         /// </summary>
         public int InnateNumber { get; set; }
 
+        /// <summary>
+        /// 五行属性
+        /// </summary>
+        public string WuXingNature { get; set; }
+
+
 
 
         public List<RectangleF> RectangleList

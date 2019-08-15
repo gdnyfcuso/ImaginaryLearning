@@ -18,7 +18,7 @@ namespace ImaginaryLearning.Core.BaGua
             GuaRectangle = GetGuaRectangle(totalWidth, heigth, midWidth);
             Name = "震";
             Nature = "雷";
-
+            WuXingNature = "木";
             InnateNumber = 4;
             NumbersAcquired = 3;
             InnateOrientation = BaGuaDirection.DB;// "南";

@@ -17,7 +17,8 @@ namespace ImaginaryLearning.Core.BaGua
             ChuYao = new YangYao(new PointF(startPoint.X, startPoint.Y + 4 * heigth), width, heigth);
             GuaRectangle = GetGuaRectangle(width, heigth, 0);
             Name = "乾";
-            Nature = "父";
+            Nature = "天";
+            WuXingNature = "金";
             InnateNumber = 1;
             NumbersAcquired = 6;
             InnateOrientation = BaGuaDirection.ZN;// "南";

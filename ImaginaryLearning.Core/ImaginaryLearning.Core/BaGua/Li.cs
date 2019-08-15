@@ -22,6 +22,8 @@ namespace ImaginaryLearning.Core.BaGua
 
             Nature = "火";
 
+            WuXingNature = "火";
+
             InnateNumber = 3;
             NumbersAcquired = 9;
             InnateOrientation = BaGuaDirection.ZD;// "正东";

@@ -27,6 +27,11 @@ namespace ImaginaryLearning.Core
         /// </summary>
         public string TuanCi { get; set; }
 
+        /// <summary>
+        /// 卦辞对应的象辞
+        /// </summary>
+        public string GuaXiangCi { get; set; }
+
         public FuGua(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             _rectangleList = new List<RectangleF>();
@@ -121,6 +126,47 @@ namespace ImaginaryLearning.Core
             {
                 return string.Empty;
             }
+        }
+
+
+        /// <summary>
+        /// 获取互卦
+        /// 互卦：指的是由“交卦”和“互卦”组合而成的新的“六爻卦”；
+        /// “交卦”为上卦、客卦，由五爻、四爻、三爻构成；
+        /// “互卦”为下卦、主卦，由二爻、三爻、四爻构成。
+        /// </summary>
+        /// <returns></returns>
+        public FuGua GetHuGua() { return null; }
+
+        /// <summary>
+        /// 获取变卦
+        /// </summary>
+        /// <param name="yaoBian">
+        /// 第几爻变
+        /// </param>
+        /// <returns></returns>
+        public FuGua GetBianGua(int yaoBian) { return null; }
+
+        /// <summary>
+        /// 获取错卦
+        /// 错卦：又称“对卦”、“旁通卦”，指阴阳相对的卦（“对卦”也可理解为，在《伏羲先天六十四卦方圆图》的圆图中相对的两卦）。
+        /// 错，阴阳相错，也就是把一个“六爻卦”的各个爻求反、求错，就得到该“六爻卦”的错卦。
+        /// </summary>
+        /// <returns></returns>
+        public FuGua GetCuoGua()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 综卦：又称“反卦”、“覆卦”，指将一个“六爻卦”反覆（颠倒）过来所得到的卦。
+        /// 综卦是“六爻卦”旋转180°所得到的卦。
+        /// 综卦是角度转换，换一个方向来看“六爻卦”，就得到该“六爻卦”的综卦。
+        /// </summary>
+        /// <returns></returns>
+        public FuGua GetZongGua()
+        {
+            return null;
         }
 
 
