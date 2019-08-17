@@ -18,6 +18,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             ShangGua = new Kun(startPoint, totalWidth, midWidth, heigth);
             Name = "泰";
+            PinYin = "Tai";
             IsTwelvePIGua = true;
             GuaCi = "小往大来，吉，亨。";
             TuanCi = "“泰，小往大来。吉，亨。”则是天地交而万物通也，上下交而其志同也。内阳而外阴，内健而外顺，内君子而外小人，君子道长，小人道消也。";

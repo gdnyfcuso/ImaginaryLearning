@@ -78,6 +78,11 @@ namespace ImaginaryLearning.Core
         /// </summary>
         public string GuaCi { get; set; }
 
+        /// <summary>
+        /// 每一卦对应的拼音
+        /// </summary>
+        public string PinYin { get; set; }
+
 
         protected PointF CreateXiaGuaPoint(PointF point, int heigth)
         {
@@ -168,6 +173,11 @@ namespace ImaginaryLearning.Core
         {
             return null;
         }
+
+        /// <summary>
+        /// 序卦传里面的编号
+        /// </summary>
+        public int XuGua { get; set; }
 
 
         /// <summary>

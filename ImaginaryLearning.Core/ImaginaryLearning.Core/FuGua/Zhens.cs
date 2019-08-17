@@ -20,6 +20,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Zhen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             ShangGua = new Zhen(startPoint, totalWidth, midWidth, heigth);
             Name = "震";
+            PinYin = "Zhen";
             IsTwelvePIGua = true;
         }
     }

@@ -21,7 +21,9 @@ namespace ImaginaryLearning.Core
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             ShangGua = new Qian(startPoint, totalWidth, heigth);
             Name = "乾";
+            PinYin = "Qian";
             IsTwelvePIGua = true;
+            XuGua = 1;
             GuaCi = "元，亨，利，贞。";
             TuanCi = "《彖》曰：大哉乾元，万物资始，乃统天。" +
                 "云行雨施，品物流形。大明终始，六位时成。" +
