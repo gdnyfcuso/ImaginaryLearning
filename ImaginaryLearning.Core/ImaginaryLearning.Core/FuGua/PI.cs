@@ -23,6 +23,8 @@ namespace ImaginaryLearning.Core
             Name = "否";
             PinYin = "Pi";
             IsTwelvePIGua = true;
+            XuGua = 12;
+
         }
     }
 }

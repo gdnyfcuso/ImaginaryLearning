@@ -48,7 +48,6 @@ namespace ImaginaryLearning.Core
                 "《象》曰：“讼，元吉”以中正也。",
                 "《象》曰：以讼受服，亦不足敬也。"
             };
-
         }
     }
 }

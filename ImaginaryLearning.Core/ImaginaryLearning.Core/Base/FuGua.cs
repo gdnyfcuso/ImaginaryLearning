@@ -141,7 +141,7 @@ namespace ImaginaryLearning.Core
         /// “互卦”为下卦、主卦，由二爻、三爻、四爻构成。
         /// </summary>
         /// <returns></returns>
-        public FuGua GetHuGua() { return null; }
+        public virtual FuGua GetHuGua() { return null; }
 
         /// <summary>
         /// 获取变卦
@@ -150,7 +150,7 @@ namespace ImaginaryLearning.Core
         /// 第几爻变
         /// </param>
         /// <returns></returns>
-        public FuGua GetBianGua(int yaoBian) { return null; }
+        public virtual FuGua GetBianGua(int yaoBian) { return null; }
 
         /// <summary>
         /// 获取错卦
@@ -158,7 +158,7 @@ namespace ImaginaryLearning.Core
         /// 错，阴阳相错，也就是把一个“六爻卦”的各个爻求反、求错，就得到该“六爻卦”的错卦。
         /// </summary>
         /// <returns></returns>
-        public FuGua GetCuoGua()
+        public virtual FuGua GetCuoGua()
         {
             return null;
         }
@@ -169,7 +169,7 @@ namespace ImaginaryLearning.Core
         /// 综卦是角度转换，换一个方向来看“六爻卦”，就得到该“六爻卦”的综卦。
         /// </summary>
         /// <returns></returns>
-        public FuGua GetZongGua()
+        public virtual FuGua GetZongGua()
         {
             return null;
         }
