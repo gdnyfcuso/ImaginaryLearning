@@ -9,7 +9,7 @@ namespace ImaginaryLearning.Core
     /// <summary>
     /// 乾为天，巽为风，风飘行天上，微畜而未下行。畜有畜聚、畜养、畜止之义。小畜象征小有畜聚，所畜甚微之象。以小畜大，以下济上，有利于刚大者之行。但阴气从西方升起聚阳甚微，不足以成雨。
     /// </summary>
-    class XiaoXu : FuGua
+    public class XiaoXu : FuGua
     {
         public XiaoXu(PointF startPoint, int totalWidth, int midWidth, int heigth) : base(startPoint, totalWidth, midWidth, heigth)
         {
