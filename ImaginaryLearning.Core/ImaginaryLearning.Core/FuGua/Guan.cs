@@ -21,7 +21,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Kun(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "观";
             PinYin = "Guan";
-            XuGua = 19;
+            XuGua = 20;
             GuaCi = "盥而不荐。有孚颙若。";
             TuanCi = "《彖》曰：大观在上，顺而巽，中正以观天下，观。“盥而不荐，有孚颙若”，下观而化也。观天之神道，而四时不忒，圣人以神道设教，而天下服矣。";
             GuaXiangCi = "《象》曰：风行地上，观。先王以省方观民设教。";

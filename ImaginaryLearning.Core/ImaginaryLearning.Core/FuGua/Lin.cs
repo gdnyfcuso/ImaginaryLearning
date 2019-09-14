@@ -21,7 +21,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Dui(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "临";
             PinYin = "Lin";
-            XuGua = 18;
+            XuGua = 19; 
             GuaCi = "《临》：元亨，利贞。至于八月有凶。";
             TuanCi = "《彖》曰：临，刚浸而长，说而顺，刚中而应。大亨以正，天之道也。“至于八月有凶”，消不久也。";
             GuaXiangCi = "《象》曰：泽上有地，临。君子以教思无穷，容保民无疆。";
