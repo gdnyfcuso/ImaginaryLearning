@@ -18,7 +18,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Li(CreateXiaGuaPoint(startPoint,heigth), totalWidth, midWidth, heigth);
             Name = "贲";
             PinYin = "Bi";
-            XuGua = 21;
+            XuGua = 22;
             GuaCi = "亨。小利有攸往。";
             GuaXiangCi = "《象》曰：山下有火，贲。君子以明庶政，无敢折狱。";
             TuanCi = "《彖》曰：贲亨，柔来而文刚，故亨。分，刚上而文柔，故小利有攸往。刚柔交错，天文也。文明以止，人文也。观乎天文，以察时变；观乎人文，以化成天下。";

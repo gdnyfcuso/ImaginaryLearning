@@ -18,6 +18,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Zhen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "噬嗑";
             PinYin = "ShiHe";
+            XuGua = 21;
             GuaCi = "亨。利用狱。";
             TuanCi = "《彖》曰：颐中有物曰噬嗑。噬嗑而亨，刚柔分，动而明，雷电合而章。柔得中而上行，虽不当位，利用狱也。";
             GuaXiangCi = "《象》曰：雷电，噬嗑。先王以明罚敕法。";
