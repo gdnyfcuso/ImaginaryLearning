@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="LiuSiGua\" />
+    <Compile Remove="LiuSiGua\**" />
+    <EmbeddedResource Remove="LiuSiGua\**" />
+    <None Remove="LiuSiGua\**" />
   </ItemGroup>
 
   <ItemGroup>
