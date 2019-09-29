@@ -21,7 +21,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             Name = "大畜";
             PinYin = "DaXu";
-            XuGua = 32;
+            XuGua = 26;
             GuaCi = "利贞。不家食吉。利涉大川。";
             TuanCi = "《彖》曰：大畜，刚健笃实，辉光日新。其德刚上而尚贤，能止健，大正也。“不家食吉”，养贤也。“利涉大川”，应乎天也。";
             GuaXiangCi = "《象》曰：天在山中，大畜。君子以多识前贤往行，以畜其德。";

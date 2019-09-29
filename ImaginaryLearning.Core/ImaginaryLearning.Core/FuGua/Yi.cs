@@ -18,7 +18,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Zhen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "颐";
             PinYin = "Yi";
-            XuGua = 33;
+            XuGua = 27;
             GuaCi = "贞吉。观颐，自求口实。";
             TuanCi = "《彖》曰：颐，贞吉，养正则吉也。观颐，观其所养也。自求口实，观其自养也。天地养万物，圣人养贤以及万民，颐之时大矣哉！";
             GuaXiangCi = "《象》曰：山下有雷，颐。君子以慎言语，节饮食。";

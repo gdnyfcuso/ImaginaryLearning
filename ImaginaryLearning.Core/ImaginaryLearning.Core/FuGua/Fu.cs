@@ -21,7 +21,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Zhen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "复";
             PinYin = "Fu";
-            XuGua = 25;
+            XuGua = 24;
             GuaCi = "亨。出入无疾。朋来无咎。反复其道，七日来复，利有攸往。";
             TuanCi = " 《彖》曰：“复，亨”。刚反，动而以顺行。是以“出入无疾，朋来无咎”。“反复其道，七日来复”，天行也。“利有攸往”，刚长也。复，其见天地之心乎。";
             GuaXiangCi = "《象》曰：雷在地中，复。先王以至日闭关，商旅不行，后不省方。";
