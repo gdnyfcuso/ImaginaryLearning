@@ -20,7 +20,7 @@ namespace ImaginaryLearning.Core
             ShangGua = new Li(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Kun(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "晋";
-            XuGua = 35;
+            XuGua = 37;
             PinYin = "Jin";
             GuaCi = "康侯用锡马蕃庶，昼日三接。";
             TuanCi = "《彖》曰：晋，进也，明出地上。顺而丽乎大明，柔进而上行，是以“康侯用锡马蕃庶，昼日三接”也。";
