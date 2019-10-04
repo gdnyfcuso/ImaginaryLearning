@@ -6,6 +6,7 @@ using System.Text;
 
 namespace ImaginaryLearning.Core
 {
+
     public class DaZhuang : FuGua
     {
         public DaZhuang(PointF startPoint, int totalWidth, int midWidth, int heigth) : base(startPoint, totalWidth, midWidth, heigth)
