@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ImaginaryLearning.Core
 {
-    public class Yi : FuGua
+    public class Yi :FuGua
     {
         public Yi(PointF startPoint, int totalWidth, int midWidth, int heigth) : base(startPoint, totalWidth, midWidth, heigth)
         {

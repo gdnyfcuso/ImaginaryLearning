@@ -18,6 +18,7 @@ namespace ImaginaryLearning.Core
             ShangGua = new Qian(startPoint, totalWidth, heigth);
             Name = "姤";
             PinYin = "Gou";
+            XuGua = 44;
             IsTwelvePIGua = true;
             GuaCi = "女壮，勿用取女。";
             TuanCi = "姤，遇也，柔遇刚也。勿用取女”，不可与长也。天地相遇，品物咸章也。刚遇中正，天下大行也。姤之时义大矣哉！";
