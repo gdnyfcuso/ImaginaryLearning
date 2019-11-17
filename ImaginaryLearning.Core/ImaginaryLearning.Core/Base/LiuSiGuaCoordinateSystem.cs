@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace ImaginaryLearning.Core.Base
@@ -9,6 +10,13 @@ namespace ImaginaryLearning.Core.Base
     /// </summary>
     public class LiuSiGuaCoordinateSystem
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap CreateLiuSiGuaBitmap()
+        {
+            return null;
+        }
     }
 }
