@@ -191,5 +191,14 @@ namespace ImaginaryLearning.Core
 
             RectangleF = new RectangleF(0, 0, ShangGua.GuaRectangle.Width, heigth);
         }
+
+        /// <summary>
+        /// 获取复卦的二进制位，下卦在前上卦在后
+        /// </summary>
+        /// <returns></returns>
+        public string GetFuGuaErJZ()
+        {
+            return ShangGua.GetGuaErJinZhi() + XiaGua.GetGuaErJinZhi();
+        }
     }
 }

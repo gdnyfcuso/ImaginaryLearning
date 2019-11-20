@@ -59,6 +59,7 @@ namespace ImaginaryLearning.Core
         private void InitYinYaoInfo(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
             Yin = new Yin();
+            YaoEr = "1";
             YaoName = Yin.Name + YaoName;
             var width = (totalWidth - midWidth) / 2;
             var size = new Size(width, heigth);

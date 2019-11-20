@@ -115,5 +115,14 @@ namespace ImaginaryLearning.Core
             image.Save(guaImagePath, System.Drawing.Imaging.ImageFormat.Bmp);
             return guaImagePath;
         }
+
+        /// <summary>
+        /// 获取卦的二进制位与八卦先天数字相对应，不过从0开始
+        /// </summary>
+        /// <returns></returns>
+        public string GetGuaErJinZhi()
+        {
+            return ChuYao.YaoEr + ErYao.YaoEr + SanYao.YaoEr;
+        }
     }
 }

@@ -66,6 +66,15 @@ namespace ImaginaryLearning.Core.Base
         }
 
         /// <summary>
+        /// 通过车牌号计算复卦
+        /// </summary>
+        /// <returns></returns>
+        public FuGua CreateFuGuaByCarCard()
+        {
+            return null;
+        }
+
+        /// <summary>
         /// 将复卦画到图像上去
         /// </summary>
         /// <param name="sourceBitmap"></param>

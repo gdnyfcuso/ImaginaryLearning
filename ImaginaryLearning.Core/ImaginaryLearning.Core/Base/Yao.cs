@@ -12,6 +12,8 @@ namespace ImaginaryLearning.Core
     {
         public string YaoName { get; set; } = "爻";
 
+        public string YaoEr { get; set; }
+
         public List<RectangleF> RectangleList { get; set; }
     }
 }

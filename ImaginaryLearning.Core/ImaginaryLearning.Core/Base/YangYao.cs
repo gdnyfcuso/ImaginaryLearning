@@ -11,6 +11,7 @@ namespace ImaginaryLearning.Core
 
         public RectangleF Rectangle { get; set; }
 
+
         public YangYao() : this(new PointF(0, 0))
         {
 
@@ -18,18 +19,19 @@ namespace ImaginaryLearning.Core
 
         public YangYao(PointF point)
         {
-            this.InitYinYaoInfo(point, 30, 5, 0);
+            this.InitYangYaoInfo(point, 30, 5, 0);
 
         }
 
         public YangYao(PointF startPoint, int totalWidth, int heigth, int midWidth = 0)
         {
-            this.InitYinYaoInfo(startPoint, totalWidth, heigth, midWidth);
+            this.InitYangYaoInfo(startPoint, totalWidth, heigth, midWidth);
         }
 
-        private void InitYinYaoInfo(PointF startPoint, int totalWidth, int heigth, int midWidth = 0)
+        private void InitYangYaoInfo(PointF startPoint, int totalWidth, int heigth, int midWidth = 0)
         {
             Yang = new Yang();
+            YaoEr = "0";
             YaoName = Yang.Name + YaoName;
             var size = new Size(totalWidth, heigth);
             Rectangle = new RectangleF(startPoint, size);
