@@ -74,6 +74,5 @@ namespace ImaginaryLearning.Core.Base
         {
             return null;
         }
-
     }
 }
