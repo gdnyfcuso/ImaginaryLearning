@@ -141,7 +141,14 @@ namespace ImaginaryLearning.Core
         /// “互卦”为下卦、主卦，由二爻、三爻、四爻构成。
         /// </summary>
         /// <returns></returns>
-        public virtual FuGua GetHuGua() { return null; }
+        public virtual FuGua GetHuGua()
+        {
+            var ej = GetFuGuaErJZ();//000000
+            var huguaej = ej.Substring(1, 3) + ej.Substring(2, 3);
+            //查询互卦
+
+            return null;
+        }
 
         /// <summary>
         /// 获取变卦
