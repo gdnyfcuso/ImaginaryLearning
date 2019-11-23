@@ -17,7 +17,8 @@ namespace ImaginaryLearning.Core
 
         protected override void InitFuGua(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
-            Name = "DaYou";
+            Name = "大有";
+            PinYin = "DaYou";
             ShangGua = new Li(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             XuGua = 14;

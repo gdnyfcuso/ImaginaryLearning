@@ -22,7 +22,7 @@ namespace ImaginaryLearning.Core
 
             Name = "离";
             PinYin = "Li";
-            XuGua = 32;
+            XuGua = 30;
             GuaCi = "利贞。亨。畜牝牛吉。";
             TuanCi = "《彖》曰：离，丽也。日月丽乎天，百谷草木丽乎土。重明以丽乎正，乃化成天下。柔丽乎中正，故，是以“畜牝牛吉”也。";
             GuaXiangCi = "《象》曰：明两作，离。大人以继明照于四方。";

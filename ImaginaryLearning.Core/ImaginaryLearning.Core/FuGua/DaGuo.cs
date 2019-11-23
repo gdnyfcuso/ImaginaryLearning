@@ -17,6 +17,7 @@ namespace ImaginaryLearning.Core
             ShangGua = new Dui(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Xun(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "大过";
+            XuGua = 28;
             PinYin = "DaGuo";
             GuaCi = "栋挠，利有攸往，亨。";
             GuaXiangCi = "《象》曰：泽灭木，大过。君子以独立不惧，遯世无闷。";

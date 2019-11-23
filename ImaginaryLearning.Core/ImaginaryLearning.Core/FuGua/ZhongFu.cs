@@ -9,7 +9,7 @@ namespace ImaginaryLearning.Core
     /// <summary>
     /// 风泽中孚
     /// </summary>
-    class ZhongFu : FuGua
+    public class ZhongFu : FuGua
     {
         public ZhongFu(PointF startPoint, int totalWidth, int midWidth, int heigth) : base(startPoint, totalWidth, midWidth, heigth)
         {

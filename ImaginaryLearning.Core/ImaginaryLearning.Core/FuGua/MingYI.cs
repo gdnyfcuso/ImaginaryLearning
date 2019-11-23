@@ -18,7 +18,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Li(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "明夷";
             PinYin = "MingYi";
-            XuGua = 38;
+            XuGua = 36;
             GuaCi = "利艰贞。";
             TuanCi = "《彖》曰：明入地中，“明夷”。内文明而外柔顺，以蒙大难，文王以之。“利艰贞”，晦其明也，内难而能正其志，箕子以之。";
             GuaXiangCi = "《象》曰：明入地中，“明夷”。君子以莅众用晦而明。";

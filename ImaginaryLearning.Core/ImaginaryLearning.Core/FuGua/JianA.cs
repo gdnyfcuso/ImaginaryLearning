@@ -9,7 +9,7 @@ namespace ImaginaryLearning.Core
     /// <summary>
     /// 风山渐
     /// </summary>
-    class JianA : FuGua
+    public class JianA : FuGua
     {
         public JianA(PointF startPoint, int totalWidth, int midWidth, int heigth) : base(startPoint, totalWidth, midWidth, heigth)
         {
@@ -17,7 +17,7 @@ namespace ImaginaryLearning.Core
 
         protected override void InitFuGua(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
-            ShangGua = new Xun(startPoint,totalWidth,midWidth,heigth);
+            ShangGua = new Xun(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Gen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "渐";
             PinYin = "Jian";

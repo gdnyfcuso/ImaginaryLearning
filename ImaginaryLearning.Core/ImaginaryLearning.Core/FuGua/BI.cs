@@ -25,6 +25,7 @@ namespace ImaginaryLearning.Core
             ShangGua = new Kan(startPoint, totalWidth, midWidth, heigth);
             Name = "比";
             PinYin = "Bi";
+            XuGua = 8;
             GuaCi = "吉。原筮，元，永贞，无咎。不宁方来，后夫凶。";
             GuaXiangCi = "《象》曰：地上有水，比。先王以建万国，亲诸侯。";
             TuanCi = "《彖》曰：比，吉也；比，辅也，下顺従也。“原筮，元永贞，无咎”，以刚中也。“不宁方来”，上下应也。“后夫凶”，其道穷也。";

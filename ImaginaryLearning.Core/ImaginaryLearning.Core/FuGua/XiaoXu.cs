@@ -23,7 +23,7 @@ namespace ImaginaryLearning.Core
             Name = "小畜";
             PinYin = "XiaoXu";
             GuaCi = "亨。密云不雨。自我西郊。";
-            XuGua = 8;
+            XuGua = 9;
             TuanCi = "《彖》曰：“小畜”，柔得位而上下应之，曰小畜。健而巽，刚中而志行，乃亨。“密云不雨”，尚往也。“自我西郊”，施未行也。";
             GuaXiangCi = "《象》曰：风行天上，“小畜”。君子以懿文德。";
             YaoCi = new string[]

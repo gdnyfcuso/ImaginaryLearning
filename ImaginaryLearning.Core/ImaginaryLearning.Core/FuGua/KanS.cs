@@ -17,7 +17,7 @@ namespace ImaginaryLearning.Core
             ShangGua = new Kan(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Kan(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "坎";
-            XuGua = 31;
+            XuGua = 29;
             PinYin = "Kan";
             GuaCi = "有孚维心，亨。行有尚。";
             GuaXiangCi = "《象》曰：水洊至，习坎。君子以常德行，习教事。";

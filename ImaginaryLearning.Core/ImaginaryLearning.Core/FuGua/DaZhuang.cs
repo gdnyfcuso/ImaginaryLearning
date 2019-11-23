@@ -15,11 +15,11 @@ namespace ImaginaryLearning.Core
 
         protected override void InitFuGua(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
-            ShangGua = new Gen(startPoint, totalWidth, midWidth, heigth);
+            ShangGua = new Zhen(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Qian(CreateXiaGuaPoint(startPoint, heigth), totalWidth, heigth);
             Name = "大壮";
             PinYin = "DaZhuang";
-            XuGua = 36;
+            XuGua = 34;
             GuaCi = "利贞。";
             TuanCi = "《彖》曰：大壮，大者壮也。刚以动，故壮。“大壮利贞”，大者正也。正大，而天地之情可见矣。";
             GuaXiangCi = "《象》曰：雷在天上，大壮。君子以非礼弗履。";

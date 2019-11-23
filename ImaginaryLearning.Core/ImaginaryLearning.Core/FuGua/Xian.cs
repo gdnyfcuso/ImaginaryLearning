@@ -14,9 +14,10 @@ namespace ImaginaryLearning.Core
 
         protected override void InitFuGua(PointF startPoint, int totalWidth, int midWidth, int heigth)
         {
-            ShangGua = new Qian(startPoint, totalWidth, heigth);
+            ShangGua = new Dui(startPoint, totalWidth, midWidth, heigth);
             XiaGua = new Gen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "咸";
+            XuGua = 31;
             PinYin = "Xian";
             GuaCi = "亨。利贞。取女吉。";
             GuaXiangCi = "《象》曰：山上有泽，咸。君子以虚受人。";

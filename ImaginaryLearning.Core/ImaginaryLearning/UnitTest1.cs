@@ -20,6 +20,21 @@ namespace Tests
         }
 
         [Test]
+        public void FuGuaA()
+        {
+            //var qian = new Qians(new PointF(), 100, 10, 30);
+            //var kun=new Kuns(new PointF(),100,10,30);
+            var ls = new LiuSiGuaCoordinateSystem(new PointF(), 100, 10, 30);
+            ls.CreateFuGuaByCarCard();
+            var listGuas = new List<int>();
+            foreach (var item in FuGua.FuGuaDic.Values)
+            {
+                listGuas.Add(item.XuGua);
+            }
+            listGuas.Sort();
+        } 
+
+        [Test]
         public void XZPointTest()
         {
             Bitmap image = new Bitmap(1000, 1000);

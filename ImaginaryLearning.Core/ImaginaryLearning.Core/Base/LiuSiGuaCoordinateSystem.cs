@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace ImaginaryLearning.Core.Base
@@ -10,6 +12,22 @@ namespace ImaginaryLearning.Core.Base
     /// </summary>
     public class LiuSiGuaCoordinateSystem
     {
+        public LiuSiGuaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, int r = 300)
+        {
+            if (FuGua.FuGuaDic.Count == 0)
+            {
+                var fuguaAssembly = Assembly.Load(Assembly.GetExecutingAssembly().FullName);
+                fuguaAssembly.GetTypes().ToList().ForEach(i =>
+                {
+                    if (i.IsClass && i.IsPublic && i.IsSubclassOf(typeof(FuGua)))
+                    {
+                        var p = Activator.CreateInstance(i, new object[] { point,totalWidth,midWidth,heigth});
+                    }
+                });
+
+            }
+        }
+
         /// <summary>
         ///创建六十四卦圆图
         /// </summary>

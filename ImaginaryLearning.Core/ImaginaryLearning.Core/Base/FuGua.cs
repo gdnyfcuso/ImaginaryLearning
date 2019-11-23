@@ -12,6 +12,8 @@ namespace ImaginaryLearning.Core
     {
         private List<RectangleF> _rectangleList;
 
+        public static Dictionary<string, FuGua> FuGuaDic = new Dictionary<string, FuGua>();
+
         /// <summary>
         /// 爻辞
         /// </summary>
@@ -37,6 +39,11 @@ namespace ImaginaryLearning.Core
             _rectangleList = new List<RectangleF>();
             InitFuGua(startPoint, totalWidth, midWidth, heigth);
             SetRectangleF();
+            var ejs = GetFuGuaErJZ();
+            if (!FuGuaDic.ContainsKey(ejs))
+            {
+                FuGuaDic.Add(ejs, this);
+            }
         }
 
         /// <summary>
@@ -108,7 +115,7 @@ namespace ImaginaryLearning.Core
         {
             if (YaoCi != null && YaoCi.Length > yaoCiIndex)
             {
-                return YaoCi[yaoCiIndex];
+                return YaoCi[yaoCiIndex - 1];
             }
             else
             {
@@ -125,7 +132,7 @@ namespace ImaginaryLearning.Core
         {
             if (XiangCi != null && XiangCi.Length > yaoCiIndex)
             {
-                return XiangCi[yaoCiIndex];
+                return XiangCi[yaoCiIndex-1];
             }
             else
             {
@@ -145,8 +152,21 @@ namespace ImaginaryLearning.Core
         {
             var ej = GetFuGuaErJZ();//000000
             var huguaej = ej.Substring(1, 3) + ej.Substring(2, 3);
-            //查询互卦
+            return GetEjGua(huguaej);
+        }
 
+        /// <summary>
+        /// 从字典里面取出对应的六十四卦
+        /// </summary>
+        /// <param name="GuaEj"></param>
+        /// <returns></returns>
+        private FuGua GetEjGua(string GuaEj)
+        {
+            //查询互卦
+            if (FuGuaDic.ContainsKey(GuaEj))
+            {
+                return FuGuaDic[GuaEj];
+            }
             return null;
         }
 
@@ -157,7 +177,62 @@ namespace ImaginaryLearning.Core
         /// 第几爻变
         /// </param>
         /// <returns></returns>
-        public virtual FuGua GetBianGua(int yaoBian) { return null; }
+        public virtual FuGua GetBianGua(int yaoBian)
+        {
+            var guaej = GetFuGuaErJZ();
+            var guaNewEj = GetBianGuaEj(guaej, yaoBian);
+            return GetEjGua(guaNewEj);
+        }
+
+        /// <summary>
+        /// 获取变卦对应的二进制
+        /// </summary>
+        /// <param name="oldEj">010101</param>
+        /// <param name="yaoBian">010001</param>
+        /// <returns></returns>
+        private string GetBianGuaEj(string oldEj, int yaoBian)
+        {
+            return GetBianEjCore(oldEj, (i, oldEjCore) =>
+            {
+                if (i == yaoBian - 1)
+                {
+                    return GetBianGuaYao(oldEjCore);
+                }
+                else
+                {
+                    return oldEjCore;
+                }
+
+            });
+        }
+
+        private string GetBianEjCore(string oldEj, Func<int, char, char> bianGuaFunc)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < oldEj.Length; i++)
+            {
+                sb.Append(bianGuaFunc(i, oldEj[i]));
+            }
+            return sb.ToString();
+            //return ejChars.ToString();
+        }
+
+        /// <summary>
+        /// 将对应爻求反 阴变阳，阳变阴
+        /// </summary>
+        /// <param name="old"></param>
+        /// <returns></returns>
+        private char GetBianGuaYao(char old)
+        {
+            if (old == '0')
+            {
+                return '1';
+            }
+            else
+            {
+                return '0';
+            }
+        }
 
         /// <summary>
         /// 获取错卦
@@ -167,7 +242,13 @@ namespace ImaginaryLearning.Core
         /// <returns></returns>
         public virtual FuGua GetCuoGua()
         {
-            return null;
+            var oldEj = GetFuGuaErJZ();
+            var newEj = GetBianEjCore(oldEj, (i, oldEjCore) =>
+             {
+                 return GetBianGuaYao(oldEjCore);
+             });
+
+            return GetEjGua(newEj);
         }
 
         /// <summary>
@@ -178,7 +259,14 @@ namespace ImaginaryLearning.Core
         /// <returns></returns>
         public virtual FuGua GetZongGua()
         {
-            return null;
+            var oldEj = GetFuGuaErJZ();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < oldEj.Length; i++)
+            {
+                sb.Append(oldEj[oldEj.Length - 1 - i]);
+            }
+            return GetEjGua(sb.ToString());
         }
 
         /// <summary>
@@ -205,7 +293,7 @@ namespace ImaginaryLearning.Core
         /// <returns></returns>
         public string GetFuGuaErJZ()
         {
-            return ShangGua.GetGuaErJinZhi() + XiaGua.GetGuaErJinZhi();
+            return XiaGua.GetGuaErJinZhi() + ShangGua.GetGuaErJinZhi();
         }
     }
 }

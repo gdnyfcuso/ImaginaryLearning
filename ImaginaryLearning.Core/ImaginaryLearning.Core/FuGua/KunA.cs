@@ -9,7 +9,7 @@ namespace ImaginaryLearning.Core
     /// <summary>
     /// 泽水困
     /// </summary>
-    class KunA : FuGua
+    public class KunA : FuGua
     {
         public KunA(PointF startPoint, int totalWidth, int midWidth, int heigth) : base(startPoint, totalWidth, midWidth, heigth)
         {

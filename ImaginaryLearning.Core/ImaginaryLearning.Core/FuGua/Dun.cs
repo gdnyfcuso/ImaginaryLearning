@@ -21,7 +21,7 @@ namespace ImaginaryLearning.Core
             XiaGua = new Gen(CreateXiaGuaPoint(startPoint, heigth), totalWidth, midWidth, heigth);
             Name = "遁";
             PinYin = "Dun";
-            XuGua = 35;
+            XuGua = 33;
             GuaCi = "亨。小利贞。";
             TuanCi = "《彖》曰：“遁亨”，遁而亨也。刚当位而应，与时行也。“小利贞”，浸而长也。遁之时义大矣哉！斋";
             GuaXiangCi = "《象》曰：天下有山，遁。君子以远小人，不恶而严。";
