@@ -44,6 +44,10 @@ namespace ImaginaryLearning.Core
             {
                 FuGuaDic.Add(ejs, this);
             }
+            else
+            {
+                FuGuaDic[ejs] = this;
+            }
         }
 
         /// <summary>
@@ -100,6 +104,7 @@ namespace ImaginaryLearning.Core
         {
             get
             {
+                this._rectangleList.Clear();
                 this._rectangleList.AddRange(XiaGua.RectangleList);
                 this._rectangleList.AddRange(ShangGua.RectangleList);
                 return _rectangleList;
@@ -132,7 +137,7 @@ namespace ImaginaryLearning.Core
         {
             if (XiangCi != null && XiangCi.Length > yaoCiIndex)
             {
-                return XiangCi[yaoCiIndex-1];
+                return XiangCi[yaoCiIndex - 1];
             }
             else
             {
@@ -294,6 +299,16 @@ namespace ImaginaryLearning.Core
         public string GetFuGuaErJZ()
         {
             return XiaGua.GetGuaErJinZhi() + ShangGua.GetGuaErJinZhi();
+        }
+
+        public int GetFuGuaXiangTianNumber()
+        {
+            return XiaGua.InnateNumber * 10 + ShangGua.InnateNumber;
+        }
+
+        public int GetFuGuaHouTianNumber()
+        {
+            return XiaGua.NumbersAcquired * 10 + ShangGua.NumbersAcquired;
         }
     }
 }

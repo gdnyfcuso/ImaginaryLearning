@@ -25,11 +25,11 @@ namespace Tests
             //var qian = new Qians(new PointF(), 100, 10, 30);
             //var kun=new Kuns(new PointF(),100,10,30);
             var ls = new LiuSiGuaCoordinateSystem(new PointF(), 100, 10, 30);
-            ls.CreateFuGuaByCarCard();
+            ls.CreateLiuSiGuaBitmap(null, new Point(500, 500), 100, 20, 30, 400);
             var listGuas = new List<int>();
             foreach (var item in FuGua.FuGuaDic.Values)
             {
-                listGuas.Add(item.XuGua);
+                listGuas.Add(item.GetFuGuaXiangTianNumber());
             }
             listGuas.Sort();
         } 

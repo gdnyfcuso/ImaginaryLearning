@@ -70,6 +70,7 @@ namespace ImaginaryLearning.Core
         {
             get
             {
+                this._rectangleList.Clear();
                 this._rectangleList.AddRange(ChuYao.RectangleList);
                 this._rectangleList.AddRange(ErYao.RectangleList);
                 this._rectangleList.AddRange(SanYao.RectangleList);
