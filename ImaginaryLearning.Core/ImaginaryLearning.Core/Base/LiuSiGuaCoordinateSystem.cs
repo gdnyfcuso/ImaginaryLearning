@@ -84,8 +84,8 @@ namespace ImaginaryLearning.Core.Base
 
             List<FuGua> liusiZ = GetLiuSiGuaList(liusbitmap);
 
-            Bitmap image = new Bitmap(1000, 1000);
-            var o = new PointF() { X = 500, Y = 500 };
+            Bitmap image = new Bitmap(6000, 6000);
+            var o = new PointF() { X = 3000, Y = 3000 };
             Graphics graph = Graphics.FromImage(image);
 
 
@@ -93,18 +93,21 @@ namespace ImaginaryLearning.Core.Base
             {
                 Matrix matrix = graph.Transform;
 
-                Font font = new Font("宋体", 22, GraphicsUnit.Pixel);
+                Font font = new Font("宋体", 50, GraphicsUnit.Pixel);
                 SizeF sf = graph.MeasureString(liusiZ[i].Name, font); // 计算出来文字所占矩形区域
                                                                       //matrix.RotateAt(45, pointF);
                                                                       //graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0, 0), new SizeF() { Width = 10, Height = 10 }));
                                                                       //graph.FillEllipse(Brushes.Blue, new RectangleF(o, new SizeF(10, 10)));
-                //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
-                //graph.FillRectangle(Brushes.Gray, rf);
-                //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
-                graph.DrawString(liusiZ[i].Name, font, Brushes.Red, new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height));
-                //graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].ShangGua.RectangleList.ToArray());
+                                                                      //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
+                                                                      //graph.FillRectangle(Brushes.Gray, rf);
+                                                                      //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
+                graph.DrawString(liusiZ[i].Name, font, Brushes.Red, new RectangleF(3000 - sf.Width / 2, 3000 - r - 20- sf.Height / 2, sf.Width, sf.Height));
+                graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].ShangGua.RectangleList.ToArray());
+                graph.FillRectangles(Brushes.Red, liusiZ[i].ShangGua.RectangleList.ToArray());
+                graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
+                graph.FillRectangles(Brushes.Red, liusiZ[i].XiaGua.RectangleList.ToArray());
                 //graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
-                matrix.RotateAt(-5.625f, new PointF() { X = 500, Y = 500 });
+                matrix.RotateAt(-5.625f, new PointF() { X = 3000, Y = 3000 });
 
                 graph.Transform = matrix;
 

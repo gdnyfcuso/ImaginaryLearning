@@ -24,8 +24,8 @@ namespace Tests
         {
             //var qian = new Qians(new PointF(), 100, 10, 30);
             //var kun=new Kuns(new PointF(),100,10,30);
-            var ls = new LiuSiGuaCoordinateSystem(new PointF(), 100, 10, 30);
-            ls.CreateLiuSiGuaBitmap(null, new Point(500, 500), 100, 20, 30, 400);
+            var ls = new LiuSiGuaCoordinateSystem(new PointF(), 40, 5, 15);
+            ls.CreateLiuSiGuaBitmap(null, new Point(3000, 3000), 100, 10, 10, 2000);
             var listGuas = new List<int>();
             foreach (var item in FuGua.FuGuaDic.Values)
             {
