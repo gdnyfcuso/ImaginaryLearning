@@ -73,22 +73,18 @@ namespace ImaginaryLearning.Core.Base
         ///创建六十四卦圆图
         /// </summary>
         /// <returns></returns>
-        public Bitmap CreateLiuSiGuaBitmap(Bitmap sourceBitmap, PointF point, int totalWidth, int midWidth, int heigth, int r = 0)
+        public Bitmap CreateLiuSiGuaCircleBitmap(Bitmap sourceBitmap, int totalWidth, int midWidth, int heigth, int r = 0)
         {
-            InitLiuSiGuaNewPoint(point, totalWidth, midWidth, heigth, r);
-            var liusbitmap = FuGua.FuGuaDic.Values.ToList();
-            liusbitmap.Sort((a, b) =>
-            {
-                return a.GetFuGuaXiangTianNumber() - b.GetFuGuaXiangTianNumber();
-            });
+            var o = new PointF() { X = sourceBitmap.Width / 2, Y = sourceBitmap.Height / 2 };
+
+            InitLiuSiGuaNewPoint(o, totalWidth, midWidth, heigth, r);
+            List<FuGua> liusbitmap = GetXianTianXuGuaList();
 
             List<FuGua> liusiZ = GetLiuSiGuaList(liusbitmap);
+            Graphics graph = Graphics.FromImage(sourceBitmap);
+            Brush white = new SolidBrush(Color.Green);
 
-            Bitmap image = new Bitmap(6000, 6000);
-            var o = new PointF() { X = 3000, Y = 3000 };
-            Graphics graph = Graphics.FromImage(image);
-
-
+            graph.FillRectangle(white, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height));
             for (int i = 0; i < liusiZ.Count; i++)
             {
                 Matrix matrix = graph.Transform;
@@ -101,27 +97,56 @@ namespace ImaginaryLearning.Core.Base
                                                                       //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
                                                                       //graph.FillRectangle(Brushes.Gray, rf);
                                                                       //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
-                graph.DrawString(liusiZ[i].Name, font, Brushes.Red, new RectangleF(3000 - sf.Width / 2, 3000 - r - 20- sf.Height / 2, sf.Width, sf.Height));
+                graph.DrawString(liusiZ[i].Name, font, Brushes.Red, new RectangleF(o.X - sf.Width / 2, o.Y - r - 20 - sf.Height / 2, sf.Width, sf.Height));
                 graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].ShangGua.RectangleList.ToArray());
                 graph.FillRectangles(Brushes.Red, liusiZ[i].ShangGua.RectangleList.ToArray());
                 graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
                 graph.FillRectangles(Brushes.Red, liusiZ[i].XiaGua.RectangleList.ToArray());
                 //graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
-                matrix.RotateAt(-5.625f, new PointF() { X = 3000, Y = 3000 });
+                matrix.RotateAt(-5.625f, o);
 
                 graph.Transform = matrix;
 
             }
 
+            return sourceBitmap;
+        }
 
+        private static List<FuGua> GetXianTianXuGuaList()
+        {
+            var liusbitmap = FuGua.FuGuaDic.Values.ToList();
+            liusbitmap.Sort((a, b) =>
+            {
+                return a.GetFuGuaXiangTianNumber() - b.GetFuGuaXiangTianNumber();
+            });
+            return liusbitmap;
+        }
 
-            //graph.TranslateTransform(500, 500);
+        public Bitmap CreateLiuSiguaRectangleBitmap(Bitmap sourceBitmap, int totalWidth, int midWidth, int heigth)
+        {
+            var o = new PointF();
 
+            InitLiuSiGua(o, totalWidth, midWidth, heigth);
+            var Mylist = GetXianTianXuGuaList();
 
+            Graphics graph = Graphics.FromImage(sourceBitmap);
+            Brush white = new SolidBrush(Color.Green);
 
-            image.Save("mat.bmp");
+            graph.FillRectangle(white, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height));
 
-            return null;
+            for (int i = 0; i < Mylist.Count; i++)
+            {
+                var guaRectangleF = Mylist[i].RectangleF;
+                var bitmapGua = new Bitmap(Convert.ToInt32(guaRectangleF.Width), Convert.ToInt32(guaRectangleF.Height));
+
+                var guaGraph = Graphics.FromImage(bitmapGua);
+                //guaGraph.DrawRectangles(new Pen(Brushes.Red), Mylist[i].RectangleList.ToArray());
+                guaGraph.FillRectangles(Brushes.Red, Mylist[i].RectangleList.ToArray());
+
+                bitmapGua.Save(Mylist[i].Name + ".bmp");
+            }
+
+            return sourceBitmap;
         }
 
         private static List<FuGua> GetLiuSiGuaList(List<FuGua> liusbitmap)

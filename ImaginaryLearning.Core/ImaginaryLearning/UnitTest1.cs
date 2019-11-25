@@ -20,19 +20,29 @@ namespace Tests
         }
 
         [Test]
-        public void FuGuaA()
+        public void Test_LSGCS_CreateLiuSiGuaBitmap()
         {
-            //var qian = new Qians(new PointF(), 100, 10, 30);
-            //var kun=new Kuns(new PointF(),100,10,30);
             var ls = new LiuSiGuaCoordinateSystem(new PointF(), 40, 5, 15);
-            ls.CreateLiuSiGuaBitmap(null, new Point(3000, 3000), 100, 10, 10, 2000);
-            var listGuas = new List<int>();
-            foreach (var item in FuGua.FuGuaDic.Values)
-            {
-                listGuas.Add(item.GetFuGuaXiangTianNumber());
-            }
-            listGuas.Sort();
-        } 
+
+            var bc = new Bitmap(6000, 6000);
+
+            ls.CreateLiuSiGuaCircleBitmap(bc, 150, 15, 10, 2000);
+
+            bc.Save("¡˘ ÆÀƒÿ‘‘≤Õº.bmp");
+        }
+
+        [Test]
+        public void Test_LSGCS_CreateLiuSiguaRectangleBitmap()
+        {
+            var ls = new LiuSiGuaCoordinateSystem(new PointF(), 40, 5, 15);
+
+            var bc = new Bitmap(6000, 6000);
+
+            ls.CreateLiuSiguaRectangleBitmap(bc, 150, 15, 10);
+
+            bc.Save("¡˘ ÆÀƒÿ‘‘≤Õº.bmp");
+        }
+
 
         [Test]
         public void XZPointTest()
@@ -244,8 +254,8 @@ namespace Tests
 
             for (int i = 0; i < ba.HoutTianBaGuaYaoRectangleF.Count; i++)
             {
-                
-                graph.FillPolygon(new SolidBrush(listColor[i%6]), ba.HoutTianBaGuaYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
+
+                graph.FillPolygon(new SolidBrush(listColor[i % 6]), ba.HoutTianBaGuaYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
             }
 
             for (int i = 0; i < bah.XianTianBaGuYaoRectangleF.Count; i++)
@@ -254,7 +264,7 @@ namespace Tests
                 graph.FillPolygon(new SolidBrush(listColor[i % 6]), bah.XianTianBaGuYaoRectangleF[i].FillPolygonPointF, FillMode.Alternate);
             }
 
-            
+
 
             image.Save("graph_CircleTest123.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
         }
