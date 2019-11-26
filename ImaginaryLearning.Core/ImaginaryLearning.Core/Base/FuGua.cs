@@ -285,11 +285,11 @@ namespace ImaginaryLearning.Core
         /// </summary>
         protected virtual void SetRectangleF()
         {
-            var heigth = ShangGua.GuaRectangle.Height + XiaGua.GuaRectangle.Height;
+            //var heigth = ShangGua.GuaRectangle.Height + XiaGua.GuaRectangle.Height;
 
-            heigth += heigth / 6;
+            //heigth += heigth / 6;
 
-            RectangleF = new RectangleF(0, 0, ShangGua.GuaRectangle.Width, heigth);
+            RectangleF = new RectangleF(0, 0, ShangGua.GuaRectangle.Width, XiaGua.RectangleList[0].Y+XiaGua.RectangleList[0].Height);
         }
 
         /// <summary>

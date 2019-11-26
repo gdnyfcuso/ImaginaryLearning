@@ -38,7 +38,7 @@ namespace Tests
 
             var bc = new Bitmap(6000, 6000);
 
-            ls.CreateLiuSiguaRectangleBitmap(bc, 150, 15, 10);
+            ls.CreateLiuSiguaRectangleBitmap(bc,600, 60, 40);
 
             bc.Save("ÁùÊ®ËÄØÔÔ²Í¼.bmp");
         }

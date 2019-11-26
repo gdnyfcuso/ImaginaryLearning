@@ -136,12 +136,43 @@ namespace ImaginaryLearning.Core.Base
 
             for (int i = 0; i < Mylist.Count; i++)
             {
-                var guaRectangleF = Mylist[i].RectangleF;
-                var bitmapGua = new Bitmap(Convert.ToInt32(guaRectangleF.Width), Convert.ToInt32(guaRectangleF.Height));
+                var myfugua = Mylist[Mylist.Count - i - 1];
+                var guaRectangleF = myfugua.RectangleF;
+
+                Font font = new Font("宋体", (int)(guaRectangleF.Height*3/10), GraphicsUnit.Pixel);
+                SizeF sf = graph.MeasureString(myfugua.Name, font); // 计算出来文字所占矩形区域
+                                                                    //matrix.RotateAt(45, pointF);
+                                                                    //graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0, 0), new SizeF() { Width = 10, Height = 10 }));
+                                                                    //graph.FillEllipse(Brushes.Blue, new RectangleF(o, new SizeF(10, 10)));
+                                                                    //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
+                                                                    //graph.FillRectangle(Brushes.Gray, rf);
+                                                                    //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
+
+
+                var bitmapGua = new Bitmap(Convert.ToInt32(guaRectangleF.Width), Convert.ToInt32(guaRectangleF.Height + sf.Height));
 
                 var guaGraph = Graphics.FromImage(bitmapGua);
+
+                guaGraph.DrawString(myfugua.Name, font, Brushes.Red, new RectangleF((guaRectangleF.Width-sf.Width)/2, guaRectangleF.Height + 20, sf.Width, sf.Height));
+
+                guaGraph.FillRectangle(Brushes.Green, guaRectangleF);
                 //guaGraph.DrawRectangles(new Pen(Brushes.Red), Mylist[i].RectangleList.ToArray());
-                guaGraph.FillRectangles(Brushes.Red, Mylist[i].RectangleList.ToArray());
+                guaGraph.FillRectangles(Brushes.Red, Mylist[Mylist.Count - i - 1].RectangleList.ToArray());
+
+                //行
+                int row = i / 8;
+                //列
+                int column = i % 8;
+                var gwidth = sourceBitmap.Width / 8;
+
+                var gHeigth = sourceBitmap.Height / 8;
+
+                if (guaRectangleF.Width * 1.2 < gwidth && guaRectangleF.Height * 1.2 < gHeigth)
+                {
+                    var centWidth = (gwidth - guaRectangleF.Width) / 2;
+                    var centHeigth = (gHeigth - guaRectangleF.Height) / 2;
+                    graph.DrawImage(bitmapGua, new PointF((float)(column * gwidth + centWidth), (float)(row * gHeigth + centHeigth)));
+                }
 
                 bitmapGua.Save(Mylist[i].Name + ".bmp");
             }
