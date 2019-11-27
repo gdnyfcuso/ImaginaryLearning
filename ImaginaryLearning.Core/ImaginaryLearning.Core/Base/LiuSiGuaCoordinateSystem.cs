@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImaginaryLearning.Common;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -122,6 +123,14 @@ namespace ImaginaryLearning.Core.Base
             return liusbitmap;
         }
 
+        /// <summary>
+        /// 计算六十四卦方图
+        /// </summary>
+        /// <param name="sourceBitmap"></param>
+        /// <param name="totalWidth"></param>
+        /// <param name="midWidth"></param>
+        /// <param name="heigth"></param>
+        /// <returns></returns>
         public Bitmap CreateLiuSiguaRectangleBitmap(Bitmap sourceBitmap, int totalWidth, int midWidth, int heigth)
         {
             var o = new PointF();
@@ -139,7 +148,7 @@ namespace ImaginaryLearning.Core.Base
                 var myfugua = Mylist[Mylist.Count - i - 1];
                 var guaRectangleF = myfugua.RectangleF;
 
-                Font font = new Font("宋体", (int)(guaRectangleF.Height*3/10), GraphicsUnit.Pixel);
+                Font font = new Font("宋体", (int)(guaRectangleF.Height * 3 / 10), GraphicsUnit.Pixel);
                 SizeF sf = graph.MeasureString(myfugua.Name, font); // 计算出来文字所占矩形区域
                                                                     //matrix.RotateAt(45, pointF);
                                                                     //graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0, 0), new SizeF() { Width = 10, Height = 10 }));
@@ -153,7 +162,7 @@ namespace ImaginaryLearning.Core.Base
 
                 var guaGraph = Graphics.FromImage(bitmapGua);
 
-                guaGraph.DrawString(myfugua.Name, font, Brushes.Red, new RectangleF((guaRectangleF.Width-sf.Width)/2, guaRectangleF.Height + 20, sf.Width, sf.Height));
+                guaGraph.DrawString(myfugua.Name, font, Brushes.Red, new RectangleF((guaRectangleF.Width - sf.Width) / 2, guaRectangleF.Height + 20, sf.Width, sf.Height));
 
                 guaGraph.FillRectangle(Brushes.Green, guaRectangleF);
                 //guaGraph.DrawRectangles(new Pen(Brushes.Red), Mylist[i].RectangleList.ToArray());
@@ -203,11 +212,23 @@ namespace ImaginaryLearning.Core.Base
         }
 
         /// <summary>
-        /// 创建六十四卦方图
+        /// 创建六十四卦方圆图
         /// </summary>
         /// <returns></returns>
-        public Bitmap CreateLiuSiGuaRectangleBitmap(Bitmap sourceBitmap)
+        public Bitmap CreateLiuSiGuaRectangleCircelBitmap(Bitmap sourceBitmap, float r)
         {
+            //计算圆心
+            var o = new PointF(sourceBitmap.Width / 2, sourceBitmap.Height / 2);
+
+            var NB = o.CirclePointfForZBC(r);
+
+            var guaWidth = ((NB / 8) * 4) / 5;
+
+            var guaHeigth = ((NB / 8) * 11) / 15;
+
+            var guaMidWidth = guaWidth / 10;
+
+
             return null;
         }
 

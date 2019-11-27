@@ -48,6 +48,18 @@ namespace ImaginaryLearning.Common
         }
 
         /// <summary>
+        /// 计算圆的内接正方形的边长
+        /// </summary>
+        /// <param name="centPoint"></param>
+        /// <param name="r"></param>
+        /// <returns></returns>
+        public static float CirclePointfForZBC(this PointF centPoint, float r)
+        {
+            return (float)(r * Math.Cos(45 * 3.14 / 180));
+        }
+
+
+        /// <summary>
         /// 计算圆上谋一个角度的坐标
         /// </summary>
         /// <param name="sPoint"></param>

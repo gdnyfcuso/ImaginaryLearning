@@ -40,7 +40,7 @@ namespace Tests
 
             ls.CreateLiuSiguaRectangleBitmap(bc,600, 60, 40);
 
-            bc.Save("六十四卦圆图.bmp");
+            bc.Save("六十四卦方图.bmp");
         }
 
 
