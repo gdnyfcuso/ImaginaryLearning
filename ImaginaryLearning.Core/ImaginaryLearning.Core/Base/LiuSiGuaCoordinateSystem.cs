@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,6 +15,12 @@ namespace ImaginaryLearning.Core.Base
     /// </summary>
     public class LiuSiGuaCoordinateSystem
     {
+        private List<Color> colorsGua = new List<Color>();
+        Brush backBrush = new SolidBrush(Color.White);
+        Brush foreBrush = new SolidBrush(Color.Black);
+        Brush fontBrush = new SolidBrush(Color.Red);
+
+
         /// <summary>
         /// 第一次初始化
         /// </summary>
@@ -24,6 +31,8 @@ namespace ImaginaryLearning.Core.Base
         /// <param name="r">半径=0的话point复卦的起始点用，不等于0的话当圆心中</param>
         public LiuSiGuaCoordinateSystem(PointF point, int totalWidth, int midWidth, int heigth, int r = 0)
         {
+
+            AddColors();
             if (FuGua.FuGuaDic.Count == 0)
             {
                 if (r == 0)
@@ -35,6 +44,15 @@ namespace ImaginaryLearning.Core.Base
                     InitLiuSiGuaNewPoint(point, totalWidth, midWidth, heigth, r);
                 }
             }
+        }
+
+        private void AddColors()
+        {
+            colorsGua.Clear();
+            colorsGua.Add(Color.Red);
+            colorsGua.Add(Color.Yellow);
+            colorsGua.Add(Color.Blue);
+            colorsGua.Add(Color.White);
         }
 
         /// <summary>
@@ -69,7 +87,7 @@ namespace ImaginaryLearning.Core.Base
                 }
             });
         }
-
+        
         /// <summary>
         ///创建六十四卦圆图
         /// </summary>
@@ -83,9 +101,8 @@ namespace ImaginaryLearning.Core.Base
 
             List<FuGua> liusiZ = GetLiuSiGuaList(liusbitmap);
             Graphics graph = Graphics.FromImage(sourceBitmap);
-            Brush white = new SolidBrush(Color.Green);
 
-            graph.FillRectangle(white, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height));
+            graph.FillRectangle(backBrush, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height));
             for (int i = 0; i < liusiZ.Count; i++)
             {
                 Matrix matrix = graph.Transform;
@@ -98,11 +115,11 @@ namespace ImaginaryLearning.Core.Base
                                                                       //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
                                                                       //graph.FillRectangle(Brushes.Gray, rf);
                                                                       //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
-                graph.DrawString(liusiZ[i].Name, font, Brushes.Red, new RectangleF(o.X - sf.Width / 2, o.Y - r - 20 - sf.Height / 2, sf.Width, sf.Height));
-                graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].ShangGua.RectangleList.ToArray());
-                graph.FillRectangles(Brushes.Red, liusiZ[i].ShangGua.RectangleList.ToArray());
-                graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
-                graph.FillRectangles(Brushes.Red, liusiZ[i].XiaGua.RectangleList.ToArray());
+                graph.DrawString(liusiZ[i].Name, font, fontBrush, new RectangleF(o.X - sf.Width / 2, o.Y - r - 20 - sf.Height / 2, sf.Width, sf.Height));
+                graph.DrawRectangles(new Pen(foreBrush), liusiZ[i].ShangGua.RectangleList.ToArray());
+                graph.FillRectangles(foreBrush, liusiZ[i].ShangGua.RectangleList.ToArray());
+                graph.DrawRectangles(new Pen(foreBrush), liusiZ[i].XiaGua.RectangleList.ToArray());
+                graph.FillRectangles(foreBrush, liusiZ[i].XiaGua.RectangleList.ToArray());
                 //graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
                 matrix.RotateAt(-5.625f, o);
 
@@ -141,14 +158,14 @@ namespace ImaginaryLearning.Core.Base
             Graphics graph = Graphics.FromImage(sourceBitmap);
             Brush white = new SolidBrush(Color.Green);
 
-            graph.FillRectangle(white, new Rectangle(0, 0, sourceBitmap.Width, sourceBitmap.Height));
+            graph.FillRectangle(backBrush, new RectangleF(0, 0, sourceBitmap.Width, sourceBitmap.Height));
 
             for (int i = 0; i < Mylist.Count; i++)
             {
                 var myfugua = Mylist[Mylist.Count - i - 1];
                 var guaRectangleF = myfugua.RectangleF;
 
-                Font font = new Font("宋体", (int)(guaRectangleF.Height * 3 / 10), GraphicsUnit.Pixel);
+                Font font = new Font("宋体", (int)(guaRectangleF.Height / 5), GraphicsUnit.Pixel);
                 SizeF sf = graph.MeasureString(myfugua.Name, font); // 计算出来文字所占矩形区域
                                                                     //matrix.RotateAt(45, pointF);
                                                                     //graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0, 0), new SizeF() { Width = 10, Height = 10 }));
@@ -162,11 +179,11 @@ namespace ImaginaryLearning.Core.Base
 
                 var guaGraph = Graphics.FromImage(bitmapGua);
 
-                guaGraph.DrawString(myfugua.Name, font, Brushes.Red, new RectangleF((guaRectangleF.Width - sf.Width) / 2, guaRectangleF.Height + 20, sf.Width, sf.Height));
+                guaGraph.DrawString(myfugua.Name, font, fontBrush, new RectangleF((guaRectangleF.Width - sf.Width) / 2, guaRectangleF.Height + guaRectangleF.Height / 100, sf.Width, sf.Height));
 
-                guaGraph.FillRectangle(Brushes.Green, guaRectangleF);
+                guaGraph.FillRectangle(backBrush, guaRectangleF);
                 //guaGraph.DrawRectangles(new Pen(Brushes.Red), Mylist[i].RectangleList.ToArray());
-                guaGraph.FillRectangles(Brushes.Red, Mylist[Mylist.Count - i - 1].RectangleList.ToArray());
+                guaGraph.FillRectangles(foreBrush, Mylist[Mylist.Count - i - 1].RectangleList.ToArray());
 
                 //行
                 int row = i / 8;
@@ -183,7 +200,8 @@ namespace ImaginaryLearning.Core.Base
                     graph.DrawImage(bitmapGua, new PointF((float)(column * gwidth + centWidth), (float)(row * gHeigth + centHeigth)));
                 }
 
-                bitmapGua.Save(Mylist[i].Name + ".bmp");
+                bitmapGua.Save(Mylist[i].Name + ".jpg", ImageFormat.Jpeg);
+                bitmapGua.Dispose();
             }
 
             return sourceBitmap;
@@ -220,16 +238,27 @@ namespace ImaginaryLearning.Core.Base
             //计算圆心
             var o = new PointF(sourceBitmap.Width / 2, sourceBitmap.Height / 2);
 
-            var NB = o.CirclePointfForZBC(r);
-
-            var guaWidth = ((NB / 8) * 4) / 5;
-
-            var guaHeigth = ((NB / 8) * 11) / 15;
-
-            var guaMidWidth = guaWidth / 10;
+            var NB = o.CirclePointfForZBC(r) * 2;
 
 
-            return null;
+            var fGuaWidth = ((NB / 8) * 4) / 5;
+
+            var fGuaHeigth = (NB / 8) / 15;
+
+            var fGuaMidWidth = fGuaWidth / 10;
+
+
+            var circleR = r + 6 * fGuaHeigth;
+
+            CreateLiuSiGuaCircleBitmap(sourceBitmap, (int)fGuaWidth / 2, (int)fGuaMidWidth / 2, (int)fGuaHeigth / 2, (int)circleR);
+            var bitmapRectangle = new Bitmap((int)NB, (int)NB + 20);
+            var rectanglePoint = o.CirclePointF(-135, r);
+            CreateLiuSiguaRectangleBitmap(bitmapRectangle, (int)fGuaWidth, (int)fGuaMidWidth, (int)fGuaHeigth);
+
+            var graph = Graphics.FromImage(sourceBitmap);
+            graph.DrawImage(bitmapRectangle, rectanglePoint);
+
+            return sourceBitmap;
         }
 
         /// <summary>

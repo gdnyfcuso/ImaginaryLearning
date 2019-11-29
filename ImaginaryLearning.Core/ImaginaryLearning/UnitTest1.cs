@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 
 namespace Tests
@@ -38,9 +39,21 @@ namespace Tests
 
             var bc = new Bitmap(6000, 6000);
 
-            ls.CreateLiuSiguaRectangleBitmap(bc,600, 60, 40);
+            ls.CreateLiuSiguaRectangleBitmap(bc, 600, 60, 40);
 
             bc.Save("六十四卦方图.bmp");
+        }
+
+        [Test]
+        public void Test_LSGCS_CreateLiuSiguaRectangleCircleBitmap()
+        {
+            var ls = new LiuSiGuaCoordinateSystem(new PointF(), 40, 5, 15);
+
+            var bc = new Bitmap(6000, 6000);
+
+            ls.CreateLiuSiGuaRectangleCircelBitmap(bc, 2500);
+
+            bc.Save("六十四卦方圆图.jpg", ImageFormat.Jpeg);
         }
 
 
