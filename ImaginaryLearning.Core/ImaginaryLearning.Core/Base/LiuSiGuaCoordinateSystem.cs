@@ -13,7 +13,7 @@ namespace ImaginaryLearning.Core.Base
     /// <summary>
     /// 六十四卦所用的坐标系统
     /// </summary>
-    public class LiuSiGuaCoordinateSystem
+    public sealed class LiuSiGuaCoordinateSystem
     {
         private List<Color> colorsGua = new List<Color>();
         Brush backBrush = new SolidBrush(Color.White);
@@ -46,17 +46,25 @@ namespace ImaginaryLearning.Core.Base
             }
         }
 
+        /// <summary>
+        /// 可以选择的颜色，动态由程序指定
+        /// </summary>
         private void AddColors()
         {
             colorsGua.Clear();
             colorsGua.Add(Color.Red);
             colorsGua.Add(Color.Yellow);
             colorsGua.Add(Color.Blue);
-            colorsGua.Add(Color.White);
+            colorsGua.Add(Color.Green);
+            colorsGua.Add(Color.DeepPink);
+            colorsGua.Add(Color.DimGray);
+            colorsGua.Add(Color.DeepSkyBlue);
+            colorsGua.Add(Color.DarkSeaGreen);
+
         }
 
         /// <summary>
-        /// 通过圆心计算卦的起始位置
+        /// 通过圆心计算卦的起始位置，然后初始化六十四卦的起始位置
         /// </summary>
         /// <param name="point"></param>
         /// <param name="totalWidth"></param>
@@ -87,10 +95,15 @@ namespace ImaginaryLearning.Core.Base
                 }
             });
         }
-        
+
         /// <summary>
         ///创建六十四卦圆图
+        ///根据图片的大小计算圆心的位置，图像一般是正方形
         /// </summary>
+        /// <param name="sourceBitmap">将六十四卦画的位置</param>
+        /// <param name="totalWidth">卦的宽度，阳爻的宽度</param>
+        /// <param name="midWidth">阴爻，中间去掉的宽度</param>
+        ///<param name="heigth">每一多的高度</param>
         /// <returns></returns>
         public Bitmap CreateLiuSiGuaCircleBitmap(Bitmap sourceBitmap, int totalWidth, int midWidth, int heigth, int r = 0)
         {
@@ -109,18 +122,30 @@ namespace ImaginaryLearning.Core.Base
 
                 Font font = new Font("宋体", 50, GraphicsUnit.Pixel);
                 SizeF sf = graph.MeasureString(liusiZ[i].Name, font); // 计算出来文字所占矩形区域
-                                                                      //matrix.RotateAt(45, pointF);
-                                                                      //graph.FillEllipse(Brushes.Red, new RectangleF(new PointF(0, 0), new SizeF() { Width = 10, Height = 10 }));
-                                                                      //graph.FillEllipse(Brushes.Blue, new RectangleF(o, new SizeF(10, 10)));
-                                                                      //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
-                                                                      //graph.FillRectangle(Brushes.Gray, rf);
-                                                                      //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
                 graph.DrawString(liusiZ[i].Name, font, fontBrush, new RectangleF(o.X - sf.Width / 2, o.Y - r - 20 - sf.Height / 2, sf.Width, sf.Height));
+
+                if (i < 32)
+                {
+
+                    foreBrush = new SolidBrush(colorsGua[i % colorsGua.Count]);
+
+                }
+                else
+                {
+                    var ci = i % colorsGua.Count;
+
+                    foreBrush = new SolidBrush(colorsGua[8 - ci-1]);
+
+                }
+
                 graph.DrawRectangles(new Pen(foreBrush), liusiZ[i].ShangGua.RectangleList.ToArray());
                 graph.FillRectangles(foreBrush, liusiZ[i].ShangGua.RectangleList.ToArray());
+
+                foreBrush = new SolidBrush(colorsGua[Convert.ToInt32(i / 8)]);
+
                 graph.DrawRectangles(new Pen(foreBrush), liusiZ[i].XiaGua.RectangleList.ToArray());
                 graph.FillRectangles(foreBrush, liusiZ[i].XiaGua.RectangleList.ToArray());
-                //graph.DrawRectangles(new Pen(Brushes.Red), liusiZ[i].XiaGua.RectangleList.ToArray());
+                //逆时针旋转5.625度
                 matrix.RotateAt(-5.625f, o);
 
                 graph.Transform = matrix;
@@ -130,7 +155,11 @@ namespace ImaginaryLearning.Core.Base
             return sourceBitmap;
         }
 
-        private static List<FuGua> GetXianTianXuGuaList()
+        /// <summary>
+        /// 将六十四卦按先天卦的顺序排列
+        /// </summary>
+        /// <returns></returns>
+        private List<FuGua> GetXianTianXuGuaList()
         {
             var liusbitmap = FuGua.FuGuaDic.Values.ToList();
             liusbitmap.Sort((a, b) =>
@@ -180,10 +209,31 @@ namespace ImaginaryLearning.Core.Base
                 var guaGraph = Graphics.FromImage(bitmapGua);
 
                 guaGraph.DrawString(myfugua.Name, font, fontBrush, new RectangleF((guaRectangleF.Width - sf.Width) / 2, guaRectangleF.Height + guaRectangleF.Height / 100, sf.Width, sf.Height));
-
+                foreBrush = new SolidBrush(colorsGua[8 - i % colorsGua.Count - 1]);
                 guaGraph.FillRectangle(backBrush, guaRectangleF);
                 //guaGraph.DrawRectangles(new Pen(Brushes.Red), Mylist[i].RectangleList.ToArray());
-                guaGraph.FillRectangles(foreBrush, Mylist[Mylist.Count - i - 1].RectangleList.ToArray());
+
+                guaGraph.FillRectangles(foreBrush, Mylist[Mylist.Count - i - 1].ShangGua.RectangleList.ToArray());
+
+                if (i < 32)
+                {
+                    foreBrush = new SolidBrush(colorsGua[4 + Convert.ToInt32(i / 8)]);
+                }
+                else
+                {
+                    foreBrush = new SolidBrush(colorsGua[8 - Convert.ToInt32(i / 8) - 1]);
+                }
+
+                //if (i > 31)
+                //{
+                //    foreBrush = new SolidBrush(colorsGua[4 + Convert.ToInt32(i / 8)]);
+                //}
+                //else
+                //{
+                //    foreBrush = new SolidBrush(colorsGua[8 - Convert.ToInt32(i / 8) - 1]);
+                //}
+
+                guaGraph.FillRectangles(foreBrush, Mylist[Mylist.Count - i - 1].XiaGua.RectangleList.ToArray());
 
                 //行
                 int row = i / 8;
@@ -200,7 +250,7 @@ namespace ImaginaryLearning.Core.Base
                     graph.DrawImage(bitmapGua, new PointF((float)(column * gwidth + centWidth), (float)(row * gHeigth + centHeigth)));
                 }
 
-                bitmapGua.Save(Mylist[i].Name + ".jpg", ImageFormat.Jpeg);
+                //bitmapGua.Save(Mylist[i].Name + ".jpg", ImageFormat.Jpeg);
                 bitmapGua.Dispose();
             }
 
