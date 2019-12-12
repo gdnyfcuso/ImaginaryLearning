@@ -16,7 +16,7 @@ namespace ImaginaryLearning.Core.Base
     public sealed class LiuSiGuaCoordinateSystem
     {
         private List<Color> colorsGua = new List<Color>();
-        Brush backBrush = new SolidBrush(Color.White);
+        Brush backBrush = new SolidBrush(Color.DarkGray);
         Brush foreBrush = new SolidBrush(Color.Black);
         Brush fontBrush = new SolidBrush(Color.Red);
 
@@ -53,14 +53,13 @@ namespace ImaginaryLearning.Core.Base
         {
             colorsGua.Clear();
             colorsGua.Add(Color.Red);
-            colorsGua.Add(Color.Yellow);
-            colorsGua.Add(Color.Blue);
+            colorsGua.Add(Color.White);
+            colorsGua.Add(Color.Firebrick);
             colorsGua.Add(Color.Green);
+            colorsGua.Add(Color.DarkOrange);
+            colorsGua.Add(Color.Yellow);
+            colorsGua.Add(Color.Black);
             colorsGua.Add(Color.DeepPink);
-            colorsGua.Add(Color.DimGray);
-            colorsGua.Add(Color.DeepSkyBlue);
-            colorsGua.Add(Color.DarkSeaGreen);
-
         }
 
         /// <summary>
@@ -123,21 +122,31 @@ namespace ImaginaryLearning.Core.Base
                 Font font = new Font("宋体", 50, GraphicsUnit.Pixel);
                 SizeF sf = graph.MeasureString(liusiZ[i].Name, font); // 计算出来文字所占矩形区域
                 graph.DrawString(liusiZ[i].Name, font, fontBrush, new RectangleF(o.X - sf.Width / 2, o.Y - r - 20 - sf.Height / 2, sf.Width, sf.Height));
-
-                if (i < 32)
+                int column = i % 8;
+                if (i >= 32)
                 {
 
-                    foreBrush = new SolidBrush(colorsGua[i % colorsGua.Count]);
 
+                    if (column < 4)
+                    {
+                        foreBrush = new SolidBrush(colorsGua[4 + column]);
+                    }
+                    else
+                    {
+                        foreBrush = new SolidBrush(colorsGua[8 - column - 1]);
+                    }
                 }
                 else
                 {
-                    var ci = i % colorsGua.Count;
-
-                    foreBrush = new SolidBrush(colorsGua[8 - ci-1]);
-
+                    if (column < 4)
+                    {
+                        foreBrush = new SolidBrush(colorsGua[column]);
+                    }
+                    else
+                    {
+                        foreBrush = new SolidBrush(colorsGua[4 + 7 - column]);
+                    }
                 }
-
                 graph.DrawRectangles(new Pen(foreBrush), liusiZ[i].ShangGua.RectangleList.ToArray());
                 graph.FillRectangles(foreBrush, liusiZ[i].ShangGua.RectangleList.ToArray());
 
@@ -202,6 +211,7 @@ namespace ImaginaryLearning.Core.Base
                                                                     //var rf = new RectangleF(500 - sf.Width / 2, 100 - sf.Height / 2, sf.Width, sf.Height);
                                                                     //graph.FillRectangle(Brushes.Gray, rf);
                                                                     //graph.DrawLine(Pens.Red, 500, 500, 500, 100);
+                                                                    //行
 
 
                 var bitmapGua = new Bitmap(Convert.ToInt32(guaRectangleF.Width), Convert.ToInt32(guaRectangleF.Height + sf.Height));
@@ -209,7 +219,22 @@ namespace ImaginaryLearning.Core.Base
                 var guaGraph = Graphics.FromImage(bitmapGua);
 
                 guaGraph.DrawString(myfugua.Name, font, fontBrush, new RectangleF((guaRectangleF.Width - sf.Width) / 2, guaRectangleF.Height + guaRectangleF.Height / 100, sf.Width, sf.Height));
-                foreBrush = new SolidBrush(colorsGua[8 - i % colorsGua.Count - 1]);
+
+                int row = i / 8;
+                //列
+                int column = i % 8;
+                if (column < 4)
+                {
+                    foreBrush = new SolidBrush(colorsGua[4 + column]);
+                }
+                else
+                {
+                    foreBrush = new SolidBrush(colorsGua[8 - column - 1]);
+                }
+
+                //foreBrush = new SolidBrush(colorsGua[8 - i % colorsGua.Count - 1]);
+
+
                 guaGraph.FillRectangle(backBrush, guaRectangleF);
                 //guaGraph.DrawRectangles(new Pen(Brushes.Red), Mylist[i].RectangleList.ToArray());
 
@@ -235,10 +260,10 @@ namespace ImaginaryLearning.Core.Base
 
                 guaGraph.FillRectangles(foreBrush, Mylist[Mylist.Count - i - 1].XiaGua.RectangleList.ToArray());
 
-                //行
-                int row = i / 8;
-                //列
-                int column = i % 8;
+                ////行
+                //int row = i / 8;
+                ////列
+                //int column = i % 8;
                 var gwidth = sourceBitmap.Width / 8;
 
                 var gHeigth = sourceBitmap.Height / 8;
