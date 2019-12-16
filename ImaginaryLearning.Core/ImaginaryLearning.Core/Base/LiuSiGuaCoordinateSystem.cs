@@ -52,14 +52,23 @@ namespace ImaginaryLearning.Core.Base
         private void AddColors()
         {
             colorsGua.Clear();
-            colorsGua.Add(Color.Red);
-            colorsGua.Add(Color.White);
-            colorsGua.Add(Color.Firebrick);
-            colorsGua.Add(Color.Green);
-            colorsGua.Add(Color.DarkOrange);
-            colorsGua.Add(Color.Yellow);
-            colorsGua.Add(Color.Black);
-            colorsGua.Add(Color.DeepPink);
+            colorsGua.Add(Color.FromArgb(255, 255, 255));
+            colorsGua.Add(Color.FromArgb(255, 255, 0));
+            colorsGua.Add(Color.FromArgb(255, 0, 255));
+            colorsGua.Add(Color.FromArgb(255, 0, 0));
+            colorsGua.Add(Color.FromArgb(0, 255, 255));
+            colorsGua.Add(Color.FromArgb(0, 255, 0));
+            colorsGua.Add(Color.FromArgb(0, 0, 255));
+            colorsGua.Add(Color.FromArgb(0, 0, 0));
+
+            //colorsGua.Add(Color.Red);
+            //colorsGua.Add(Color.White);
+            //colorsGua.Add(Color.Firebrick);
+            //colorsGua.Add(Color.Green);
+            //colorsGua.Add(Color.DarkOrange);
+            //colorsGua.Add(Color.Yellow);
+            //colorsGua.Add(Color.Black);
+            //colorsGua.Add(Color.DeepPink);
         }
 
         /// <summary>
