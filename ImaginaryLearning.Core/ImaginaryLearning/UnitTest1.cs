@@ -49,11 +49,30 @@ namespace Tests
         {
             var ls = new LiuSiGuaCoordinateSystem(new PointF(), 40, 5, 15);
 
+
             var bc = new Bitmap(6000, 6000);
-
             ls.CreateLiuSiGuaRectangleCircelBitmap(bc, 2500);
+            bc.Save(string.Format("六十四卦方圆图{0}{1}.jpg", 0, 0), ImageFormat.Jpeg);
+            List<Color> colorsGua = new List<Color>();
+            colorsGua.Add(Color.FromArgb(255, 255, 255));
+            colorsGua.Add(Color.FromArgb(255, 255, 0));
+            colorsGua.Add(Color.FromArgb(255, 0, 255));
+            colorsGua.Add(Color.FromArgb(255, 0, 0));
+            colorsGua.Add(Color.FromArgb(0, 0, 0));
+            colorsGua.Add(Color.FromArgb(0, 0, 255));
+            colorsGua.Add(Color.FromArgb(0, 255, 0));
+            colorsGua.Add(Color.FromArgb(0, 255, 255));
+            for (int i = 0; i < colorsGua.Count; i++)
+            {
+                for (int j = i + 1; j < colorsGua.Count; j++)
+                {
+                    var mycolos = colorsGua[i].GradualChange(colorsGua[j], 8);
+                    ls.AddColors(mycolos);
+                    ls.CreateLiuSiGuaRectangleCircelBitmap(bc, 2500);
 
-            bc.Save("六十四卦方圆图.jpg", ImageFormat.Jpeg);
+                    bc.Save(string.Format("六十四卦方圆图{0}{1}.jpg", i, j), ImageFormat.Jpeg);
+                }
+            }
         }
 
         [Test]

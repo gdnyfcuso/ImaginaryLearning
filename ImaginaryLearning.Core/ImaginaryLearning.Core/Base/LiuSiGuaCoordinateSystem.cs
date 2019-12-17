@@ -49,17 +49,54 @@ namespace ImaginaryLearning.Core.Base
         /// <summary>
         /// 可以选择的颜色，动态由程序指定
         /// </summary>
-        private void AddColors()
+        public void AddColors(List<Color> colors=null)
         {
             colorsGua.Clear();
-            colorsGua.Add(Color.FromArgb(255, 255, 255));
-            colorsGua.Add(Color.FromArgb(255, 255, 0));
-            colorsGua.Add(Color.FromArgb(255, 0, 255));
-            colorsGua.Add(Color.FromArgb(255, 0, 0));
-            colorsGua.Add(Color.FromArgb(0, 255, 255));
-            colorsGua.Add(Color.FromArgb(0, 255, 0));
-            colorsGua.Add(Color.FromArgb(0, 0, 255));
-            colorsGua.Add(Color.FromArgb(0, 0, 0));
+            if (colors!=null)
+            {
+                colorsGua.AddRange(colors);
+            }
+            else
+            {
+                
+                colorsGua.Add(Color.FromArgb(255, 255, 255));
+                colorsGua.Add(Color.FromArgb(255, 255, 0));
+                colorsGua.Add(Color.FromArgb(255, 0, 255));
+                colorsGua.Add(Color.FromArgb(255, 0, 0));
+                colorsGua.Add(Color.FromArgb(0, 0, 0));
+                colorsGua.Add(Color.FromArgb(0, 0, 255));
+                colorsGua.Add(Color.FromArgb(0, 255, 0));
+                colorsGua.Add(Color.FromArgb(0, 255, 255));
+            }
+            
+            //colorsGua.Add(Color.FromArgb(255, 255, 255));
+            //colorsGua.Add(Color.FromArgb(255, 255, 0));
+            //colorsGua.Add(Color.FromArgb(255, 0, 255));
+            //colorsGua.Add(Color.FromArgb(255, 0, 0));
+            //colorsGua.Add(Color.FromArgb(0, 0, 0));
+            //colorsGua.Add(Color.FromArgb(0, 255, 255));
+            //colorsGua.Add(Color.FromArgb(255, 0, 0));
+            //colorsGua.Add(Color.FromArgb(0, 0, 255));
+
+            #region 红色
+            //colorsGua.Add(Color.FromArgb(255, 0, 0));
+            //colorsGua.Add(Color.FromArgb(255, 28, 0));
+            //colorsGua.Add(Color.FromArgb(255, 57, 0));
+            //colorsGua.Add(Color.FromArgb(255, 85, 0));
+            //colorsGua.Add(Color.FromArgb(255, 198, 0));
+            //colorsGua.Add(Color.FromArgb(255, 170, 0));
+            //colorsGua.Add(Color.FromArgb(255, 142, 0));
+            //colorsGua.Add(Color.FromArgb(255, 113, 0)); 
+            #endregion
+
+            //colorsGua.Add(Color.FromArgb(255, 255, 255));
+            //colorsGua.Add(Color.FromArgb(255, 255, 0));
+            //colorsGua.Add(Color.FromArgb(255, 0, 255));
+            //colorsGua.Add(Color.FromArgb(255, 0, 0));
+            //colorsGua.Add(Color.FromArgb(0, 255, 255));
+            //colorsGua.Add(Color.FromArgb(0, 255, 0));
+            //colorsGua.Add(Color.FromArgb(0, 0, 255));
+            //colorsGua.Add(Color.FromArgb(0, 0, 0));
 
             //colorsGua.Add(Color.Red);
             //colorsGua.Add(Color.White);
