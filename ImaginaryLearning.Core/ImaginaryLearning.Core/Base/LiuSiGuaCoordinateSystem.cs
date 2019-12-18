@@ -58,15 +58,15 @@ namespace ImaginaryLearning.Core.Base
             }
             else
             {
-                
-                colorsGua.Add(Color.FromArgb(255, 255, 255));
-                colorsGua.Add(Color.FromArgb(255, 255, 0));
-                colorsGua.Add(Color.FromArgb(255, 0, 255));
-                colorsGua.Add(Color.FromArgb(255, 0, 0));
-                colorsGua.Add(Color.FromArgb(0, 0, 0));
-                colorsGua.Add(Color.FromArgb(0, 0, 255));
-                colorsGua.Add(Color.FromArgb(0, 255, 0));
-                colorsGua.Add(Color.FromArgb(0, 255, 255));
+
+                colorsGua.Add(Color.FromArgb(255, 255, 255));//白
+                colorsGua.Add(Color.FromArgb(0, 0, 255));//蓝
+                colorsGua.Add(Color.FromArgb(255, 0, 0));//红
+                colorsGua.Add(Color.FromArgb(0, 255, 0));//绿
+                colorsGua.Add(Color.FromArgb(255, 255, 0));//黄
+                colorsGua.Add(Color.FromArgb(255, 0, 255));//紫
+                colorsGua.Add(Color.FromArgb(0, 0, 0));//黑
+                colorsGua.Add(Color.FromArgb(0, 255, 255));//青
             }
             
             //colorsGua.Add(Color.FromArgb(255, 255, 255));

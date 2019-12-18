@@ -54,14 +54,16 @@ namespace Tests
             ls.CreateLiuSiGuaRectangleCircelBitmap(bc, 2500);
             bc.Save(string.Format("ÁùÊ®ËÄØÔ·½Ô²Í¼{0}{1}.jpg", 0, 0), ImageFormat.Jpeg);
             List<Color> colorsGua = new List<Color>();
-            colorsGua.Add(Color.FromArgb(255, 255, 255));
-            colorsGua.Add(Color.FromArgb(255, 255, 0));
-            colorsGua.Add(Color.FromArgb(255, 0, 255));
-            colorsGua.Add(Color.FromArgb(255, 0, 0));
-            colorsGua.Add(Color.FromArgb(0, 0, 0));
-            colorsGua.Add(Color.FromArgb(0, 0, 255));
-            colorsGua.Add(Color.FromArgb(0, 255, 0));
-            colorsGua.Add(Color.FromArgb(0, 255, 255));
+            colorsGua.Add(Color.FromArgb(255, 255, 255));//°×
+            colorsGua.Add(Color.FromArgb(0, 0, 255));//À¶
+            colorsGua.Add(Color.FromArgb(255, 0, 0));//ºì
+            colorsGua.Add(Color.FromArgb(0, 255, 0));//ÂÌ
+            colorsGua.Add(Color.FromArgb(255, 255, 0));//»Æ
+            colorsGua.Add(Color.FromArgb(255, 0, 255));//×Ï
+            colorsGua.Add(Color.FromArgb(0, 0, 0));//ºÚ
+            colorsGua.Add(Color.FromArgb(0, 255, 255));//Çà
+
+
             for (int i = 0; i < colorsGua.Count; i++)
             {
                 for (int j = i + 1; j < colorsGua.Count; j++)
