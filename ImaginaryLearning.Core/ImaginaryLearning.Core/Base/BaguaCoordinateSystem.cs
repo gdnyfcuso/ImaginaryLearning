@@ -476,9 +476,10 @@ namespace ImaginaryLearning.Core.Base
             Bitmap image = new Bitmap(2 * Convert.ToInt32(CircleCenter.X), 2 * Convert.ToInt32(CircleCenter.Y));
             var o = CircleCenter;//  new PointF() { X = 500, Y = 500 };
             Graphics graph = Graphics.FromImage(image);
-            Brush white = new SolidBrush(Color.Green);
+            Brush white = new SolidBrush(Color.White);
             graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
             CreateBaGuaImage(graph, o, R, R * 4 / 5, true);
+            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             DrawGuaString(o, graph, R + GuaRectangle.Height+30, fontSize: 50);
 
             if (!string.IsNullOrWhiteSpace(fileName))
@@ -500,7 +501,6 @@ namespace ImaginaryLearning.Core.Base
             new Dui(o),
             new Qian(o),
             };
-
             for (int i = 0; i < 8; i++)
             {
                 Matrix matrix = graph.Transform;
@@ -526,7 +526,7 @@ namespace ImaginaryLearning.Core.Base
         public void CreateBaGuaImage(Graphics graph, PointF o, float r, float taiji = 250, bool istaiji = true, bool isXian = true)
         {
             //var ba = new BaguaCoordinateSystem(o, r);
-            var listColor = new List<Color>() { Color.White, Color.Black, Color.Red, Color.Yellow, Color.Blue, Color.Gold };
+            var listColor = new List<Color>() { Color.Green, Color.Black, Color.Red, Color.Yellow, Color.Blue, Color.Gold };
 
             if (istaiji)
             {

@@ -82,7 +82,7 @@ namespace ImaginaryLearning.Core
 
             //Bitmap image = new Bitmap(imgWidth, imgWidth);
             image.SetResolution(300, 300);
-
+            
             Graphics graphics = Graphics.FromImage(image);
 
             CreateTaiJiImage(new PointF(), graphics,Color.Blue,Color.Red);
