@@ -49,10 +49,10 @@ namespace ImaginaryLearning.Core.Base
         /// <summary>
         /// 可以选择的颜色，动态由程序指定
         /// </summary>
-        public void AddColors(List<Color> colors=null)
+        public void AddColors(List<Color> colors = null)
         {
             colorsGua.Clear();
-            if (colors!=null)
+            if (colors != null)
             {
                 colorsGua.AddRange(colors);
             }
@@ -68,7 +68,7 @@ namespace ImaginaryLearning.Core.Base
                 colorsGua.Add(Color.FromArgb(0, 0, 0));//黑
                 colorsGua.Add(Color.FromArgb(0, 255, 255));//青
             }
-            
+
             //colorsGua.Add(Color.FromArgb(255, 255, 255));
             //colorsGua.Add(Color.FromArgb(255, 255, 0));
             //colorsGua.Add(Color.FromArgb(255, 0, 255));
@@ -385,10 +385,22 @@ namespace ImaginaryLearning.Core.Base
         /// <summary>
         /// 通过数字计算复卦
         /// </summary>
+        /// <param name="numA">
+        /// 上卦
+        /// </param>
+        /// <param name="numB">
+        /// 下卦
+        /// </param>
         /// <returns></returns>
-        public FuGua CreateFuGuaByNumber()
+        public FuGua CreateFuGuaByNumber(int numA, int numB)
         {
-            return null;
+            int up = (numA - 1) % 8;
+            int down = (numB - 1) % 8;
+
+            var upstr = Convert.ToString(up, 2).PadLeft(3, '0');
+            var downStr = Convert.ToString(down, 2).PadLeft(3, '0');
+
+            return FuGua.FuGuaDic[downStr + upstr];
         }
 
         /// <summary>
@@ -398,8 +410,58 @@ namespace ImaginaryLearning.Core.Base
         /// <returns></returns>
         public FuGua CreateFuGuaByDateTime(DateTime SourceDateTime)
         {
-            return null;
+            int Hour = SourceDateTime.Hour, diZinum = 0, tianGannum = 0, tianNum = 0, monthNum = 0, yearNum = 0;
+            var strtime = string.Empty;
+            string nonLiTime = SourceDateTime.GetLunarCalendar(out strtime);
+
+            string[] GetstrTime = strtime.Split('|');
+            //以年天干为主的话,把下边的yearNum年数换为tianNum
+            tianGannum = GetSuZuValues(GetstrTime[0], YLConvertYinL.TianGan) + 1;
+            //2013年蛇年 癸巳 腊月初一日,以年地支为主的话,把tianNum换为yearNum,默认以年地支为主
+            yearNum = GetSuZuValues(nonLiTime.Substring(9, 1), YLConvertYinL.DiZhi) + 1;
+            monthNum = GetSuZuValues(GetstrTime[1], YLConvertYinL.MonthName);
+            tianNum = GetSuZuValues(GetstrTime[2], YLConvertYinL.DayName);
+            diZinum = GetDiZhiNum(SourceDateTime);
+            int numa = 0; int numb = 0;
+            numa = yearNum + monthNum + tianNum;
+            numb = yearNum + monthNum + tianNum + diZinum;
+            int Up = (yearNum + monthNum + tianNum) % 8;
+            int Down = (yearNum + monthNum + tianNum + diZinum) % 8;
+
+
+            return CreateFuGuaByNumber(Up, Down);
         }
+
+        private int GetSuZuValues(string strname, string[] strarry)
+        {
+            int i = 0;
+            for (i = 0; i < strarry.Length; i++)
+            {
+                if (strarry[i] == strname)
+                {
+                    break;
+                }
+            }
+            return i;
+
+        }
+        private int GetDiZhiNum(DateTime da)
+        {
+            int i = 0;
+
+            if (da.Hour % 2 == 0)
+            {
+                i = da.Hour / 2 + 1;
+            }
+            else
+            {
+                i = ((da.Hour + 1) / 2) % 12 + 1;
+
+            }
+            return i;
+
+        }
+
 
         /// <summary>
         /// 通过当前时间计算复卦
@@ -407,7 +469,7 @@ namespace ImaginaryLearning.Core.Base
         /// <returns></returns>
         public FuGua CreateFuGuaByCurrentDateTime()
         {
-            return null;
+            return CreateFuGuaByDateTime(DateTime.Now);
         }
 
         /// <summary>

@@ -479,7 +479,6 @@ namespace ImaginaryLearning.Core.Base
             Brush white = new SolidBrush(Color.White);
             graph.FillRectangle(white, new Rectangle(0, 0, image.Width, image.Height));
             CreateBaGuaImage(graph, o, R, R * 4 / 5, true);
-            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             DrawGuaString(o, graph, R + GuaRectangle.Height+30, fontSize: 50);
 
             if (!string.IsNullOrWhiteSpace(fileName))

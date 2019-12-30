@@ -27,6 +27,10 @@ namespace Tests
 
             var bc = new Bitmap(6000, 6000);
 
+            var my = ls.CreateFuGuaByNumber(3, 8);
+            my = ls.CreateFuGuaByCurrentDateTime();
+            Console.WriteLine(my.Name);
+
             ls.CreateLiuSiGuaCircleBitmap(bc, 150, 15, 10, 2000);
 
             bc.Save("ÁùÊ®ËÄØÔÔ²Í¼.bmp");
