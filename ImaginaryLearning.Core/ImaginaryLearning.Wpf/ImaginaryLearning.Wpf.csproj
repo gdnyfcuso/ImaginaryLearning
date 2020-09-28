@@ -12,4 +12,9 @@
     <PackageReference Include="Panuon.UI.Silver" Version="1.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+    <Folder Include="PageWindow\" />
+  </ItemGroup>
+
 </Project>
